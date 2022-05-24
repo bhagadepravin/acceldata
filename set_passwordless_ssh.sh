@@ -37,7 +37,7 @@ fi
 
 # Avoid duplicate keys in authorized_keys, user can run this all the time
 echo "We need to log into $hostname as $username to set up your public key (hopefully last time you'll use password from this computer)"
-cat "$path/$filename.pub" | ssh "$hostname" -l "$username" ' [ -d ~/.ssh ] || \
+cat "$path/$filename.pub" | sshpass -p Acceldata | ssh "$hostname" -l "$username" ' [ -d ~/.ssh ] || \
                                                              mkdir -p ~/.ssh ; \
                                                              cat > ~/.ssh/KEY ; \
                                                              KEY=$(cat ~/.ssh/KEY) ; \
