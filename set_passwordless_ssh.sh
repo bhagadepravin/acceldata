@@ -1,5 +1,6 @@
 #! /bin/bash
 
+# wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_passwordless_ssh.sh && chmod +x set_passwordless_ssh.sh 
 filename="id_rsa"
 path="$HOME/.ssh"
 
