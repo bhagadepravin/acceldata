@@ -31,7 +31,7 @@ if [ -f $path/$filename ]
 then
     echo "RSA key exists on $path/$filename, using existing file"
 else
-    ssh-keygen -t rsa -f "$path/$filename"
+    ssh-keygen -t rsa -N '' -f "$path/$filename" <<< y
     echo RSA key pair generated
 fi
 
