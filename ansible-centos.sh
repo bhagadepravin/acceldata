@@ -23,6 +23,7 @@ sudo yum --nogpgcheck -y install bind-utils nc ntp net-tools sysstat tcpdump str
 
 if [[ -f "/usr/local/bin/python3.9" ]]
 then
+printf "Downloading Python-3.9.6 tar "
 wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
 tar -xvf Python-3.9.6.tgz
 cd Python-3.9.6 
@@ -33,6 +34,7 @@ touch ~/.bash_aliases
 echo "alias python3='/usr/local/bin/python3.9'" >> ~/.bash_aliases
 source ~/.bash_aliases
 python3 -V
+printf "done!\n"
 else 
     echo "python3.9 is present"
 fi
