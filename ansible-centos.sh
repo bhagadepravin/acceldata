@@ -52,9 +52,13 @@ wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_password
 
 # ./set_passwordless_ssh IP-ADDRESS
 
-
+if [[ -d "~/ansible-hortonworks" ]]
+then
+    echo " github ansible-hortonworks present"
+else
 cd && git clone https://github.com/bhagadepravin/ansible-hortonworks.git
 
+fi
 # Modify the file at ~/ansible-hortonworks/inventory/static
 
 # ansible -i ~/ansible-hortonworks/inventory/static all --list-hosts
@@ -76,3 +80,6 @@ export CLOUD_TO_USE=static
 # Configure Ambari: configure_ambari.sh
 # Apply Blueprint: apply_blueprint.sh
 # Post Install: post_install.sh
+
+echo ""
+echo "virtualenv --python=/usr/local/bin/python3.9 ~/ansible; source ~/ansible/bin/activate"
