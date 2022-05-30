@@ -33,6 +33,8 @@ touch ~/.bash_aliases
 echo "alias python3='/usr/local/bin/python3.9'" >> ~/.bash_aliases
 source ~/.bash_aliases
 python3 -V
+else 
+    echo "python3.9 is present"
 fi
 
 
