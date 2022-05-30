@@ -1,6 +1,6 @@
 #!/bin/bash
 #Centos Ansible HDP setup
-
+wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/ansible-centos.sh && chmod +x ansible-centos.sh
 
 # hostnamectl set-hostname --static pravin1.sre.iti.acceldata.dev
 # hostnamectl set-hostname --static pravin2.sre.iti.acceldata.dev
