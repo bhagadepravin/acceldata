@@ -1,5 +1,16 @@
 #!/bin/bash
-#Centos Ansible HDP setup
+# Centos 7 Ansible Ambari + HDP setup
+
+# Prerequsites
+# * You can setup python Virtual env on mac machine and run the ansible playbook to setup
+# * Make sure VM has enough space  or use below link to extend root size
+# https://bhagadepravin.github.io/acceldata/linux-mount-commands
+# Make sure Hostname are set correctly.
+# you will find set_passwordless_ssh.sh script here to set password less ssh, Make sure you setup before running ansible playbool
+# wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_passwordless_ssh.sh && chmod +x set_passwordless_ssh.sh
+
+# ------------------ 
+
 # wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/ansible-centos.sh && chmod +x ansible-centos.sh
 
 # hostnamectl set-hostname --static pravin1.sre.iti.acceldata.dev
@@ -20,6 +31,7 @@ mysql-connector-java gcc gcc-c++ python-virtualenv htop python3-pip python3-deve
 sshpass git vim-enhanced git mlocate 
 
 
+# Optional if you are runnning from mac
 # Install python3.9 "This will take sometime to configure"
 
 if [[ -f "/usr/local/bin/python3.9" ]]
@@ -49,7 +61,7 @@ pip3 install setuptools --upgrade
 pip3 install pip --upgrade   
 pip3 install ansible
 
-wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_passwordless_ssh.sh && chmod +x set_passwordless_ssh.sh
+
 
 # ./set_passwordless_ssh IP-ADDRESS
 
