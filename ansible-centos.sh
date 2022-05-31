@@ -8,15 +8,16 @@ wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/ansible-cent
 
 # echo "10.90.6.153 pravin1.sre.iti.acceldata.dev" >> /etc/hosts
 # echo "10.90.6.154 pravin2.sre.iti.acceldata.dev" >> /etc/hosts
+# echo "10.90.6.155 pravin2.sre.iti.acceldata.dev" >> /etc/hosts
 
 # Setup root login for ssh if not working
 # echo "PermitRootLogin yes" | sudo tee -a /etc/ssh/sshd_config
 # sudo systemctl restart sshd
 
 sudo yum -y install epel-release || sudo yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-sudo yum --nogpgcheck -y install bind-utils nc ntp net-tools sysstat tcpdump strace python3  bzip2-devel java-1.8.0-openjdk-devel mysql-connector-java gcc gcc-c++ python-virtualenv htop python3-pip python3-devel libffi-devel openssl-devel libyaml-devel sshpass git vim-enhanced git mlocate 
-
-
+sudo yum --nogpgcheck -y install bind-utils nc ntp net-tools sysstat tcpdump strace python3  bzip2-devel java-1.8.0-openjdk-devel \
+mysql-connector-java gcc gcc-c++ python-virtualenv htop python3-pip python3-devel libffi-devel openssl-devel libyaml-devel \
+sshpass git vim-enhanced git mlocate 
 
 
 # Install python3.9 "This will take sometime to configure"
@@ -59,6 +60,8 @@ else
 cd && git clone https://github.com/bhagadepravin/ansible-hortonworks.git
 
 fi
+
+# Update HDP version in https://github.com/bhagadepravin/ansible-hortonworks/blob/master/playbooks/roles/ambari-config/tasks/main.yml
 # Modify the file at ~/ansible-hortonworks/inventory/static
 
 # ansible -i ~/ansible-hortonworks/inventory/static all --list-hosts
