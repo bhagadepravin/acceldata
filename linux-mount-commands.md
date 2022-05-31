@@ -110,7 +110,9 @@ Use `n` to create the partition and save the changes with `w` command.
 https://dade2.net/kb/how-to-extend-filesystem-on-linux/
 
 `$ yum -y install cloud-utils-growpart`
+
 `$ lsblk`
+
 `$ growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root`
 
 
