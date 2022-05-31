@@ -1,11 +1,9 @@
 # Linux Mounting Commands
 
-
+```bash
 $ df -Th
 OR
 $ df -Th | grep "^/dev"
-
-###### lsblk displays block devices, when used with the -f option, it prints file system type on partitions as well:
 
 $ lsblk -f
 
@@ -14,7 +12,7 @@ $ mount | grep "^/dev"
 $ file -sL /dev/sda2
 
 $ cat /etc/fstab
-
+```
 
 ###### How to Add New Disks Using LVM to an Existing Linux System
 
