@@ -1,13 +1,14 @@
 #!/bin/bash
 # Centos 7 Ansible Ambari + HDP setup
 
-# Prerequsites
+# *Prerequsites*
 # * You can setup python Virtual env on mac machine and run the ansible playbook to setup
 # * Make sure VM has enough space  or use below link to extend root size
 # https://bhagadepravin.github.io/acceldata/linux-mount-commands
 # Make sure Hostname are set correctly.
 # you will find set_passwordless_ssh.sh script here to set password less ssh, Make sure you setup before running ansible playbool
 # wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_passwordless_ssh.sh && chmod +x set_passwordless_ssh.sh
+# ./set_passwordless_ssh IP-ADDRESS
 
 # ------------------ 
 
@@ -52,8 +53,6 @@ else
     printf "done!\n"
 fi
 
-
-# --python=
 virtualenv --python=/usr/local/bin/python3.9 ~/ansible; source ~/ansible/bin/activate
 # virtualenv ~/ansible; source ~/ansible/bin/activate
 
@@ -61,9 +60,6 @@ pip3 install setuptools --upgrade
 pip3 install pip --upgrade   
 pip3 install ansible
 
-
-
-# ./set_passwordless_ssh IP-ADDRESS
 
 if [[ -d "~/ansible-hortonworks" ]]
 then
