@@ -63,9 +63,9 @@ Use `n` to create the partition and save the changes with `w` command.
 
 ## LVM
 
-pvs
-vgs
-lvs
+* pvs
+* vgs
+* lvs
 
 ```bash
 [root@pravin1 ~]# pvs
@@ -105,11 +105,13 @@ lvs
 
 ```
 
-# HOW TO EXTEND FILESYSTEM ON LINUX (ROOT AND OTHER) : https://dade2.net/kb/how-to-extend-filesystem-on-linux/
+## HOW TO EXTEND FILESYSTEM ON LINUX (ROOT AND OTHER) : 
 
-$ yum -y install cloud-utils-growpart
+https://dade2.net/kb/how-to-extend-filesystem-on-linux/
 
-growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root
+`$ yum -y install cloud-utils-growpart`
+`$ lsblk`
+`$ growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root`
 
 
 ```bash
