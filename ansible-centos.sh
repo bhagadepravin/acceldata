@@ -74,7 +74,7 @@ fi
 
 # Install the cluster : https://github.com/hortonworks/ansible-hortonworks/blob/master/INSTALL_static.md#install-the-cluster
 
-export CLOUD_TO_USE=static
+# export CLOUD_TO_USE=static
 # cd ~/ansible-hortonworks*/ && bash install_cluster.sh
 
 
@@ -84,5 +84,5 @@ export CLOUD_TO_USE=static
 # Apply Blueprint: apply_blueprint.sh
 # Post Install: post_install.sh
 
-echo ""
+echo "export CLOUD_TO_USE=static"
 echo "virtualenv --python=/usr/local/bin/python3.9 ~/ansible; source ~/ansible/bin/activate"
