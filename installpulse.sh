@@ -3,6 +3,9 @@
 
 # wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/installpulse.sh && chmod +x installpulse.sh && bash installpulse.sh
 
+# What does script Do:
+# Set JAVA_HOME, umask, selinux, sysctl, firewalld, install and setup docker.
+
 # Pulse Setup : https://docs.acceldata.io/pulse/prerequisites
 # Minimum Requirement
 
@@ -45,6 +48,7 @@ sudo firewall-cmd --state
 firewall-cmd --get-default-zone
 firewall-cmd --get-active-zones
 systemctl status firewalld
+systemctl stop firewalld
 
 # Docker without proxy setup
 
