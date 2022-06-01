@@ -1,6 +1,8 @@
 #!/bin/bash
 # Pravin Bhagade
 
+# wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/installpulse.sh && chmod +x installpulse.sh && bash installpulse.sh
+
 # Pulse Setup : https://docs.acceldata.io/pulse/prerequisites
 # Minimum Requirement
 
