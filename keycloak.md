@@ -1,4 +1,4 @@
-### Setup keycloak via docker
+## Setup Keycloak via docker
 
 Before you start
 Make sure you have Docker installed.
