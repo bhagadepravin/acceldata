@@ -18,7 +18,7 @@ systemctl enable docker
 Start Keycloak
 From a terminal start Keycloak with the following command:
 ```bash
-$ docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin -e DB_VENDOR=H2 -p 8080:8080 --name keycloak jboss/keycloak
+docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin -e DB_VENDOR=H2 -p 8080:8080 --name keycloak jboss/keycloak
 ```
 Wait until you see 
 
