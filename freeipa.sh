@@ -13,7 +13,10 @@ usage() {
     cat <<EOM
 Usage: $(basename $0) [HOSTNAME] [IP-ADDRESS] [REALM] [DOMAIN]
   Parameter:
-    - IP: Provide ip address of the host of which .kube/config needs to be copied
+    - HOSTNAME 
+    - IP-ADDRESS
+    - REALM
+    - DOMAIN
   Examples:
     ./$(basename $0) [HOSTNAME] [IP-ADDRESS] [REALM] [DOMAIN]
 EOM
