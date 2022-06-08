@@ -54,11 +54,11 @@ cd freeipa-container
 docker build -t freeipa-server -f Dockerfile.centos-7 .
 docker images freeipa-server
 
-docker run  -e IPA_SERVER_IP=$IP-ADDRESS --name freeipa-server -ti -h $HOSTNAME \
+docker run  -e IPA_SERVER_IP=${IP-ADDRESS} --name freeipa-server -ti -h ${HOSTNAME} \
 -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
 --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z \
--e PASSWORD=admin-password freeipa-server ipa-server-install -U -r $REALM --ds-password=admin-password --admin-password=admin-password \
---domain=$DOMAIN --no-ntp 
+-e PASSWORD=admin-password freeipa-server ipa-server-install -U -r ${REALM} --ds-password=admin-password --admin-password=admin-password \
+--domain=${DOMAIN} --no-ntp 
 
 # Note: Else it will keep on running.
 # * exit-on-finished  # Once added , make sure to start docker container.
