@@ -6,10 +6,13 @@ NC=$'\e[0m'
 
 HOSTNAME=`hostname -f`
 IP=`hostname -i`
-echo ${HOSTNAME}
-echo ${IP}
-REALM=$1
+REALM=`hostname -d`| tr  [:lower:] [:upper:]
 DOMAIN=`hostname -d`
+echo "${GREEN}${HOSTNAME}${NC}"
+echo "${GREEN}${IP}${NC}"
+echo "${GREEN}${REALM}${NC}"
+echo "${GREEN}${DOMAIN}${NC}"
+
 
 usage() {
     cat <<EOM
