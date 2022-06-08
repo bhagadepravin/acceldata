@@ -1,13 +1,10 @@
 #!/bin/bash
 
-which docker
+which docker &&  docker --version | grep "Docker version"
 
 if [ $? -eq 0 ]
 then
-    docker --version | grep "Docker version"
-    if [ $? -eq 0 ]
-    then
-        echo "docker existing"
+         echo "docker existing"  
     else
         echo "install docker"
 sudo yum -y install yum-utils device-mapper-persistent-data lvm2
@@ -17,14 +14,6 @@ systemctl enable docker
 systemctl restart docker
 docker version
     fi
-else
-    echo "install docker" >&2
-sudo yum -y install yum-utils device-mapper-persistent-data lvm2
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-yum clean all && yum update all  && yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io
-systemctl enable docker
-systemctl restart docker    
-fi
 
 ## Setup Docker Freeipa
 
