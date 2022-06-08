@@ -9,16 +9,15 @@ IP=`hostname -i`
 echo ${HOSTNAME}
 echo ${IP}
 REALM=$1
-DOMAIN=$2
+DOMAIN=`hostname -d`
 
 usage() {
     cat <<EOM
-Usage: $(basename $0)  [REALM] [DOMAIN]
+Usage: $(basename $0)  [REALM] 
   Parameter:
     - REALM
-    - DOMAIN
   Examples:
-    ./$(basename $0) [REALM] [DOMAIN]
+    ./$(basename $0) [REALM]
 EOM
     exit 0
 }
