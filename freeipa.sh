@@ -6,7 +6,7 @@ NC=$'\e[0m'
 
 HOSTNAME=`hostname -f`
 IP=`hostname -i`
-REALM=`hostname -d`| tr  [:lower:] [:upper:]
+REALM=`hostname -d`| tr [:lower:] [:upper:]
 DOMAIN=`hostname -d`
 echo "${GREEN}${HOSTNAME}${NC}"
 echo "${GREEN}${IP}${NC}"
