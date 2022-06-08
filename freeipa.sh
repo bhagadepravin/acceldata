@@ -5,7 +5,6 @@ RED=$'\e[0;31m'
 NC=$'\e[0m'
 # echo "I ${RED}love${NC} ${GREEN}Stack Overflow${NC}"
 
-
 HOSTNAME=`hostname -f`
 IP=`hostname -i`
 DOMAIN=`hostname -d`
@@ -14,8 +13,6 @@ echo "${GREEN}${HOSTNAME}${NC}"
 echo "${GREEN}${IP}${NC}"
 echo "${GREEN}${REALM}${NC}"
 echo "${GREEN}${DOMAIN}${NC}"
-
-
 
 which docker &&  docker --version | grep "Docker version"
 
