@@ -1,12 +1,18 @@
 #!/bin/bash
 
+GREEN=$'\e[0;32m'
+RED=$'\e[0;31m'
+NC=$'\e[0m'
+
+# echo "I ${RED}love${NC} ${GREEN}Stack Overflow${NC}"
+
 which docker &&  docker --version | grep "Docker version"
 
 if [ $? -eq 0 ]
 then
-         echo "docker existing"  
+         echo "${GREEN}Docker Existing${NC}"  
     else
-         echo "install docker"
+         echo "${RED}Install Docker${NC}"
          sudo yum -y install yum-utils device-mapper-persistent-data lvm2
          yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
          yum clean all && yum update all  && yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io
@@ -15,11 +21,11 @@ then
          docker version
     fi
 
-## Setup Docker Freeipa
+         echo "${GREEN} Setup Docker Freeipa${NC}
 
 mkdir -p /var/lib/ipa-data
 
-# Enable Port forwading
+         echo "${GREEN} Enable Port forwading${NC}
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 sudo sysctl -p /etc/sysctl.conf
