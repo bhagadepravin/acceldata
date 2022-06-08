@@ -60,21 +60,14 @@ docker start freeipa-server
 # * exit-on-finished  # Once added , make sure to start docker container.
 # Example: docker run [...] freeipa-server exit-on-finished -U -r EXAMPLE.TEST
 
-
-# docker run  -e IPA_SERVER_IP=ip-address--name freeipa-server-test -ti -h hostname.domain.test \
-# -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
-# --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z \
-# -e PASSWORD=admin-password freeipa-server ipa-server-install -U -r DOMAIN.TEST \
-# --ds-password=admin-password --admin-password=admin-password --domain=domain.test --no-ntp 
+# ldapsearch -x -h pravin2.sre.iti.acceldata.dev -D "uid=admin,cn=users,cn=accounts,dc=sre,dc=iti,dc=acceldata,dc=dev" -w admin-password \
+-b "cn=users,cn=accounts,dc=sre,dc=iti,dc=acceldata,dc=dev"  dn
 
 
-# Note:
-# Clean up or change data dir " /var/lib/ipa-data" for new configuration
-
-# docker stop freeipa-server
-# docker start freeipa-server
+echo "${GREEN}FreeIPA WebUI${NC} --- ${RED}https://$HOSTNAME/ipa/ui${NC}"
 
 # Cleanup container
-# docker stop container-id
-# docker rm container-id
+# docker stop freeipa-server
+# docker rm freeipa-server
+
 
