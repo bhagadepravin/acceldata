@@ -19,6 +19,11 @@ docker version
     fi
 else
     echo "install docker" >&2
+sudo yum -y install yum-utils device-mapper-persistent-data lvm2
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum clean all && yum update all  && yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io
+systemctl enable docker
+systemctl restart docker    
 fi
 
 ## Setup Docker Freeipa
