@@ -15,7 +15,7 @@ systemctl status docker
 systemctl enable docker
 ```
 
-```
+```bash
 #!/bin/bash
 
 which docker &&  docker --version | grep "Docker version"
