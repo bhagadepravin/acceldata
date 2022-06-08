@@ -4,6 +4,25 @@ GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
 
+HOSTNAME=$1
+IP-ADDRESS=$2
+REALM=$3
+DOMAIN=$4
+
+usage() {
+    cat <<EOM
+Usage: $(basename $0) [HOSTNAME] [IP-ADDRESS] [REALM] [DOMAIN]
+  Parameter:
+    - IP: Provide ip address of the host of which .kube/config needs to be copied
+  Examples:
+    ./$(basename $0) [HOSTNAME] [IP-ADDRESS] [REALM] [DOMAIN]
+EOM
+    exit 0
+}
+
+[ -z $1 ] && { usage; }
+[ -z $1 $2 $3 $4 ] && { usage; }
+
 # echo "I ${RED}love${NC} ${GREEN}Stack Overflow${NC}"
 
 which docker &&  docker --version | grep "Docker version"
@@ -35,7 +54,11 @@ cd freeipa-container
 docker build -t freeipa-server -f Dockerfile.centos-7 .
 docker images freeipa-server
 
-# docker run  -e IPA_SERVER_IP=<...ip...> --name freeipa-server -ti -h <HOSTNAME> -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z -e PASSWORD=admin-password freeipa-server ipa-server-install -U -r <REALM> --ds-password=admin-password --admin-password=admin-password --domain=<DOMAIN> --no-ntp 
+docker run  -e IPA_SERVER_IP=$IP-ADDRESS --name freeipa-server -ti -h $HOSTNAME \
+-p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
+--sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z \
+-e PASSWORD=admin-password freeipa-server ipa-server-install -U -r $REALM --ds-password=admin-password --admin-password=admin-password \
+--domain=$DOMAIN --no-ntp 
 
 # Note: Else it will keep on running.
 # * exit-on-finished  # Once added , make sure to start docker container.
