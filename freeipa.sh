@@ -1,22 +1,25 @@
-## Install Docker
+#!/bin/bash
 
+which docker
 
-# Docker without proxy setup
-
-###  Add Docker repository ###
-# Install dependencies for docker-ce
+if [ $? -eq 0 ]
+then
+    docker --version | grep "Docker version"
+    if [ $? -eq 0 ]
+    then
+        echo "docker existing"
+    else
+        echo "install docker"
 sudo yum -y install yum-utils device-mapper-persistent-data lvm2
-
-echo "Added docker repo"
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 
-
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum clean all && yum update all  && yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io
-docker version
-
-# Restart Docker
 systemctl enable docker
 systemctl restart docker
-systemctl status -l docker
+docker version
+    fi
+else
+    echo "install docker" >&2
+fi
 
 ## Setup Docker Freeipa
 
