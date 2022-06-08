@@ -4,21 +4,21 @@ GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
 
-HOSTNAME=$1
-IP-ADDRESS=$2
-REALM=$3
-DOMAIN=$4
+HOSTNAME=`hostname -f`
+IP=`hostname -i`
+echo ${HOSTNAME}
+echo ${IP}
+REALM=$1
+DOMAIN=$2
 
 usage() {
     cat <<EOM
-Usage: $(basename $0) [HOSTNAME] [IP-ADDRESS] [REALM] [DOMAIN]
+Usage: $(basename $0)  [REALM] [DOMAIN]
   Parameter:
-    - HOSTNAME 
-    - IP-ADDRESS
     - REALM
     - DOMAIN
   Examples:
-    ./$(basename $0) [HOSTNAME] [IP-ADDRESS] [REALM] [DOMAIN]
+    ./$(basename $0) [REALM] [DOMAIN]
 EOM
     exit 0
 }
@@ -57,7 +57,7 @@ cd freeipa-container
 docker build -t freeipa-server -f Dockerfile.centos-7 .
 docker images freeipa-server
 
-docker run  -e IPA_SERVER_IP=${IP-ADDRESS} --name freeipa-server -ti -h ${HOSTNAME} \
+docker run  -e IPA_SERVER_IP=${IP} --name freeipa-server -ti -h ${HOSTNAME} \
 -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
 --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z \
 -e PASSWORD=admin-password freeipa-server ipa-server-install -U -r ${REALM} --ds-password=admin-password --admin-password=admin-password \
