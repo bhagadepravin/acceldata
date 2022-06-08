@@ -3,32 +3,19 @@
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
+# echo "I ${RED}love${NC} ${GREEN}Stack Overflow${NC}"
+
 
 HOSTNAME=`hostname -f`
 IP=`hostname -i`
-REALM="${HOSTNAME^^}"
 DOMAIN=`hostname -d`
+REALM="${DOMAIN^^}"
 echo "${GREEN}${HOSTNAME}${NC}"
 echo "${GREEN}${IP}${NC}"
 echo "${GREEN}${REALM}${NC}"
 echo "${GREEN}${DOMAIN}${NC}"
 
 
-usage() {
-    cat <<EOM
-Usage: $(basename $0)  [REALM] 
-  Parameter:
-    - REALM
-  Examples:
-    ./$(basename $0) [REALM]
-EOM
-    exit 0
-}
-
-[ -z $1 ] && { usage; }
-[ -z $1 $2 $3 $4 ] && { usage; }
-
-# echo "I ${RED}love${NC} ${GREEN}Stack Overflow${NC}"
 
 which docker &&  docker --version | grep "Docker version"
 
