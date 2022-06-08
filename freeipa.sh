@@ -34,6 +34,7 @@ then
 
          echo "${GREEN} Setup Docker Freeipa${NC}
 
+mv  /var/lib/ipa-data  /var/lib/ipa-data_bk
 mkdir -p /var/lib/ipa-data
 
          echo "${GREEN} Enable Port forwading${NC}
