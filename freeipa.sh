@@ -54,7 +54,7 @@ docker images freeipa-server
 docker run  -e IPA_SERVER_IP=${IP} --name freeipa-server -ti -h ${HOSTNAME} \
 -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
 --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z \
--e PASSWORD=admin-password freeipa-server ipa-server-install exit-on-finished -U -r ${REALM} --ds-password=admin-password --admin-password=admin-password \
+-e PASSWORD=admin-password freeipa-server ipa-server-install exit-on-finished --setup-dns --dns=127.0.0.1 -U -r ${REALM} --ds-password=admin-password --admin-password=admin-password \
 --domain=${DOMAIN} --no-ntp 
 
 docker stop freeipa-server
