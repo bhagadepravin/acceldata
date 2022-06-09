@@ -41,7 +41,7 @@ sysctl -w net.ipv4.ip_forward=1
 sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf"
 sudo sysctl -p /etc/sysctl.conf
 
-docker images freeipa-server
+docker images freeipa-server | grep freeipa-server
 
 if [ $? -eq 0 ]
 then
