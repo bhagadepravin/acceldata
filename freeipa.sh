@@ -39,10 +39,17 @@ sysctl -w net.ipv4.ip_forward=1
 sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf"
 sudo sysctl -p /etc/sysctl.conf
 
+docker images freeipa-server
+
+if [ $? -eq 0 ]
+then
+         echo "${GREEN}Freeipa-server image exists ${NC}"  
+    else
 git clone https://github.com/freeipa/freeipa-container.git
 cd freeipa-container
 docker build -t freeipa-server -f Dockerfile.centos-7 .
 docker images freeipa-server
+    fi
 
 docker run  -e IPA_SERVER_IP=${IP} --name freeipa-server -ti -h ${HOSTNAME} \
 -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
