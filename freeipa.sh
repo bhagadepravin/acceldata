@@ -36,7 +36,7 @@ mkdir -p /var/lib/ipa-data
 
          echo "${GREEN} Enable Port forwading${NC}
 sysctl -w net.ipv4.ip_forward=1
-sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf"
 sudo sysctl -p /etc/sysctl.conf
 
 git clone https://github.com/freeipa/freeipa-container.git
