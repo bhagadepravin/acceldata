@@ -34,10 +34,11 @@ then
     fi
 ```
 
+```bash
 sysctl -w net.ipv4.ip_forward=1
 sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf"
 sudo sysctl -p /etc/sysctl.conf
-
+```
 
 Start Keycloak
 From a terminal start Keycloak with the following command:
