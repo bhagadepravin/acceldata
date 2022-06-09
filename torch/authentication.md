@@ -11,5 +11,3 @@ test video
 
 
 
-https://user-images.githubusercontent.com/28974904/172890693-69c097d5-1930-4db6-8f41-c02306c455bb.mov
-
