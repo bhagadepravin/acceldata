@@ -34,6 +34,11 @@ then
     fi
 ```
 
+sysctl -w net.ipv4.ip_forward=1
+sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+sudo sysctl -p /etc/sysctl.conf
+
+
 Start Keycloak
 From a terminal start Keycloak with the following command:
 ```bash
