@@ -1,4 +1,4 @@
-```basj
+```bash
 #Centos Ansible HDP setup
 # wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/ansible-centos.sh && chmod +x ansible-centos.sh
 
