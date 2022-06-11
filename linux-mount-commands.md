@@ -1,6 +1,10 @@
 # Linux Mounting Commands
 
 ```bash
+yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
+```
+
+```bash
 $ df -Th
 OR
 $ df -Th | grep "^/dev"
