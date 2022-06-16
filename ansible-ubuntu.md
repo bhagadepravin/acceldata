@@ -50,6 +50,9 @@ git clone https://github.com/bhagadepravin/ansible-hortonworks.git
 #### Set the static inventory
 Modify the file at `~/ansible-hortonworks/inventory/static` to set the static inventory, or create a cluster specific one
 
+### Repo details 
+Modify the file at ~/ansible-hortonworks/playbooks/roles/ambari-config/defaults/main.yml
+
 #### For Ubuntu user ansible_user as "user" and for CentOS use "root"
 ```bash
 [hdp-master]
