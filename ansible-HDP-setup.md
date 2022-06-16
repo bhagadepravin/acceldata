@@ -29,7 +29,8 @@ pip install ansible openstacksdk
 ```bash   
 wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_passwordless_ssh.sh  && chmod +x set_passwordless_ssh.sh
 ```
-### Create a host file with all host entry for the cluster which you want to creat.
+### Create a host file with all host entry of the cluster which you want to create.
+ex:
 ```bash
 vi hosts
 10.90.6.81
