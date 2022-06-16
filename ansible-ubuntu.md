@@ -3,22 +3,22 @@
 ### non-root user
 1. Install the required packages
 ```python
-		brew install python
-		curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-		python3 get-pip.py
-		pip3 install virtualenv
-		pip3 install virtualenvwrapper
+brew install python
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
+pip3 install virtualenv
+pip3 install virtualenvwrapper
 ```
 
 2. Create and source the Python virtual environment
 ```python
-		virtualenv -p /usr/bin/python3 ~/ansible; source ~/ansible/bin/activate
+virtualenv -p /usr/bin/python3 ~/ansible; source ~/ansible/bin/activate
 ```	
 3. Install the required Python packages inside the virtualenv
 ```python
-		pip install setuptools --upgrade
-		pip install pip --upgrade
-		pip install ansible openstacksdk
+pip install setuptools --upgrade
+pip install pip --upgrade
+pip install ansible openstacksdk
 ```
 4. The build node / workstation will need to login via SSH to the cluster nodes.
    Setup passwordless ssh to the nodes.
