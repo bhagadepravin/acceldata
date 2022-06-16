@@ -75,6 +75,17 @@ slave03 ansible_host=cmpt2.hdp310.u18.adsre ansible_user=user ansible_ssh_privat
 slave04 ansible_host=cmpt3.hdp310.u18.adsre ansible_user=user ansible_ssh_private_key_file="~/.ssh/id_rsa" rack=/default-rack
 ```
 
+Test ansible cmds, First switch to virtual env.
+
+```bash
+virtualenv -p /usr/bin/python3 ~/ansible; source ~/ansible/bin/activate
+
+ansible -i ~/ansible-hortonworks/inventory/static all --list-hosts
+ansible -i ~/ansible-hortonworks/inventory/static all -m setup
+ansible -i ~/ansible-hortonworks/inventory/static all -m setup | grep ansible_fqdn
+```
+
+
 ## Set the cluster variables
 
 ### cluster config file
@@ -90,15 +101,6 @@ Modify the file at `~/ansible-hortonworks/playbooks/group_vars/all` to set the c
 | repo_base_url              | The base URL for the repositories. Change this to the local web server url if using a Local Repository. `/HDP/<OS>/2.x/updates/<latest.version>` (or `/HDF/..`) will be appended to this value to set it accordingly if there are additional URL paths. |
 
 
-Test ansible cmds, First switch to virtual env.
-
-```bash
-virtualenv -p /usr/bin/python3 ~/ansible; source ~/ansible/bin/activate
-
-ansible -i ~/ansible-hortonworks/inventory/static all --list-hosts
-ansible -i ~/ansible-hortonworks/inventory/static all -m setup
-ansible -i ~/ansible-hortonworks/inventory/static all -m setup | grep ansible_fqdn
-```
 
 Modify the file at ` ~/ansible-hortonworks/playbooks/group_vars/all`
 
