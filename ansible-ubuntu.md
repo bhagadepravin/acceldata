@@ -1,6 +1,6 @@
 # Ansible HDP Cluster setup on Ubuntu From Mac
 
-### non-root user
+### Ubuntu non-root user setup for Mac only time, Next 
 1. Install the required packages
 ```python
 brew install python
@@ -45,6 +45,8 @@ git clone https://github.com/bhagadepravin/ansible-hortonworks.git
 ```
 #### Update Hostname and ipaddress to Mac Machine under /etc/hosts.
 
+# Cluster Configs / Start from here if Mac workstation setup is already done for ansible
+
 #### Set the static inventory
 Modify the file at `~/ansible-hortonworks/inventory/static` to set the static inventory, or create a cluster specific one
 
@@ -71,9 +73,6 @@ ansible -i ~/ansible-hortonworks/inventory/static all --list-hosts
 ansible -i ~/ansible-hortonworks/inventory/static all -m setup
 ansible -i ~/ansible-hortonworks/inventory/static all -m setup | grep ansible_fqdn
 ```
-
-## Cluster Configs
-
 
 Modify the file at ` ~/ansible-hortonworks/playbooks/group_vars/all`
 
