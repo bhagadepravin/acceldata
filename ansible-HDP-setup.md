@@ -122,16 +122,7 @@ Modify the file at `~/ansible-hortonworks/playbooks/group_vars/all` to set the c
 | security_options               | These options are only relevant if `security` is not `none`. All of the options here are used for an Ambari managed security configuration. No manual option is available at the moment. |
 | `.http_authentication`         | Set to `yes` to enable Kerberos HTTP authentication (SPNEGO) for most UIs. |
 
-### ranger configuration
 
-| Variable                       | Description                                                                                                |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| ranger_options                 | These options are only relevant if `RANGER_ADMIN` is a component of the dynamic Blueprint stack.           |
-| `.enable_plugins`              | If set to `yes` the plugins for all of the available services will be enabled. With `no` Ranger would be installed but not functional. |
-| ranger_security_options        | Security related options for Ranger (such as passwords).                                                   |
-| `.ranger_admin_password`       | The password for the Ranger admin users (both admin and amb_ranger_admin).                                 |
-| `.ranger_keyadmin_password`    | The password for the Ranger keyadmin user. This only has effect in HDP3, with HDP2 the password will remain to the default of `keyadmin` and must be changed manually. |
-| `.kms_master_key_password`     | The password used for encrypting the Master Key.    
 
 Modify the file at ` ~/ansible-hortonworks/playbooks/group_vars/all`
 
@@ -155,22 +146,28 @@ Goto host_group section to devide the services.
 As currently we have 5 node.
 
 
-## run ansible to setup cluster
-```bash
+
+# Install the cluster
+
+Run the script that will install the cluster using Blueprints while taking care of the necessary prerequisites.
+
+Make sure you set the `CLOUD_TO_USE` environment variable to `static`.
+
+```
 virtualenv -p /usr/bin/python3 ~/ansible; source ~/ansible/bin/activate
 export CLOUD_TO_USE=static
 cd ~/ansible-hortonworks*/ && bash install_cluster.sh
 ```
 
-## or You can perform activity one by one
 
-```bash
-bash prepare_nodes.sh
-bash install_ambari.sh
-bash configure_ambari.sh
-bash apply_blueprint.sh
-bash post_install.sh
-```
+This script will apply all the required playbooks in one run, but you can also apply the individual playbooks by running the following wrapper scripts:
+
+- Prepare the nodes: `prepare_nodes.sh`
+- Install Ambari: `install_ambari.sh`
+- Configure Ambari: `configure_ambari.sh`
+- Apply Blueprint: `apply_blueprint.sh`
+- Post Install: `post_install.sh`
+
 
 On `YARN_REGISTRY_DNS` node stop below service.
 ```
