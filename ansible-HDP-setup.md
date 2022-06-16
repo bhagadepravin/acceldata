@@ -5,6 +5,8 @@
 
 - Setup Mac Workstation. One time setup
 - [Clone GitHub repo](https://github.com/bhagadepravin/acceldata/blob/main/ansible-HDP-setup.md#clone-github-repo-which-include-ansible-related-files)
+- [Install cluster](https://github.com/bhagadepravin/acceldata/blob/main/ansible-HDP-setup.md#install-the-cluster)
+
 
 ## Setup Mac Workstation. One time setup.
 1. Install the required packages
