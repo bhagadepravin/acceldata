@@ -58,7 +58,7 @@ Modify the file at `~/ansible-hortonworks/inventory/static` to set the static in
 ### Repo details 
 Cross Check `~/ansible-hortonworks/playbooks/roles/ambari-config/defaults/main.yml`
 
-#### For Ubuntu user ansible_user as "user"
+#### For Ubuntu user ansible_user as "user", For CentOS user use "root" user
 Example: for 5 node cluster
 ```bash
 [hdp-master]
