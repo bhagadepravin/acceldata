@@ -1,7 +1,7 @@
 # Setup HDP Cluster on Ubuntu Using Ansible.
 
-Ambari `2.7.4.0-118`
-HDP `3.1.4.0-315`
+* Ambari `2.7.4.0-118`
+* HDP `3.1.4.0-315`
 
 ## Setup Mac Workstation. One time setup.
 1. Install the required packages
