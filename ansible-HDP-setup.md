@@ -1,4 +1,4 @@
-# Setup HDP Cluster on Ubuntu Using Ansible.
+# Setup HDP Cluster Using Ansible.
 
 * Ambari `2.7.4.0-118`
 * HDP `3.1.4.0-315`
