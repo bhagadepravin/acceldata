@@ -45,7 +45,7 @@ while read HOST; do bash set_passwordess_ssh.sh $HOST user ;done <hosts
 ```bash
 git clone https://github.com/bhagadepravin/ansible-hortonworks.git
 ```
-#### Update Hostname and ipaddress to Mac Machine under /etc/hosts.
+Update Hostname and ipaddress to Mac Machine under /etc/hosts.
 
 # Cluster Configs / Start from here if Mac workstation setup is already done for ansible
 
