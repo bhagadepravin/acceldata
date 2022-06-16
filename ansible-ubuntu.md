@@ -1,9 +1,10 @@
-# Ansible HDP Cluster setup on Ubuntu From Mac
+# Setup HDP Cluster on Ubuntu Using Ansible.
 
-### Ubuntu non-root user setup for Mac only time, Next 
+## Setup Mac Workstation. One time setup.
 1. Install the required packages
 ```python
 brew install python
+brew install git
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 pip3 install virtualenv
@@ -25,7 +26,7 @@ pip install ansible openstacksdk
 ```bash   
 wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_passwordless_ssh.sh  && chmod +x set_passwordless_ssh.sh
 ```
-### Create a host file will all host entry
+### Create a host file with all host entry for the cluster which you want to creat.
 ```bash
 vi hosts
 10.90.6.81
@@ -35,11 +36,12 @@ vi hosts
 10.90.6.95
 ```
 
-#### Setting password less ssh from localmachine to hosts.
+### Setting password-less ssh from mac to cluster nodes.
 ```bash
 while read HOST; do bash set_passwordess_ssh.sh $HOST user ;done <hosts
 ```
-#### Clone github repo
+## Clone GitHub repo, which include ansible related files
+
 ```bash
 git clone https://github.com/bhagadepravin/ansible-hortonworks.git
 ```
@@ -51,9 +53,10 @@ git clone https://github.com/bhagadepravin/ansible-hortonworks.git
 Modify the file at `~/ansible-hortonworks/inventory/static` to set the static inventory, or create a cluster specific one
 
 ### Repo details 
-Modify the file at `~/ansible-hortonworks/playbooks/roles/ambari-config/defaults/main.yml`
+Cross Check `~/ansible-hortonworks/playbooks/roles/ambari-config/defaults/main.yml`
 
-#### For Ubuntu user ansible_user as "user" and for CentOS use "root"
+#### For Ubuntu user ansible_user as "user"
+Example: for 5 node cluster
 ```bash
 [hdp-master]
 master01 ansible_host=mstr1.hdp310.u18.adsre ansible_user=user ansible_ssh_private_key_file="~/.ssh/id_rsa" rack=/default-rack
@@ -89,6 +92,8 @@ ambari_admin_password
 default_password
 host_group
 ```
+`host_group` Distribute the services accordingly.
+Sample files, make sure you edit/update in `all` file:  https://github.com/bhagadepravin/ansible-hortonworks/tree/master/playbooks/group_vars
 
 ```bash
 egrep "cluster_name|security:|http_authentication|ambari_admin_password|host_group"  ~/ansible-hortonworks/playbooks/group_vars/all
@@ -113,3 +118,12 @@ bash configure_ambari.sh
 bash apply_blueprint.sh
 bash post_install.sh
 ```
+
+On `YARN_REGISTRY_DNS` node stop below service.
+```
+systemctl stop systemd-resolved
+systemctl disable systemd-resolved
+```
+
+Regenerate Kerberos keytab onces and restart whole cluster
+Check /etc/hosts file on all hosts and "hostname -f" cmd output
