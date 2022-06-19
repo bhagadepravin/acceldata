@@ -12,7 +12,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'ambari'@'ansible.iti.acceldata.dev';
 FLUSH PRIVILEGES;
 ```
 
-```psql
+```sql
 psql
 
 DROP DATABASE IF EXISTS ambari;
