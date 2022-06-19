@@ -36,6 +36,7 @@ pip install ansible openstacksdk
 wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_passwordless_ssh.sh  && chmod +x set_passwordless_ssh.sh
 ```
 `./set_passwordless_ssh.sh IP-ADDRESS USER` 
+
 ex:
 `./set_passwordless_ssh.sh 10.90.6.131 root`
 
