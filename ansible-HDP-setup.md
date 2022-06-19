@@ -30,10 +30,13 @@ pip install pip --upgrade
 pip install ansible openstacksdk
 ```
 4. The build node / workstation will need to login via SSH to the cluster nodes.
-   Setup passwordless ssh to the nodes.
+
+### Setup passwordless ssh to the nodes.
 ```bash   
 wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_passwordless_ssh.sh  && chmod +x set_passwordless_ssh.sh
 ```
+`./set_passwordless_ssh IP-ADDRESS`
+
 ### Create a host file with all host entry of the cluster which you want to create.
 ex:
 ```bash
