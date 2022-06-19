@@ -24,3 +24,13 @@ CREATE SCHEMA ambari AUTHORIZATION ambari;
 ALTER SCHEMA ambari OWNER TO ambari;
 ALTER ROLE ambari SET search_path to 'ambari', 'public';
 ```
+
+## Clean HDP and Ambari repo
+
+```bash
+# Centos
+
+for i in ansible.iti.acceldata.dev ; do ssh root@$i "ls -l /etc/yum.repos.d/ambari*" ; done
+for i in ansible.iti.acceldata.dev ; do ssh root@$i "rm -rf /etc/yum.repos.d/ambari*" ; done
+for i in ansible.iti.acceldata.dev ; do ssh root@$i "yum clean all" ; done
+```
