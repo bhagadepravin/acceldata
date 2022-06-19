@@ -40,7 +40,7 @@ wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_password
 ex:
 `./set_passwordless_ssh.sh 10.90.6.131 root`
 
-For Ubuntu Machine make sure you Enable Passwordless Sudo.
+##### For Ubuntu Machine make sure you Enable Passwordless Sudo.
 ```bash
 vim /etc/sudoers
 %sudo	ALL=(ALL:ALL) NOPASSWD:ALL
