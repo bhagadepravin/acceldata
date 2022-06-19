@@ -36,15 +36,16 @@ for i in ansible.iti.acceldata.dev ; do ssh root@$i "yum clean all" ; done
 ```
 
 ### On Ubuntu if mariadb does not start.
-```
-You probably had MySQL installed beforehand. Is a known bug: MySQL installs an AppArmor profile, and \
-the MariaDB package fails to properly uninstall it 
+```bash
+# You probably had MySQL installed beforehand. Is a known bug: MySQL installs an AppArmor profile, and
+# the MariaDB package fails to properly uninstall it 
 
-sudo systemctl stop mariadb
-echo "/usr/sbin/mysqld { }" | sudo tee /etc/apparmor.d/usr.sbin.mysqld
-sudo apparmor_parser -v -R /etc/apparmor.d/usr.sbin.mysqld
-This should display Removal succeeded for "/usr/sbin/mysqld".
+$ sudo systemctl stop mariadb
+$ echo "/usr/sbin/mysqld { }" | sudo tee /etc/apparmor.d/usr.sbin.mysqld
+$ sudo apparmor_parser -v -R /etc/apparmor.d/usr.sbin.mysqld
+
+# This should display Removal succeeded for "/usr/sbin/mysqld".
 
 Then, very important:
 
-sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/usr.sbin.mysqld
+$ sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/usr.sbin.mysqld
