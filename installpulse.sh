@@ -82,6 +82,9 @@ systemctl enable docker
 systemctl restart docker
 systemctl status -l docker
 
+echo umask 0022 >> /etc/profile
+
+mkdir -p /acceldata
 
 # Cluster Configuration Changes
 # https://docs.acceldata.io/pulse/cluster-configuration-changes
