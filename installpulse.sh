@@ -17,7 +17,6 @@
 echo "Set JAVA_HOME"
 
 find / -executable -name java
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.332.b09-1.el7_9.x86_64
 echo $JAVA_HOME
 
 echo "Set umask"
@@ -49,6 +48,9 @@ firewall-cmd --get-default-zone
 firewall-cmd --get-active-zones
 systemctl status firewalld
 systemctl stop firewalld
+
+# Increase LVM size for root
+yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
 
 # Docker without proxy setup
 
