@@ -114,18 +114,14 @@ if [ "$1" -eq status ]; then
 status
 fi
 
-
 if [ "$1" -eq stop ]; then
 stop
 fi
-
 
 if [ "$1" -eq start ]; then
 start
 fi
 
-
 if [ "$1" -eq delete_torch ]; then
 delete_torch
 fi
-
