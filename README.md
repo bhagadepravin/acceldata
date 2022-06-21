@@ -10,7 +10,7 @@ ln -s /var/lib/snapd/snap /snap
 snap install k9s
 ```
 
-# Enable metrics for K8
+#### Enable metrics for K8
 ```
 yum install -y -q git
 git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
