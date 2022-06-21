@@ -109,22 +109,22 @@ rm -rf /data01/acceldata/config/kubernetes
  echo "${GREEN}TORCH DELETED also removed docker completely${NC}"      
 }
 
-status
+
 if [ "$1" -eq status ]; then
 status $1
 fi
 
-stop
+
 if [ "$1" -eq stop ]; then
 stop $1
 fi
 
-start
+
 if [ "$1" -eq start ]; then
 start $1
 fi
 
-delete_torch
+
 if [ "$1" -eq delete_torch ]; then
 delete_torch $1
 fi
