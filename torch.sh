@@ -48,11 +48,13 @@ kubectl get deploy -n monitoring -o name | xargs -I % kubectl scale % --replicas
 
 # StatefulSet
 kubectl get statefulset -o name | xargs -I % kubectl scale % --replicas=0
+kubectl get statefulset -o name -n monitoring | xargs -I % kubectl scale % --replicas=0 -n monitoring
+kubectl get statefulset -o name torch | xargs -I % kubectl scale % --replicas=0 torch
 
 # DaemonSet
-kubectl get daemonset.apps -n monitoring -o name | xargs -I % kubectl scale % --replicas=0
-kubectl get daemonset.apps -n rook-ceph -o name | xargs -I % kubectl scale % --replicas=0
-kubectl get daemonset.apps -n velero -o name | xargs -I % kubectl scale % --replicas=0
+kubectl get daemonset.apps -n monitoring -o name | xargs -I % kubectl scale % --replicas=0 -n monitoring
+kubectl get daemonset.apps -n rook-ceph -o name | xargs -I % kubectl scale % --replicas=0 -n rook-ceph
+kubectl get daemonset.apps -n velero -o name | xargs -I % kubectl scale % --replicas=0 -n velero
 
  echo "${GREEN}TORCH STOPPED${NC}"  
 }
@@ -69,10 +71,13 @@ kubectl get deploy -n spark-operator -o name | xargs -I % kubectl scale % --repl
 kubectl get deploy -n velero -o name | xargs -I % kubectl scale % --replicas=1 -n velero
 kubectl get deploy -n volcano-monitoring -o name | xargs -I % kubectl scale % --replicas=1 -n volcano-monitoring
 kubectl get deploy -n volcano-system -o name | xargs -I % kubectl scale % --replicas=1 -n volcano-system
-kubectl get deploy -n monitoring -o name | xargs -I % kubectl scale % --replicas=1 -n monitoring
+kubectl get deploy -n monitoring -o name  | xargs -I % kubectl scale % --replicas=1 -n monitoring
 
 # StatefulSet
 kubectl get statefulset -o name | xargs -I % kubectl scale % --replicas=1
+kubectl get statefulset -o name  alertmanager-prometheus-alertmanager -n monitoring | xargs -I % kubectl scale % --replicas=3 -n monitoring
+kubectl get statefulset -o name torch | xargs -I % kubectl scale % --replicas=0 torch
+kubectl get statefulset -o name prometheus-k8s -n prometheus-k8s | xargs -I % kubectl scale % --replicas=2 -n prometheus-k8s
 
 # DaemonSet
 kubectl get daemonset.apps -n monitoring -o name | xargs -I % kubectl scale % --replicas=1
