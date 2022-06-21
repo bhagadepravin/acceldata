@@ -19,9 +19,9 @@ usage() {
     cat <<EOM
 Usage: $(basename $0) [stop start delete_troch]
   Parameter:
-    - stop: Will Stop deployments, statefulset, deamonset
-    - start: Will Start deployments, statefulset, deamonset
-    - delete_troch: Will Delete deployments, svc, Kubernetes , docker& K8 config files.
+    - ${RED}stop: Will Stop deployments, statefulset, deamonset${NC}
+    - ${GREEN}start: Will Start deployments, statefulset, deamonset${NC}
+    - ${RED}delete_troch: Will Delete deployments, svc, Kubernetes , docker& K8 config files${NC}
   Examples:
     ./$(basename $0) stop
     ./$(basename $0) start
