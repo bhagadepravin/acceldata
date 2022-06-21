@@ -18,23 +18,46 @@ logSuccess() {
 
 usage() {
     cat <<EOM
-Usage: $(basename $0) [status, stop, start, delete_troch, install_torch_on_prem]
+Usage: $(basename $0) [install_torch_on_prem, status, stop, start, delete_troch]
   Parameter:
     - ${RED}stop${NC}: Will Stop deployments, statefulset, deamonset
     - ${RED}start${NC}: Will Start deployments, statefulset, deamonset
     - ${RED}delete_torch${NC}: Will Delete deployments, svc, Kubernetes , docker& K8 config files
     - ${RED}install_torch_on_prem${NC}: Intsall torch-db-kots, kots and admin console torch/db-kots in default namespace
   Examples:
+    ./$(basename $0) ${GREEN}install_torch_on_prem${NC}
     ./$(basename $0) ${GREEN}status${NC}
     ./$(basename $0) ${RED}stop${NC}
     ./$(basename $0) ${GREEN}start${NC}
-    ./$(basename $0) ${RED}delete_torch${NC}
-    ./$(basename $0) ${GREEN}install_torch_on_prem${NC}
+    ./$(basename $0) ${RED}delete_torch${NC}                
 EOM
     exit 0
 }
 [ -z $1 ] && { usage; }
 
+function install_torch_on_prem {
+
+cat /etc/fstab | grep --quiet --ignore-case --extended-regexp '^[^#]+swap'
+if [ $? -eq 0 ]
+    then
+        cp  /etc/fstab  /etc/fstab.bak
+        swapoff --all
+        sed --in-place=.bak '/\bswap\b/ s/^/#/' /etc/fstab
+fi
+
+kubectl kots install torch/db-kots -n default
+
+if [ $? -eq 0 ]
+    then
+        logSuccess "Torch is Already Installed\n"
+    else
+        echo "${GREEN}Installing Torch........${NC}" 
+        curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
+        curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
+        kubectl kots install torch/db-kots -n default
+        logSuccess "Torch is Installed\n"
+fi
+}
 
 function status {
 kubectl get all --all-namespaces
@@ -63,7 +86,7 @@ kubectl -n rook-ceph patch daemonset rook-ceph-agent -p '{"spec": {"template": {
 kubectl -n rook-ceph patch daemonset rook-discover -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
 kubectl -n velero patch daemonset restic -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
 kubectl get job -n rook-ceph -o yaml > /home/job.yaml
- echo "${GREEN}TORCH STOPPED${NC}"  
+         logSuccess "Torch is Stopped\n"
 }
 
 function start {
@@ -92,11 +115,12 @@ kubectl -n rook-ceph patch daemonset rook-ceph-agent --type json -p='[{"op": "re
 kubectl -n rook-ceph patch daemonset rook-discover --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
 kubectl -n velero patch daemonset restic --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
 # kubectl apply -f /home/job.yaml -n rook-ceph
- echo "${GREEN}TORCH STARTED${NC}"  
+          logSuccess "Torch is Started\n"
 }
 
 function delete_torch {
          echo "${RED}Deleting torch ${NC}"  
+kubectl kots remove torch -n default --force
 kubeadm reset --force
 yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
 docker stop $(docker ps -a -q)
@@ -123,34 +147,9 @@ rm -rf /data01/acceldata/config/kubernetes
 [ -e ~/.kube ] && rm -rf ~/.kube
 [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
 [ -e /opt/cni ] && rm -rf /opt/cni
+          logSuccess "Torch is DELETED also  docker is removed completely\n"
+} 
 
- echo "${GREEN}TORCH DELETED also removed docker completely${NC}"      
-}
-
-function install_torch_on_prem {
-
-cat /etc/fstab | grep --quiet --ignore-case --extended-regexp '^[^#]+swap'
-if [ $? -eq 0 ]
-    then
-        cp  /etc/fstab  /etc/fstab.bak
-        swapoff --all
-        sed --in-place=.bak '/\bswap\b/ s/^/#/' /etc/fstab
-fi
-
-kubectl kots install torch/db-kots -n default
-
-if [ $? -eq 0 ]
-    then
-        logSuccess "Torch is Already Installed\n"
-    else
-        echo "${GREEN}Installing Torch........${NC}" 
-        curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
-        curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
-        kubectl kots install torch/db-kots -n default
-        logSuccess "Torch is Installed\n"
-fi
-
-}
 
 if [ "$1" == "status" ]; then
 status
