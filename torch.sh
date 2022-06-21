@@ -12,20 +12,18 @@ GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
 
-         echo "${GREEN}Docker Existing${NC}"  
-         echo "${RED}Docker Existing${NC}"  
 
 usage() {
     cat <<EOM
 Usage: $(basename $0) [stop start delete_troch]
   Parameter:
-    echo "${RED}stop: Will Stop deployments, statefulset, deamonset${NC}"
-    echo "${GREEN}start: Will Start deployments, statefulset, deamonset${NC}"
-    - echo "${RED}delete_troch: Will Delete deployments, svc, Kubernetes , docker& K8 config files${NC}"
+    - ${RED}stop: Will Stop deployments, statefulset, deamonset${NC}
+    - ${GREEN}start: Will Start deployments, statefulset, deamonset${NC}
+    - ${RED}delete_troch: Will Delete deployments, svc, Kubernetes , docker& K8 config files${NC}
   Examples:
-    ./$(basename $0) stop
-    ./$(basename $0) start
-    ./$(basename $0) delete_troch
+    ./$(basename $0) ${RED}stop${NC}
+    ./$(basename $0) ${GREEN}start${NC}
+    ./$(basename $0) ${RED}delete_troch${NC}
 EOM
     exit 0
 }
