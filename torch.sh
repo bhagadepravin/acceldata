@@ -110,18 +110,18 @@ rm -rf /data01/acceldata/config/kubernetes
 }
 
 
-if [ "$1" -eq status ]; then
+if [ "$1" == "status" ]; then
 status
 fi
 
-if [ "$1" -eq stop ]; then
+if [ "$1" == "stop" ]; then
 stop
 fi
 
-if [ "$1" -eq start ]; then
+if [ "$1" == "start" ]; then
 start
 fi
 
-if [ "$1" -eq delete_torch ]; then
+if [ "$1" == "delete_torch" ]; then
 delete_torch
 fi
