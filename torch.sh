@@ -52,8 +52,10 @@ kubectl get statefulset -o name -n monitoring | xargs -I % kubectl scale % --rep
 kubectl get statefulset -o name -n torch | xargs -I % kubectl scale % --replicas=0 -n torch
 
 # DaemonSet
-kubectl get daemonset.apps -n monitoring -o name | xargs -I % kubectl scale % --replicas=0 -n monitoring
-kubectl get daemonset.apps -n rook-ceph -o name | xargs -I % kubectl scale % --replicas=0 -n rook-ceph
+kubectl -n monitoring patch daemonset prometheus-node-exporter -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
+kubectl -n rook-ceph patch daemonset rook-ceph-agent -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
+kubectl -n rook-ceph patch daemonset rook-discover -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
+kubectl -n velero patch daemonset restic -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
 kubectl get daemonset.apps -n velero -o name | xargs -I % kubectl scale % --replicas=0 -n velero
 
  echo "${GREEN}TORCH STOPPED${NC}"  
@@ -80,9 +82,10 @@ kubectl get statefulset -o name -n torch | xargs -I % kubectl scale % --replicas
 kubectl get statefulset -o name prometheus-k8s -n prometheus-k8s | xargs -I % kubectl scale % --replicas=2 -n prometheus-k8s
 
 # DaemonSet
-kubectl get daemonset.apps -n monitoring -o name | xargs -I % kubectl scale % --replicas=1
-kubectl get daemonset.apps -n rook-ceph -o name | xargs -I % kubectl scale % --replicas=1
-kubectl get daemonset.apps -n velero -o name | xargs -I % kubectl scale % --replicas=1
+kubectl -n monitoring patch daemonset prometheus-node-exporter --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
+kubectl -n rook-cep patch daemonset rook-ceph-agent --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
+kubectl -n rook-cep patch daemonset rook-discover --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
+kubectl -n velero patch daemonset restic --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
  echo "${GREEN}TORCH STARTED${NC}"  
 }
 
