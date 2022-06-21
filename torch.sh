@@ -20,10 +20,12 @@ usage() {
     cat <<EOM
 Usage: $(basename $0) [install_torch_on_prem, status, stop, start, delete_troch]
   Parameter:
+    - ${RED}install_torch_on_prem${NC}: Intsall torch-db-kots, kots and admin console torch/db-kots in default namespace
+    - ${RED}status${NC}: it will run "kubectl get all --all-namespaces"
     - ${RED}stop${NC}: Will Stop deployments, statefulset, deamonset
     - ${RED}start${NC}: Will Start deployments, statefulset, deamonset
     - ${RED}delete_torch${NC}: Will Delete deployments, svc, Kubernetes , docker& K8 config files
-    - ${RED}install_torch_on_prem${NC}: Intsall torch-db-kots, kots and admin console torch/db-kots in default namespace
+
   Examples:
     ./$(basename $0) ${GREEN}install_torch_on_prem${NC}
     ./$(basename $0) ${GREEN}status${NC}
