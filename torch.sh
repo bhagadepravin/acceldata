@@ -15,7 +15,7 @@ NC=$'\e[0m'
 
 usage() {
     cat <<EOM
-Usage: $(basename $0) [status stop start delete_troch]
+Usage: $(basename $0) [status, stop, start, delete_troch, install_torch_on_prem]
   Parameter:
     - ${RED}stop: Will Stop deployments, statefulset, deamonset${NC}
     - ${GREEN}start: Will Start deployments, statefulset, deamonset${NC}
