@@ -3,7 +3,7 @@
 # Company: Acceldata
 # Designation: Staff SRE
 
-# wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/troch.sh && chmod +x troch.sh && ./troch.sh
+# rm -rf troch.sh && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/troch.sh && chmod +x troch.sh && ./troch.sh
 
 set -e
 set -E
