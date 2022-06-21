@@ -3,6 +3,9 @@
 # Company: Acceldata
 # Designation: Staff SRE
 
+wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/troch.sh && chmod +x troch.sh
+./troch.sh
+
 set -e
 set -E
 
@@ -17,7 +20,9 @@ usage() {
     cat <<EOM
 Usage: $(basename $0) [stop start delete_troch]
   Parameter:
-    - IP: Provide ip address of the host of which .kube/config needs to be copied
+    - stop: Will Stop deployments, statefulset, deamonset
+    - start: Will Start deployments, statefulset, deamonset
+    - delete_troch: Will Delete deployments, svc, Kubernetes , docker& K8 config files.
   Examples:
     ./$(basename $0) stop
     ./$(basename $0) start
