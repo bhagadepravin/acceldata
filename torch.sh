@@ -5,8 +5,8 @@
 
 # rm -rf torch.sh && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/torch.sh && chmod +x torch.sh && ./torch.sh
 
-set -e
-set -E
+# set -e
+# set -E
 
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
