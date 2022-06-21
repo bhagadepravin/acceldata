@@ -38,7 +38,7 @@ wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/set_password
 `./set_passwordless_ssh.sh IP-ADDRESS USER` 
 
 ex:
-`./set_passwordless_ssh.sh 10.90.6.131 root`
+`./set_passwordless_ssh.sh 10.11.11.11 root`
 
 ###### For Ubuntu Machine make sure you Enable Passwordless Sudo.
 ```bash
@@ -50,11 +50,11 @@ vim /etc/sudoers
 ex:
 ```bash
 vi hosts
-10.90.6.81
-10.90.6.91
-10.90.6.93
-10.90.6.94
-10.90.6.95
+10.11.11.11
+10.11.11.12
+10.11.11.13
+10.11.11.14
+10.11.11.15
 ```
 
 ### Setting password-less ssh from mac to cluster nodes.
