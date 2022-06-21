@@ -154,7 +154,7 @@ rm -rf /data01/acceldata/config/kubernetes
 [ -e ~/.kube ] && rm -rf ~/.kube
 [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
 [ -e /opt/cni ] && rm -rf /opt/cni
-          logSuccess "Torch is DELETED also  docker is removed completely\n"
+          logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
 } 
 
 
