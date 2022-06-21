@@ -39,16 +39,15 @@ EOM
 
 function install_torch_on_prem {
 
-cat /etc/fstab | grep --quiet --ignore-case --extended-regexp '^[^#]+swap'
-if [ $? -eq 0 ]
-    then
-        cp  /etc/fstab  /etc/fstab.bak
-        swapoff --all
-        sed --in-place=.bak '/\bswap\b/ s/^/#/' /etc/fstab
-fi
+# Disable Swap
+cp  /etc/fstab  /etc/fstab.bak
+swapoff --all
+sed --in-place=.bak '/\bswap\b/ s/^/#/' /etc/fstab
+
+# Increase LVM size
+yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
 
 kubectl kots install torch/db-kots -n default
-
 if [ $? -eq 0 ]
     then
         logSuccess "Torch is Already Installed\n"
