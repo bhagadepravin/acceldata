@@ -78,7 +78,7 @@ kubectl get deploy -n monitoring -o name  | xargs -I % kubectl scale % --replica
 kubectl get statefulset -o name | xargs -I % kubectl scale % --replicas=1
 kubectl get statefulset -o name  alertmanager-prometheus-alertmanager -n monitoring | xargs -I % kubectl scale % --replicas=3 -n monitoring
 kubectl get statefulset -o name -n torch | xargs -I % kubectl scale % --replicas=0 -n torch
-kubectl get statefulset -o name prometheus-k8s -n monitoring | xargs -I % kubectl scale % --replicas=2 -n prometheus-k8s
+kubectl get statefulset -o name prometheus-k8s -n monitoring | xargs -I % kubectl scale % --replicas=2 -n monitoring
 
 # DaemonSet
 kubectl -n monitoring patch daemonset prometheus-node-exporter --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
