@@ -56,8 +56,6 @@ kubectl -n monitoring patch daemonset prometheus-node-exporter -p '{"spec": {"te
 kubectl -n rook-ceph patch daemonset rook-ceph-agent -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
 kubectl -n rook-ceph patch daemonset rook-discover -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
 kubectl -n velero patch daemonset restic -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
-kubectl get daemonset.apps -n velero -o name | xargs -I % kubectl scale % --replicas=0 -n velero
-
  echo "${GREEN}TORCH STOPPED${NC}"  
 }
 
