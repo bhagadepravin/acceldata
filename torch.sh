@@ -93,7 +93,6 @@ function delete_torch {
          echo "${RED}Deleting torch ${NC}"  
 
 kubectl delete deployment --all
-kubectl delete svc --all
 kubeadm reset --force
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
