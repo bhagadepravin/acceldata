@@ -11,6 +11,9 @@ set -E
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
+logSuccess() {
+    printf "${GREEN}✔ $1${NC}\n" 1>&2
+}
 
 
 usage() {
@@ -31,6 +34,7 @@ EOM
     exit 0
 }
 [ -z $1 ] && { usage; }
+
 
 function status {
 kubectl get all --all-namespaces
@@ -124,9 +128,29 @@ rm -rf /data01/acceldata/config/kubernetes
 }
 
 function install_torch_on_prem {
-curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
-curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
+
+cat /etc/fstab | grep --quiet --ignore-case --extended-regexp '^[^#]+swap'
+if [ $? -eq 0 ]
+    then
+        cp  /etc/fstab  /etc/fstab.bak
+        swapoff --all
+        sed --in-place=.bak '/\bswap\b/ s/^/#/' /etc/fstab
+    else
+fi
+
 kubectl kots install torch/db-kots -n default
+
+if [ $? -eq 0 ]
+    then
+        logSuccess "Torch is Already Installed\n"
+    else
+        echo "${GREEN}Installing Torch........${NC}" 
+        curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
+        curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
+        kubectl kots install torch/db-kots -n default
+        logSuccess "Torch is Installed\n"
+fi
+
 }
 
 if [ "$1" == "status" ]; then
