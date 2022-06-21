@@ -91,8 +91,6 @@ kubectl -n velero patch daemonset restic --type json -p='[{"op": "remove", "path
 
 function delete_torch {
          echo "${RED}Deleting torch ${NC}"  
-
-kubectl delete deployment --all
 kubeadm reset --force
 yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
 docker stop $(docker ps -a -q)
@@ -103,7 +101,15 @@ rm -rf /usr/local/bin/kubectl*
 rm -rf /var/lib/kubelet
 rm -rf /var/lib/replicated
 # rm -rf /var/lib/kurl 
-rm -rf  /var/lib/rook 
+rm -rf /var/lib/kurl/addons
+rm -rf /var/lib/kurl/bin
+rm -rf /var/lib/kurl/helm
+rm -rf /var/lib/kurl/host-preflights
+rm -rf /var/lib/kurl/krew
+rm -rf /var/lib/kurl/kurlkinds
+rm -rf /var/lib/kurl/kustomize
+rm -rf /var/lib/kurl/shared
+rm -rf /var/lib/rook 
 rm -rf  /opt/replicated/rook
 rm -rf ll /usr/libexec/kubernetes/kubelet-plugins/volume/exec/
 rm -rf /usr/libexec/kubernetes/kubelet-plugins
