@@ -97,7 +97,7 @@ kubeadm reset --force
 yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
-yum remove -y -q docker-ce docker containerd.io
+yum remove -y -q docker-ce docker containerd.io docker-ce-cli
 rm -rf /var/lib/docker
 rm -rf /usr/local/bin/kubectl*
 rm -rf /var/lib/kubelet
