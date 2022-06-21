@@ -135,7 +135,6 @@ if [ $? -eq 0 ]
         cp  /etc/fstab  /etc/fstab.bak
         swapoff --all
         sed --in-place=.bak '/\bswap\b/ s/^/#/' /etc/fstab
-    else
 fi
 
 kubectl kots install torch/db-kots -n default
