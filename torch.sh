@@ -94,12 +94,11 @@ function delete_torch {
 
 kubectl delete deployment --all
 kubeadm reset --force
+yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 yum remove -y -q docker-ce docker containerd.io
 rm -rf /var/lib/docker
-yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
-
 rm -rf /usr/local/bin/kubectl*
 rm -rf /var/lib/kubelet
 rm -rf /var/lib/replicated
