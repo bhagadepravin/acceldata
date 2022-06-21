@@ -122,11 +122,11 @@ kubectl -n velero patch daemonset restic --type json -p='[{"op": "remove", "path
 function delete_torch {
          echo "${RED}Deleting torch ${NC}"  
 kubectl kots remove torch -n default --force
-kubectl delete deployment
-kubectl delete svc 
-kubectl delete crd 
-kubectl delete pvc
-kubectl delete ns
+kubectl delete deployment -l app=torch --force
+kubectl delete svc -l app=torch --force
+kubectl delete crd -l app=torch
+kubectl delete pvc -l app=torch --force
+kubectl delete ns -l app=torch --force
 kubeadm reset --force
 yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
 docker stop $(docker ps -a -q)
