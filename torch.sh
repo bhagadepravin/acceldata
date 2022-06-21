@@ -57,6 +57,8 @@ if [ $? -eq 0 ]
         curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
         kubectl kots install torch/db-kots -n default
         logSuccess "Torch is Installed\n"
+        
+        logSuccess "Make sure you copy Kotsadm URL and Password or use this cmd to reset the password. 'kubectl kots reset-password -n default'\n"
 fi
 }
 
