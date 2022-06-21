@@ -155,6 +155,7 @@ rm -rf /data01/acceldata/config/kubernetes
 [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
 [ -e /opt/cni ] && rm -rf /opt/cni
           logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
+          logSuccess "Make sure you Reboot the make before Reinstalling \n"
 } 
 
 
