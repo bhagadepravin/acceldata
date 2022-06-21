@@ -24,7 +24,7 @@ Usage: $(basename $0) [status stop start delete_troch]
     ./$(basename $0) ${GREEN}status${NC}
     ./$(basename $0) ${RED}stop${NC}
     ./$(basename $0) ${GREEN}start${NC}
-    ./$(basename $0) ${RED}delete_troch${NC}
+    ./$(basename $0) ${RED}delete_torch${NC}
 EOM
     exit 0
 }
@@ -81,7 +81,7 @@ kubectl get daemonset.apps -n velero -o name | xargs -I % kubectl scale % --repl
  echo "${GREEN}TORCH STARTED${NC}"  
 }
 
-function delete_troch {
+function delete_torch {
          echo "${RED}Deleting torch ${NC}"  
 
 kubectl delete deployment --all
@@ -112,5 +112,5 @@ rm -rf /data01/acceldata/config/kubernetes
 status $1
 stop $1
 start $1
-delete_troch $1
+delete_torch $1
 
