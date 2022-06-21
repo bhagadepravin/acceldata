@@ -56,6 +56,7 @@ kubectl -n monitoring patch daemonset prometheus-node-exporter -p '{"spec": {"te
 kubectl -n rook-ceph patch daemonset rook-ceph-agent -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
 kubectl -n rook-ceph patch daemonset rook-discover -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
 kubectl -n velero patch daemonset restic -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
+kubectl get job -n rook-ceph -o yaml > /home/job.yaml
  echo "${GREEN}TORCH STOPPED${NC}"  
 }
 
@@ -84,6 +85,7 @@ kubectl -n monitoring patch daemonset prometheus-node-exporter --type json -p='[
 kubectl -n rook-cep patch daemonset rook-ceph-agent --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
 kubectl -n rook-cep patch daemonset rook-discover --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
 kubectl -n velero patch daemonset restic --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
+# kubectl apply -f /home/job.yaml -n rook-ceph
  echo "${GREEN}TORCH STARTED${NC}"  
 }
 
