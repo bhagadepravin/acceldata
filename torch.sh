@@ -102,7 +102,7 @@ rm -rf /var/lib/docker
 rm -rf /usr/local/bin/kubectl*
 rm -rf /var/lib/kubelet
 rm -rf /var/lib/replicated
-rm -rf /var/lib/kurl 
+# rm -rf /var/lib/kurl 
 rm -rf  /var/lib/rook 
 rm -rf  /opt/replicated/rook
 rm -rf ll /usr/libexec/kubernetes/kubelet-plugins/volume/exec/
