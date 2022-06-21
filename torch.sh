@@ -20,11 +20,13 @@ Usage: $(basename $0) [status stop start delete_troch]
     - ${RED}stop: Will Stop deployments, statefulset, deamonset${NC}
     - ${GREEN}start: Will Start deployments, statefulset, deamonset${NC}
     - ${RED}delete_troch: Will Delete deployments, svc, Kubernetes , docker& K8 config files${NC}
+    - ${GREEN}install_torch_on_prem: Intsall torch-db-kots, kots and admin console torch/db-kots in default namespace
   Examples:
     ./$(basename $0) ${GREEN}status${NC}
     ./$(basename $0) ${RED}stop${NC}
     ./$(basename $0) ${GREEN}start${NC}
     ./$(basename $0) ${RED}delete_torch${NC}
+    ./$(basename $0) ${GREEN}install_torch_on_prem${NC}
 EOM
     exit 0
 }
@@ -121,6 +123,11 @@ rm -rf /data01/acceldata/config/kubernetes
  echo "${GREEN}TORCH DELETED also removed docker completely${NC}"      
 }
 
+function install_torch_on_prem {
+curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
+curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
+kubectl kots install torch/db-kots -n default
+}
 
 if [ "$1" == "status" ]; then
 status
@@ -136,4 +143,8 @@ fi
 
 if [ "$1" == "delete_torch" ]; then
 delete_torch
+fi
+
+if [ "$1" == "install_torch_on_prem" ]; then
+install_torch_on_prem
 fi
