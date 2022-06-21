@@ -47,7 +47,7 @@ sed --in-place=.bak '/\bswap\b/ s/^/#/' /etc/fstab
 # Increase LVM size
 yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
 
-kubectl kots install torch/db-kots -n default
+rpm -qa  |grep kubectl
 if [ $? -eq 0 ]
     then
         logSuccess "Torch is Already Installed\n"
