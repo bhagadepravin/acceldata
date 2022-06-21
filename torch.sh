@@ -15,12 +15,13 @@ NC=$'\e[0m'
 
 usage() {
     cat <<EOM
-Usage: $(basename $0) [stop start delete_troch]
+Usage: $(basename $0) [status stop start delete_troch]
   Parameter:
     - ${RED}stop: Will Stop deployments, statefulset, deamonset${NC}
     - ${GREEN}start: Will Start deployments, statefulset, deamonset${NC}
     - ${RED}delete_troch: Will Delete deployments, svc, Kubernetes , docker& K8 config files${NC}
   Examples:
+    ./$(basename $0) ${GREEN}status${NC}
     ./$(basename $0) ${RED}stop${NC}
     ./$(basename $0) ${GREEN}start${NC}
     ./$(basename $0) ${RED}delete_troch${NC}
@@ -29,6 +30,9 @@ EOM
 }
 [ -z $1 ] && { usage; }
 
+function status {
+kubectl get all --all-namespaces
+}
 function stop {
          echo "${RED}Stopping torch ${NC}"  
 kubectl get deployments.apps -o name | xargs -I % kubectl scale % --replicas=0
@@ -105,6 +109,7 @@ rm -rf /data01/acceldata/config/kubernetes
  echo "${GREEN}TORCH DELETED also removed docker completely${NC}"      
 }
 
+status $1
 stop $1
 start $1
 delete_troch $1
