@@ -133,27 +133,25 @@ yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 yum remove -y -q docker* containerd.io docker-ce-cli
-rm -rf /var/lib/docker
-rm -rf /usr/local/bin/kubectl*
-rm -rf /var/lib/kubelet
-rm -rf /var/lib/replicated
-# rm -rf /var/lib/kurl 
-rm -rf /var/lib/kurl/addons
-rm -rf /var/lib/kurl/bin
-rm -rf /var/lib/kurl/helm
-rm -rf /var/lib/kurl/host-preflights
-rm -rf /var/lib/kurl/krew
-rm -rf /var/lib/kurl/kurlkinds
-rm -rf /var/lib/kurl/kustomize
-rm -rf /var/lib/kurl/shared
-rm -rf /var/lib/rook 
-rm -rf  /opt/replicated/rook
-rm -rf ll /usr/libexec/kubernetes/kubelet-plugins/volume/exec/
-rm -rf /usr/libexec/kubernetes/kubelet-plugins
-rm -rf /data01/acceldata/config/kubernetes
+[ -e /var/lib/docker ] && rm -rf /var/lib/docker
+[ -e /usr/local/bin/kubectl* ] && rm -rf /usr/local/bin/kubectl*
+[ -e /etc/kubernetes  ] && rm -rf /etc/kubernetes 
+[ -e /var/lib/replicated ] && rm -rf /var/lib/replicated
+[ -e /var/lib/kurl/addons ] && rm -rf /var/lib/kurl/addons
+[ -e /var/lib/kurl/bin ] && rm -rf /var/lib/kurl/bin
+[ -e /var/lib/kurl/helm ] && rm -rf /var/lib/kurl/helm
+[ -e /var/lib/kurl/host-preflights ] && rm -rf /var/lib/kurl/host-preflights
+[ -e /var/lib/kurl/krew ] && rm -rf /var/lib/kurl/krew
+[ -e /var/lib/kurl/kustomize ] && rm -rf /var/lib/kurl/kustomize
+[ -e /var/lib/kurl/kurlkinds ] && rm -rf /var/lib/kurl/kurlkinds
+[ -e /var/lib/kurl/shared ] && rm -rf /var/lib/kurl/shared
+[ -e /var/lib/rook] && rm -rf /var/lib/rook
+[ -e /var/log/containers ] && rm -rf /var/log/containers
+[ -e /usr/libexec/kubernetes ] && rm -rf /usr/libexec/kubernetes
 [ -e ~/.kube ] && rm -rf ~/.kube
 [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
 [ -e /opt/cni ] && rm -rf /opt/cni
+
           logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
           logSuccess "Make sure you Reboot the Node before Reinstalling \n"
 } 
