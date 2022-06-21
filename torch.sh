@@ -27,7 +27,7 @@ Usage: $(basename $0) [install_torch_on_prem, status, stop, start, delete_troch]
   Examples:
     ./$(basename $0) ${GREEN}install_torch_on_prem${NC}
     ./$(basename $0) ${GREEN}status${NC}
-    ./$(basename $0) ${RED}stop${NC}
+    ./$(basename $0) ${GREEN}stop${NC}
     ./$(basename $0) ${GREEN}start${NC}
     ./$(basename $0) ${RED}delete_torch${NC}                
 EOM
