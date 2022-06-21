@@ -127,11 +127,12 @@ kubectl delete svc -l app=torch --force
 kubectl delete crd -l app=torch
 kubectl delete pvc -l app=torch --force
 kubectl delete ns -l app=torch --force
+for mount in $(mount | egrep "tmpfs|overlay"  | grep '/var/lib' | awk '{ print $3 }') /var/lib/kubelet /var/lib/docker; do umount $mount; done
 kubeadm reset --force
 yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
-yum remove -y -q docker-ce docker containerd.io docker-ce-cli
+yum remove -y -q docker* containerd.io docker-ce-cli
 rm -rf /var/lib/docker
 rm -rf /usr/local/bin/kubectl*
 rm -rf /var/lib/kubelet
