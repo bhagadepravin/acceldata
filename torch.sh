@@ -187,6 +187,8 @@ for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ pri
     [ -e /var/lib/kurl/host-preflights ] && rm -rf /var/lib/kurl/host-preflights
     [ -e /var/lib/kurl/krew ] && rm -rf /var/lib/kurl/krew
     [ -e /var/lib/kurl/kustomize ] && rm -rf /var/lib/kurl/kustomize
+    [ -e /var/lib/kurl/packages ] && rm -rf /var/lib/kurl/packages
+    [ -e /var/lib/kurl/tmp-kubeadm.conf ] && rm -rf /var/lib/kurl/tmp-kubeadm.conf
     [ -e /var/lib/kurl/kurlkinds ] && rm -rf /var/lib/kurl/kurlkinds
     [ -e /var/lib/kurl/shared ] && rm -rf /var/lib/kurl/shared
     [ -e /var/lib/rook ] && rm -rf /var/lib/rook
