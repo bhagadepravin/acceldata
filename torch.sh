@@ -60,12 +60,7 @@ function increase_LVM {
 }
 
 function install_torch_on_prem {
-
-    rpm -qa | grep kubectl
-    if [ $? -eq 0 ]; then
-        logSuccess "Torch is Already Installed\n"
-    else
-        logStep "Installing Torch........\n"
+        logStep "Installing Torch.......e.\n"
         curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
         curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
         kubectl kots install torch/db-kots -n default
@@ -73,7 +68,6 @@ function install_torch_on_prem {
 
         logSuccess "Make sure you copy Kotsadm URL and Password. \n"
         logStep "Use this cmd to reset the Kotsadm password --- 'kubectl kots reset-password -n default'\n"
-    fi
 }
 
 function status {
@@ -145,6 +139,7 @@ function delete_torch {
 
     kubectl delete deployment --all
     kubectl delete svc --all
+    for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }'); do umount $mount; done
     kubeadm reset --force
     docker stop $(docker ps -a -q)
     docker rm $(docker ps -a -q)
@@ -170,6 +165,8 @@ function delete_torch {
     logSuccess "Make sure you Reboot the Node before Reinstalling \n"
 }
 
+    diasble_swap
+    increase_LVM
 if [ "$1" == "status" ]; then
     status
 fi
@@ -187,7 +184,5 @@ if [ "$1" == "delete_torch" ]; then
 fi
 
 if [ "$1" == "install_torch_on_prem" ]; then
-    diasble_swap
-    increase_LVM
     install_torch_on_prem
 fi
