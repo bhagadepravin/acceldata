@@ -44,22 +44,24 @@ EOM
 }
 [ -z $1 ] && { usage; }
 
-function install_torch_on_prem {
 
-    # Disable Swap
+function diasble_swap {
     logWarn "Disabling Swap\n"
     cp /etc/fstab /etc/fstab.bak
     swapoff --all
     sed --in-place=.bak '/\bswap\b/ s/^/#/' /etc/fstab
+}
 
-    # Increase LVM size
+function increase_LVM {
     logWarn "Increasing LVM size\n"
     yum -y install cloud-utils-growpart && growpart /dev/sda 2
     pvresize /dev/sda2
     lvextend -l+100%FREE /dev/centos/root
     xfs_growfs /dev/centos/root
     lsblk
+}
 
+function install_torch_on_prem {
      logWarn "Checking kubectl package to see kubectl is installed or not p\n"
     rpm -qa | grep kubectl
     if [ $? -eq 0 ]; then
@@ -216,5 +218,7 @@ if [ "$1" == "delete_torch" ]; then
 fi
 
 if [ "$1" == "install_torch_on_prem" ]; then
+    diasble_swap
+    increase_LVM
     install_torch_on_prem
 fi
