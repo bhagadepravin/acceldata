@@ -5,7 +5,6 @@
 
 # rm -rf torch.sh && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/torch.sh && chmod +x torch.sh && ./torch.sh
 
-
 set -E
 
 RED=$'\e[0;31m'
@@ -144,79 +143,26 @@ function start {
 function delete_torch {
     echo "${RED}Deleting torch ${NC}"
 
-    [ -e /usr/bin/kubectl ] && kubectl kots remove torch -n default --force
-    [ -e /usr/bin/kubectl ] && kubectl delete deployments,services -l app=torch --force
-    [ -e /usr/bin/kubectl ] && kubectl delete jobs --all -n rook-ceph
-    [ -e /usr/bin/kubectl ] && kubectl delete --all deployments
-    [ -e /usr/bin/kubectl ] && kubectl delete --all deployments -n monitoring
-    [ -e /usr/bin/kubectl ] && kubectl delete --all deployments -n rook-ceph
-    [ -e /usr/bin/kubectl ] && kubectl delete --all deployments -n kurl
-    [ -e /usr/bin/kubectl ] && kubectl delete deployment.apps/velero -n velero
-    [ -e /usr/bin/kubectl ] && kubectl delete deployments metrics-server -n kube-system
-    [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n monitoring
-    [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n rook-ceph
-    [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n default
-    [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n kurl
-    [ -e /usr/bin/kubectl ] && kubectl delete --all daemonset -n rook-ceph
-    [ -e /usr/bin/kubectl ] && kubectl delete --all daemonset -n monitoring
-    [ -e /usr/bin/kubectl ] && kubectl delete --all daemonset -n velero
-    [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l kots.io/app-slug=torch
-    [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l kots.io/backup=velero
-    [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l app=kube-prometheus-stack-alertmanager -n monitoring
-    [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l app=kube-prometheus-stack-prometheus -n monitoring
-    # Delete any pod which is in Terminating state:
-    kubectl get pods -o custom-columns=:metadata.name | xargs kubectl delete pod --force --grace-period=0
-    kubectl get pods -o custom-columns=:metadata.name -n monitoring | xargs kubectl delete pod --force --grace-period=0 -n monitoring
-    kubectl get pods -o custom-columns=:metadata.name -n kurl | xargs kubectl delete pod --force --grace-period=0 -n kurl
-    kubectl get pods -o custom-columns=:metadata.name -n rook-ceph | xargs kubectl delete pod --force --grace-period=0 -n rook-ceph
-    kubectl get pods -o custom-columns=:metadata.name -n spark-operator | xargs kubectl delete pod --force --grace-period=0 -n spark-operator
-    kubectl get pods -o custom-columns=:metadata.name -n velero | xargs kubectl delete pod --force --grace-period=0 -n velero
-    kubectl get pods -o custom-columns=:metadata.name -n volcano-monitoring | xargs kubectl delete pod --force --grace-period=0 -n volcano-monitoring
-    kubectl get pods -o custom-columns=:metadata.name -n volcano-system | xargs kubectl delete pod --force --grace-period=0 -n volcano-system
-    [ -e /usr/bin/kubectl ] && kubectl -n rook-ceph patch crd cephclusters.ceph.rook.io --type merge -p '{"metadata":{"finalizers": [null]}}'
-    [ -e /usr/bin/kubectl ] && kubectl delete crd --all --force --grace-period=0
-    [ -e /usr/bin/kubectl ] && kubectl delete secrets --all --force --grace-period=0
-    [ -e /usr/bin/kubectl ] && kubectl delete pvc --all --force --grace-period=0
-    [ -e /usr/bin/kubectl ] && kubectl delete --all pods
-
-    [ -e /usr/bin/kubectl ] && kubectl delete deployment -l app=torch --force
-    [ -e /usr/bin/kubectl ] && kubectl delete svc -l app=torch --force
-    [ -e /usr/bin/kubectl ] && kubectl delete crd -l app=torch
-    [ -e /usr/bin/kubectl ] && kubectl delete pvc -l app=torch --force
-    # You need to delete all the resources associated to namespace before deleting the ns
-    #[ -e /usr/bin/kubectl ] && kubectl delete ns monitoring kurl rook-ceph spark-operator velero volcano-monitoring volcano-system
-    for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }'); do umount $mount; done
-    [ -e /usr/bin/kubeadm ] && [ -e /usr/bin/kubectl ] && yum remove -y -q kubectl kubelet kubernetes-cni kube*
-    [ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
-    #[ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
-    [ -e /usr/bin/docker ] && docker system prune --force
-    [ -e /usr/bin/docker ] && docker network prune --force
-    [ -e /usr/bin/docker ] && yum remove -y docker* containerd.io docker-ce-cli
-    [ -e /var/lib/docker ] && rm -rf /var/lib/docker
-    [ -e /usr/local/bin/kubectl ] && rm -rf /usr/local/bin/kubectl
-    [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
-    [ -e /var/lib/replicated ] && rm -rf /var/lib/replicated
-    [ -e /var/lib/kurl/addons ] && rm -rf /var/lib/kurl/addons
-    [ -e /var/lib/kurl/bin ] && rm -rf /var/lib/kurl/bin
-    [ -e /var/lib/kurl/helm ] && rm -rf /var/lib/kurl/helm
-    [ -e /var/lib/kurl/host-preflights ] && rm -rf /var/lib/kurl/host-preflights
-    [ -e /var/lib/kurl/krew ] && rm -rf /var/lib/kurl/krew
-    [ -e /var/lib/kurl/kustomize ] && rm -rf /var/lib/kurl/kustomize
-    [ -e /var/lib/kurl/packages ] && rm -rf /var/lib/kurl/packages
-    [ -e /var/lib/kurl/tmp-kubeadm.conf ] && rm -rf /var/lib/kurl/tmp-kubeadm.conf
-    [ -e /var/lib/kurl/kurlkinds ] && rm -rf /var/lib/kurl/kurlkinds
-    [ -e /var/lib/kurl/shared ] && rm -rf /var/lib/kurl/shared
-    [ -e /var/lib/rook ] && rm -rf /var/lib/rook
-    [ -e /var/log/containers ] && rm -rf /var/log/containers
-    [ -e /usr/libexec/kubernetes ] && rm -rf /usr/libexec/kubernetes
+    kubectl delete deployment --all
+    kubectl delete svc --all
+    kubeadm reset --force
+    docker stop $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
+    yum remove -y docker-ce docker containerd.io
+    rm -rf /var/lib/docker
+    yum remove -y kubeadm kubectl kubelet kubernetes-cni kube*
+    rm -rf /usr/local/bin/kubectl*
+    rm -rf /var/lib/kubelet
+    rm -rf /var/lib/replicated
+    rm -rf /var/lib/kurl
+    rm -rf /var/lib/rook
+    rm -rf /opt/replicated/rook
+    rm -rf ll /usr/libexec/kubernetes/kubelet-plugins/volume/exec/
+    rm -rf /usr/libexec/kubernetes/kubelet-plugins
+    rm -rf /data01/acceldata/config/kubernetes
     [ -e ~/.kube ] && rm -rf ~/.kube
     [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
     [ -e /opt/cni ] && rm -rf /opt/cni
-    [ -e /var/lib/kubelet ] && rm -rf /var/lib/kubelet
-    [ -e /etc/cni/net.d ] && rm -rf /etc/cni/net.d
-    [ -e /usr/bin/kubeadm ] && kubeadm reset --force
-    [ -e /var/lib/etcd ] && rm -rf /var/lib/etcd
-    [ -e /var/lib/weave ] && rm -rf /var/lib/weave
 
     ip link delete docker0
 
