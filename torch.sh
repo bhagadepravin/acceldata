@@ -174,6 +174,7 @@ function delete_torch {
     [ -e ~/.kube ] && rm -rf ~/.kube
     [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
     [ -e /opt/cni ] && rm -rf /opt/cni
+    [ -e /var/lib/kubelet ] && rm -rf /var/lib/kubelet
 
     logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
     logSuccess "Make sure you Reboot the Node before Reinstalling \n"
