@@ -168,8 +168,9 @@ function delete_torch {
     #[ -e /usr/bin/kubectl ] && kubectl delete ns monitoring kurl rook-ceph spark-operator velero volcano-monitoring volcano-system
     for mount in $(mount | egrep "tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }') ; do umount $mount; done
     [ -e /usr/bin/kubeadm ] && [ -e /usr/bin/kubectl ] && yum remove -y -q kubectl kubelet kubernetes-cni kube*
-    #[ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
+    [ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
     #[ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
+    [ -e /usr/bin/docker ] &&  docker system prune -a --force
     [ -e /usr/bin/docker ] && yum remove -y docker* containerd.io docker-ce-cli
     [ -e /var/lib/docker ] && rm -rf /var/lib/docker
     [ -e /usr/local/bin/kubectl ] && rm -rf /usr/local/bin/kubectl
