@@ -18,7 +18,7 @@ logSuccess() {
     printf "${GREEN}✔ $1${NC}\n" 1>&2
 }
 logStep() {
-    printf "${BLUE}�~Z~Y  $1${NC}\n" 1>&2
+    printf "${BLUE}✔ $1${NC}\n" 1>&2
 }
 logWarn() {
     printf "${YELLOW}$1${NC}\n" 1>&2
@@ -84,7 +84,7 @@ function status {
 }
 
 function stop {
-    echo "${RED} �~Z~Y Stopping Torch ${NC}"
+    echo "${RED} Stopping Torch ${NC}"
     # Deployments
     kubectl get deployments.apps -o name | xargs -I % kubectl scale % --replicas=0
     kubectl get deployments.apps deployment.apps/torch-query-analyzer | xargs -I % kubectl scale % --replicas=0
