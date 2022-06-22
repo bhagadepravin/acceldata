@@ -196,6 +196,7 @@ for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ pri
     [ -e /var/lib/kubelet ] && rm -rf /var/lib/kubelet
     [ -e /etc/cni/net.d ] && rm -rf /etc/cni/net.d
     [ -e /usr/bin/kubeadm ] && kubeadm reset --force
+    [ -e /var/lib/etcd ] && rm -rf /var/lib/etcd
 
     logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
     logSuccess "Make sure you Reboot the Node before Reinstalling \n"
