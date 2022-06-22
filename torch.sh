@@ -158,10 +158,25 @@ function delete_torch {
     [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n default
     [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n kurl
     [ -e /usr/bin/kubectl ] && kubectl delete --all daemonset -n rook-ceph
+    [ -e /usr/bin/kubectl ] && kubectl delete --all daemonset -n monitoring
+    [ -e /usr/bin/kubectl ] && kubectl delete --all daemonset -n velero
     [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l kots.io/app-slug=torch
     [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l kots.io/backup=velero
     [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l app=kube-prometheus-stack-alertmanager -n monitoring
     [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l app=kube-prometheus-stack-prometheus -n monitoring
+    # Delete any pod which is in Terminating state:
+    kubectl get pods -o custom-columns=:metadata.name | xargs kubectl delete pod --force --grace-period=0
+    kubectl get pods -o custom-columns=:metadata.name -n monitoring | xargs kubectl delete pod --force --grace-period=0 -n monitoring
+    kubectl get pods -o custom-columns=:metadata.name -n kurl | xargs kubectl delete pod --force --grace-period=0 -n kurl
+    kubectl get pods -o custom-columns=:metadata.name -n rook-ceph | xargs kubectl delete pod --force --grace-period=0 -n rook-ceph
+    kubectl get pods -o custom-columns=:metadata.name -n spark-operator | xargs kubectl delete pod --force --grace-period=0 -n spark-operator
+    kubectl get pods -o custom-columns=:metadata.name -n velero | xargs kubectl delete pod --force --grace-period=0 -n velero
+    kubectl get pods -o custom-columns=:metadata.name -n volcano-monitoring | xargs kubectl delete pod --force --grace-period=0 -n volcano-monitoring
+    kubectl get pods -o custom-columns=:metadata.name -n volcano-system | xargs kubectl delete pod --force --grace-period=0 -n volcano-system
+    [ -e /usr/bin/kubectl ] && kubectl -n rook-ceph patch crd cephclusters.ceph.rook.io --type merge -p '{"metadata":{"finalizers": [null]}}'
+    [ -e /usr/bin/kubectl ] && kubectl delete crd --all --force --grace-period=0
+    [ -e /usr/bin/kubectl ] && kubectl delete secrets --all --force --grace-period=0
+    [ -e /usr/bin/kubectl ] && kubectl delete pvc --all --force --grace-period=0
     [ -e /usr/bin/kubectl ] && kubectl delete --all pods
 
     [ -e /usr/bin/kubectl ] && kubectl delete deployment -l app=torch --force
