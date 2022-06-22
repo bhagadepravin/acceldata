@@ -43,7 +43,6 @@ EOM
 }
 [ -z $1 ] && { usage; }
 
-
 function diasble_swap {
     logWarn "Disabling Swap\n"
     cp /etc/fstab /etc/fstab.bak
@@ -146,36 +145,36 @@ function delete_torch {
     echo "${RED}Deleting torch ${NC}"
 
     [ -e /usr/bin/kubectl ] && kubectl kots remove torch -n default --force
-    [ -e /usr/bin/kubectl ] &&  kubectl delete deployments,services -l app=torch --force
-    [ -e /usr/bin/kubectl ] &&  kubectl delete jobs --all -n rook-ceph
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all deployments
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all deployments -n monitoring
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all deployments -n rook-ceph
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all deployments -n kurl
-    [ -e /usr/bin/kubectl ] &&  kubectl delete deployment.apps/velero  -n velero
-    [ -e /usr/bin/kubectl ] &&  kubectl delete deployments metrics-server -n kube-system
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n monitoring
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n rook-ceph
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n default
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n kurl
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all daemonset -n rook-ceph
-    [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l kots.io/app-slug=torch
-    [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l kots.io/backup=velero
-    [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l app=kube-prometheus-stack-alertmanager -n monitoring
-    [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l app=kube-prometheus-stack-prometheus -n monitoring
-    [ -e /usr/bin/kubectl ] &&  kubectl delete --all pods   
-#
+    [ -e /usr/bin/kubectl ] && kubectl delete deployments,services -l app=torch --force
+    [ -e /usr/bin/kubectl ] && kubectl delete jobs --all -n rook-ceph
+    [ -e /usr/bin/kubectl ] && kubectl delete --all deployments
+    [ -e /usr/bin/kubectl ] && kubectl delete --all deployments -n monitoring
+    [ -e /usr/bin/kubectl ] && kubectl delete --all deployments -n rook-ceph
+    [ -e /usr/bin/kubectl ] && kubectl delete --all deployments -n kurl
+    [ -e /usr/bin/kubectl ] && kubectl delete deployment.apps/velero -n velero
+    [ -e /usr/bin/kubectl ] && kubectl delete deployments metrics-server -n kube-system
+    [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n monitoring
+    [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n rook-ceph
+    [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n default
+    [ -e /usr/bin/kubectl ] && kubectl delete --all svc -n kurl
+    [ -e /usr/bin/kubectl ] && kubectl delete --all daemonset -n rook-ceph
+    [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l kots.io/app-slug=torch
+    [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l kots.io/backup=velero
+    [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l app=kube-prometheus-stack-alertmanager -n monitoring
+    [ -e /usr/bin/kubectl ] && kubectl delete statefulset -l app=kube-prometheus-stack-prometheus -n monitoring
+    [ -e /usr/bin/kubectl ] && kubectl delete --all pods
+
     [ -e /usr/bin/kubectl ] && kubectl delete deployment -l app=torch --force
     [ -e /usr/bin/kubectl ] && kubectl delete svc -l app=torch --force
     [ -e /usr/bin/kubectl ] && kubectl delete crd -l app=torch
     [ -e /usr/bin/kubectl ] && kubectl delete pvc -l app=torch --force
     # You need to delete all the resources associated to namespace before deleting the ns
     #[ -e /usr/bin/kubectl ] && kubectl delete ns monitoring kurl rook-ceph spark-operator velero volcano-monitoring volcano-system
-for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }' ) ; do umount $mount; done
+    for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }'); do umount $mount; done
     [ -e /usr/bin/kubeadm ] && [ -e /usr/bin/kubectl ] && yum remove -y -q kubectl kubelet kubernetes-cni kube*
     [ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
     #[ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
-    [ -e /usr/bin/docker ] &&  docker system prune -a --force
+    [ -e /usr/bin/docker ] && docker system prune -a --force
     [ -e /usr/bin/docker ] && yum remove -y docker* containerd.io docker-ce-cli
     [ -e /var/lib/docker ] && rm -rf /var/lib/docker
     [ -e /usr/local/bin/kubectl ] && rm -rf /usr/local/bin/kubectl
@@ -202,8 +201,8 @@ for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ pri
     [ -e /usr/bin/kubeadm ] && kubeadm reset --force
     [ -e /var/lib/etcd ] && rm -rf /var/lib/etcd
     [ -e /var/lib/weave ] && rm -rf /var/lib/weave
-    
-ip link delete docker0
+
+    ip link delete docker0
 
     logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
     logSuccess "Make sure you Reboot the Node before Reinstalling \n"
