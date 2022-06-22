@@ -5,14 +5,23 @@
 
 # rm -rf torch.sh && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/torch.sh && chmod +x torch.sh && ./torch.sh
 
-#set -e
+# set -e
 set -E
 
-GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
+BLUE='\033[0;94m'
+GREEN=$'\e[0;32m'
+YELLOW='\033[0;33m'
 NC=$'\e[0m'
+
 logSuccess() {
     printf "${GREEN}✔ $1${NC}\n" 1>&2
+}
+logStep() {
+    printf "${BLUE}�~Z~Y  $1${NC}\n" 1>&2
+}
+logWarn() {
+    printf "${YELLOW}$1${NC}\n" 1>&2
 }
 
 usage() {
@@ -38,22 +47,25 @@ EOM
 function install_torch_on_prem {
 
     # Disable Swap
+    logWarn "Disabling Swap\n"
     cp /etc/fstab /etc/fstab.bak
     swapoff --all
     sed --in-place=.bak '/\bswap\b/ s/^/#/' /etc/fstab
 
     # Increase LVM size
+    logWarn "Increasing LVM size\n"
     yum -y install cloud-utils-growpart && growpart /dev/sda 2
     pvresize /dev/sda2
     lvextend -l+100%FREE /dev/centos/root
     xfs_growfs /dev/centos/root
     lsblk
 
+     logWarn "Checking kubectl package to see kubectl is installed or not p\n"
     rpm -qa | grep kubectl
     if [ $? -eq 0 ]; then
         logSuccess "Torch is Already Installed\n"
     else
-        echo "${GREEN}Installing Torch........${NC}"
+        logStep "Installing Torch........\n"
         curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
         curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
         kubectl kots install torch/db-kots -n default
@@ -64,11 +76,14 @@ function install_torch_on_prem {
 }
 
 function status {
+    logStep "kubectl get pods\n"
+    kubectl get pods
+    logStep "kubectl get all --all-namespaces\n"
     kubectl get all --all-namespaces
 }
 
 function stop {
-    echo "${RED}Stopping torch ${NC}"
+    echo "${RED} �~Z~Y Stopping Torch ${NC}"
     # Deployments
     kubectl get deployments.apps -o name | xargs -I % kubectl scale % --replicas=0
     kubectl get deployments.apps deployment.apps/torch-query-analyzer | xargs -I % kubectl scale % --replicas=0
