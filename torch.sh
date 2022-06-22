@@ -148,7 +148,8 @@ function delete_torch {
     [ -e /usr/bin/kubectl ] && kubectl delete svc -l app=torch --force
     [ -e /usr/bin/kubectl ] && kubectl delete crd -l app=torch
     [ -e /usr/bin/kubectl ] && kubectl delete pvc -l app=torch --force
-    [ -e /usr/bin/kubectl ] && kubectl delete ns -l app=torch --force
+    # You need to delete all the resources associated to namespace before deleting the ns
+    #[ -e /usr/bin/kubectl ] && kubectl delete ns monitoring kurl rook-ceph spark-operator velero volcano-monitoring volcano-system
     for mount in $(mount | egrep "tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }') ; do umount $mount; done
     [ -e /usr/bin/kubeadm ] && kubeadm reset --force
     [ -e /usr/bin/kubeadm ] && [ -e /usr/bin/kubectl ] && yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
