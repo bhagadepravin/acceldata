@@ -149,7 +149,7 @@ function delete_torch {
     [ -e /usr/bin/kubectl ] && kubectl delete crd -l app=torch
     [ -e /usr/bin/kubectl ] && kubectl delete pvc -l app=torch --force
     [ -e /usr/bin/kubectl ] && kubectl delete ns -l app=torch --force
-    for mount in $(mount | egrep "tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }') /var/lib/kubelet /var/lib/docker; do umount $mount; done
+    for mount in $(mount | egrep "tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }') ; do umount $mount; done
     [ -e /usr/bin/kubeadm ] && kubeadm reset --force
     [ -e /usr/bin/kubeadm ] && [ -e /usr/bin/kubectl ] && yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
     [ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
