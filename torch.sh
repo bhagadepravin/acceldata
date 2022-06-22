@@ -168,7 +168,7 @@ function delete_torch {
     [ -e /var/lib/kurl/kustomize ] && rm -rf /var/lib/kurl/kustomize
     [ -e /var/lib/kurl/kurlkinds ] && rm -rf /var/lib/kurl/kurlkinds
     [ -e /var/lib/kurl/shared ] && rm -rf /var/lib/kurl/shared
-    [ -e /var/lib/rook] && rm -rf /var/lib/rook
+    [ -e /var/lib/rook ] && rm -rf /var/lib/rook
     [ -e /var/log/containers ] && rm -rf /var/log/containers
     [ -e /usr/libexec/kubernetes ] && rm -rf /usr/libexec/kubernetes
     [ -e ~/.kube ] && rm -rf ~/.kube
