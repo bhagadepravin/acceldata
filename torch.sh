@@ -63,8 +63,9 @@ fi
 }
 
 function status {
-kubectl get all --all-namespaces
+         kubectl get all --all-namespaces
 }
+
 function stop {
          echo "${RED}Stopping torch ${NC}"  
 kubectl get deployments.apps -o name | xargs -I % kubectl scale % --replicas=0
@@ -123,18 +124,18 @@ kubectl -n velero patch daemonset restic --type json -p='[{"op": "remove", "path
 
 function delete_torch {
          echo "${RED}Deleting torch ${NC}"  
-kubectl kots remove torch -n default --force
-kubectl delete deployment -l app=torch --force
-kubectl delete svc -l app=torch --force
-kubectl delete crd -l app=torch
-kubectl delete pvc -l app=torch --force
-kubectl delete ns -l app=torch --force
+[ -e /usr/bin/kubectl ] && kubectl kots remove torch -n default --force
+[ -e /usr/bin/kubectl ] && kubectl delete deployment -l app=torch --force
+[ -e /usr/bin/kubectl ] && kubectl delete svc -l app=torch --force
+[ -e /usr/bin/kubectl ] && kubectl delete crd -l app=torch
+[ -e /usr/bin/kubectl ] && kubectl delete pvc -l app=torch --force
+[ -e /usr/bin/kubectl ] && kubectl delete ns -l app=torch --force
 for mount in $(mount | egrep "tmpfs|overlay"  | grep '/var/lib' | awk '{ print $3 }') /var/lib/kubelet /var/lib/docker; do umount $mount; done
-kubeadm reset --force
-yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-yum remove -y -q docker* containerd.io docker-ce-cli
+[ -e /usr/bin/kubeadm ] && kubeadm reset --force
+[ -e /usr/bin/kubeadm ] && [ -e /usr/bin/kubectl ] && yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
+[ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
+[ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
+[ -e /usr/bin/docker ] && yum remove -y -q docker* containerd.io docker-ce-cli
 [ -e /var/lib/docker ] && rm -rf /var/lib/docker
 [ -e /usr/local/bin/kubectl* ] && rm -rf /usr/local/bin/kubectl*
 [ -e /etc/kubernetes  ] && rm -rf /etc/kubernetes 
