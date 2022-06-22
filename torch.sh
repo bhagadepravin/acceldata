@@ -71,7 +71,8 @@ function install_torch_on_prem {
         kubectl kots install torch/db-kots -n default
         logSuccess "Torch is Installed\n"
 
-        logSuccess "Make sure you copy Kotsadm URL and Password or use this cmd to reset the password. 'kubectl kots reset-password -n default'\n"
+        logSuccess "Make sure you copy Kotsadm URL and Password. \n"
+        logStep "Use this cmd to reset the Kotsadm password --- 'kubectl kots reset-password -n default'\n"
     fi
 }
 
