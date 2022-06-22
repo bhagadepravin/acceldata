@@ -62,9 +62,10 @@ function increase_LVM {
 }
 
 function install_torch_on_prem {
-     logWarn "Checking kubectl package to see kubectl is installed or not p\n"
+
     rpm -qa | grep kubectl
-    if [ $? -eq 0 ]; then
+    if [ ($? -eq 0) ]; then
+        return 0
         logSuccess "Torch is Already Installed\n"
     else
         logStep "Installing Torch........\n"
