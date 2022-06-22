@@ -151,8 +151,7 @@ function delete_torch {
     # You need to delete all the resources associated to namespace before deleting the ns
     #[ -e /usr/bin/kubectl ] && kubectl delete ns monitoring kurl rook-ceph spark-operator velero volcano-monitoring volcano-system
     for mount in $(mount | egrep "tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }') ; do umount $mount; done
-    [ -e /usr/bin/kubeadm ] && kubeadm reset --force
-    [ -e /usr/bin/kubeadm ] && [ -e /usr/bin/kubectl ] && yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
+    [ -e /usr/bin/kubeadm ] && [ -e /usr/bin/kubectl ] && yum remove -y -q kubectl kubelet kubernetes-cni kube*
     #[ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
     #[ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
     [ -e /usr/bin/docker ] && yum remove -y docker* containerd.io docker-ce-cli
@@ -175,6 +174,8 @@ function delete_torch {
     [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
     [ -e /opt/cni ] && rm -rf /opt/cni
     [ -e /var/lib/kubelet ] && rm -rf /var/lib/kubelet
+    [ -e /etc/cni/net.d ] && rm -rf /etc/cni/net.d
+    [ -e /usr/bin/kubeadm ] && kubeadm reset --force
 
     logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
     logSuccess "Make sure you Reboot the Node before Reinstalling \n"
