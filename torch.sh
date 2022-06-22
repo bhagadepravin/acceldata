@@ -144,6 +144,22 @@ function delete_torch {
     echo "${RED}Deleting torch ${NC}"
 
     [ -e /usr/bin/kubectl ] && kubectl kots remove torch -n default --force
+    [ -e /usr/bin/kubectl ] &&  kubectl delete deployments,services -l app=torch --force
+    [ -e /usr/bin/kubectl ] &&  kubectl delete jobs --all -n rook-ceph
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all deployments
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all deployments -n monitoring
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all deployments -n rook-ceph
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all deployments -n kurl
+    [ -e /usr/bin/kubectl ] &&  kubectl delete deployment.apps/velero  -n velero
+    [ -e /usr/bin/kubectl ] &&  kubectl delete deployments metrics-server -n kube-system
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n monitoring
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n rook-ceph
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n default
+    [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l kots.io/app-slug=torch
+    [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l kots.io/backup=velero
+    [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l app=kube-prometheus-stack-alertmanager -n monitoring
+    [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l app=kube-prometheus-stack-prometheus -n monitoring
+#
     [ -e /usr/bin/kubectl ] && kubectl delete deployment -l app=torch --force
     [ -e /usr/bin/kubectl ] && kubectl delete svc -l app=torch --force
     [ -e /usr/bin/kubectl ] && kubectl delete crd -l app=torch
