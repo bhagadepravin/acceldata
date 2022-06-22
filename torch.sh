@@ -153,9 +153,9 @@ function delete_torch {
     for mount in $(mount | egrep "tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }') ; do umount $mount; done
     [ -e /usr/bin/kubeadm ] && kubeadm reset --force
     [ -e /usr/bin/kubeadm ] && [ -e /usr/bin/kubectl ] && yum remove -y -q kubeadm kubectl kubelet kubernetes-cni kube*
-    [ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
-    [ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
-    [ -e /usr/bin/docker ] && yum remove -y -q docker* containerd.io docker-ce-cli
+    #[ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
+    #[ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
+    [ -e /usr/bin/docker ] && yum remove -y docker* containerd.io docker-ce-cli
     [ -e /var/lib/docker ] && rm -rf /var/lib/docker
     [ -e /usr/local/bin/kubectl* ] && rm -rf /usr/local/bin/kubectl*
     [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
