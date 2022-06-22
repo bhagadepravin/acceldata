@@ -157,6 +157,8 @@ function delete_torch {
     [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n monitoring
     [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n rook-ceph
     [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n default
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all svc  -n kurl
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all daemonset -n rook-ceph
     [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l kots.io/app-slug=torch
     [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l kots.io/backup=velero
     [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l app=kube-prometheus-stack-alertmanager -n monitoring
