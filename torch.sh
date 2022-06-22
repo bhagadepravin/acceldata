@@ -159,6 +159,7 @@ function delete_torch {
     [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l kots.io/backup=velero
     [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l app=kube-prometheus-stack-alertmanager -n monitoring
     [ -e /usr/bin/kubectl ] &&  kubectl delete statefulset -l app=kube-prometheus-stack-prometheus -n monitoring
+    [ -e /usr/bin/kubectl ] &&  kubectl delete --all pods   
 #
     [ -e /usr/bin/kubectl ] && kubectl delete deployment -l app=torch --force
     [ -e /usr/bin/kubectl ] && kubectl delete svc -l app=torch --force
