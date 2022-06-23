@@ -60,14 +60,14 @@ function increase_LVM {
 }
 
 function install_torch_on_prem {
-        logStep "Installing Torch.......e.\n"
-        curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
-        curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
-        kubectl kots install torch/db-kots -n default
-        logSuccess "Torch is Installed\n"
+    logStep "Installing Torch.......e.\n"
+    curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
+    curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
+    kubectl kots install torch/db-kots -n default
+    logSuccess "Torch is Installed\n"
 
-        logSuccess "Make sure you copy Kotsadm URL and Password. \n"
-        logStep "Use this cmd to reset the Kotsadm password --- 'kubectl kots reset-password -n default'\n"
+    logSuccess "Make sure you copy Kotsadm URL and Password. \n"
+    logStep "Use this cmd to reset the Kotsadm password --- 'kubectl kots reset-password -n default'\n"
 }
 
 function status {
@@ -137,24 +137,35 @@ function start {
 function delete_torch {
     echo "${RED}Deleting torch ${NC}"
 
-    kubectl delete deployment --all
-    kubectl delete svc --all
+    [ -e /usr/bin/kubectl ] && kubectl delete deployment --all
+    [ -e /usr/bin/kubectl ] && kubectl delete svc --all
     for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }'); do umount $mount; done
-    kubeadm reset --force
-    docker stop $(docker ps -a -q)
-    docker rm $(docker ps -a -q)
+    [ -e /usr/bin/kubeadm ] && kubeadm reset --force
+    [ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
+    [ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
     yum remove -y docker-ce docker containerd.io
-    rm -rf /var/lib/docker
+    [ -e /usr/bin/docker ] && rm -rf /var/lib/docker
     yum remove -y kubeadm kubectl kubelet kubernetes-cni kube*
-    rm -rf /usr/local/bin/kubectl*
-    rm -rf /var/lib/kubelet
-    rm -rf /var/lib/replicated
-    rm -rf /var/lib/kurl
-    rm -rf /var/lib/rook
-    rm -rf /opt/replicated/rook
-    rm -rf ll /usr/libexec/kubernetes/kubelet-plugins/volume/exec/
-    rm -rf /usr/libexec/kubernetes/kubelet-plugins
-    rm -rf /data01/acceldata/config/kubernetes
+    [ -e /usr/local/bin/kubectl ] && rm -rf /usr/local/bin/kubectl*
+    [ -e /var/lib/kubelet ] && rm -rf /var/lib/kubelet
+    [ -e /var/lib/replicated ] && rm -rf /var/lib/replicated
+    [ -e /var/lib/kurl/addons ] && rm -rf /var/lib/kurl/addons
+    [ -e /var/lib/kurl/bin ] && rm -rf /var/lib/kurl/bin
+    [ -e /var/lib/kurl/helm ] && rm -rf /var/lib/kurl/helm
+    [ -e /var/lib/kurl/host-preflights ] && rm -rf /var/lib/kurl/host-preflights
+    [ -e /var/lib/kurl/krew ] && rm -rf /var/lib/kurl/krew
+    [ -e /var/lib/kurl/kustomize ] && rm -rf /var/lib/kurl/kustomize
+    [ -e /var/lib/kurl/packages ] && rm -rf /var/lib/kurl/packages
+    [ -e /var/lib/kurl/tmp-kubeadm.conf ] && rm -rf /var/lib/kurl/tmp-kubeadm.conf
+    [ -e /var/lib/kurl/kurlkinds ] && rm -rf /var/lib/kurl/kurlkinds
+    [ -e /var/lib/kurl/shared ] && rm -rf /var/lib/kurl/shared
+    [ -e /var/lib/rook ] && rm -rf /var/lib/rook
+    [ -e /opt/replicated/rook ] && rm rm -rf /opt/replicated/rook
+    [ -e /usr/libexec/kubernetes/kubelet-plugins/volume/exec/ ] && rm -rf/usr/libexec/kubernetes/kubelet-plugins/volume/exec/
+    [ -e /usr/libexec/kubernetes/kubelet-plugins ] && rm -rf /usr/libexec/kubernetes/kubelet-plugins
+    [ -e /data01/acceldata/config/kubernetes ] && rm -rf /data01/acceldata/config/kubernetes
+    [ -e /var/lib/etcd ] && rm -rf /var/lib/etcd
+    [ -e /var/lib/weave ] && rm -rf /var/lib/weave
     [ -e ~/.kube ] && rm -rf ~/.kube
     [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
     [ -e /opt/cni ] && rm -rf /opt/cni
@@ -165,8 +176,8 @@ function delete_torch {
     logSuccess "Make sure you Reboot the Node before Reinstalling \n"
 }
 
-    diasble_swap
-    increase_LVM
+diasble_swap
+increase_LVM
 if [ "$1" == "status" ]; then
     status
 fi
