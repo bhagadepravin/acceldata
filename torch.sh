@@ -169,7 +169,7 @@ function delete_torch {
     [ -e /var/lib/kurl/shared ] && rm -rf /var/lib/kurl/shared
     [ -e /var/lib/rook ] && rm -rf /var/lib/rook
     [ -e /opt/replicated/rook ] && rm rm -rf /opt/replicated/rook
-    [ -e /usr/libexec/kubernetes/kubelet-plugins/volume/exec/ ] && rm -rf/usr/libexec/kubernetes/kubelet-plugins/volume/exec/
+    [ -e /usr/libexec/kubernetes/kubelet-plugins/volume/exec/ ] && rm -rf /usr/libexec/kubernetes/kubelet-plugins/volume/exec/
     [ -e /usr/libexec/kubernetes/kubelet-plugins ] && rm -rf /usr/libexec/kubernetes/kubelet-plugins
     [ -e /data01/acceldata/config/kubernetes ] && rm -rf /data01/acceldata/config/kubernetes
     [ -e /var/lib/etcd ] && rm -rf /var/lib/etcd
