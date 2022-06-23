@@ -17,7 +17,7 @@ git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
 kubectl create -f kubernetes-metrics-server/
 ```
 #### Portainer WebUi for Docker
-```
+```bash
 # Install
 docker run  --name portainer -d -p 9000:9000 --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /opt/portainer:/data portainer/portainer
 
