@@ -148,6 +148,7 @@ set -x
     yum remove -y docker-ce docker containerd.io
     [ -e /usr/bin/docker ] && rm -rf /var/lib/docker
     yum remove -y kubeadm kubectl kubelet kubernetes-cni kube*
+    set +x
     [ -e /usr/local/bin/kubectl ] && rm -rf /usr/local/bin/kubectl*
     [ -e /var/lib/kubelet ] && rm -rf /var/lib/kubelet
     [ -e /var/lib/replicated ] && rm -rf /var/lib/replicated
@@ -173,7 +174,7 @@ set -x
     [ -e /opt/cni ] && rm -rf /opt/cni
 
     ip link delete docker0
-set +x
+
     logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
     logSuccess "Make sure you Reboot the Node before Reinstalling \n"
 }
