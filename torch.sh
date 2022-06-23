@@ -62,7 +62,7 @@ function increase_LVM {
 }
 
 function install_torch_on_prem {
-    logStep "Installing Torch.......e.\n"
+    logStep "Installing Torch........\n"
     curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
     curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
     kubectl kots install torch/db-kots -n default
