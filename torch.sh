@@ -199,6 +199,7 @@ if [ "$1" == "delete_torch" ]; then
 fi
 
 if [ "$1" == "install_torch_on_prem" ]; then
+    stop
     install_torch_on_prem
 fi
 if [ "$1" == "prep_node" ]; then
