@@ -54,7 +54,7 @@ function diasble_swap {
 
 function increase_LVM {
     logWarn "Increasing LVM size\n"
-    yum -y install cloud-utils-growpart && growpart /dev/sda 2
+    yum -y -q install cloud-utils-growpart && growpart /dev/sda 2
     pvresize /dev/sda2
     lvextend -l+100%FREE /dev/centos/root
     xfs_growfs /dev/centos/root
@@ -147,9 +147,9 @@ set -x
     [ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
     [ -e /usr/bin/docker ] && docker system prune --force
     [ -e /usr/bin/docker ] && docker network prune --force
-    yum remove -y docker-ce docker containerd.io
+    yum remove -q -y docker-ce docker containerd.io
     [ -e /usr/bin/docker ] && rm -rf /var/lib/docker
-    yum remove -y kubeadm kubectl kubelet kubernetes-cni kube*
+    yum remove -q -y kubeadm kubectl kubelet kubernetes-cni kube*
     set +x
     [ -e /usr/local/bin/kubectl ] && rm -rf /usr/local/bin/kubectl*
     [ -e /var/lib/kubelet ] && rm -rf /var/lib/kubelet
