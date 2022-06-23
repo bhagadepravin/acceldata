@@ -141,7 +141,7 @@ set -x
     [ -e /usr/bin/kubectl ] && kubectl delete svc --all
     for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }'); do umount $mount; done
     [ -e /usr/bin/kubeadm ] && kubeadm reset --force
-    [ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
+    #[ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
     [ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
     [ -e /usr/bin/docker ] && docker system prune --force
     [ -e /usr/bin/docker ] && docker network prune --force
