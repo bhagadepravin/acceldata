@@ -136,13 +136,15 @@ function start {
 
 function delete_torch {
     echo "${RED}Deleting torch ${NC}"
-
+set -x
     [ -e /usr/bin/kubectl ] && kubectl delete deployment --all
     [ -e /usr/bin/kubectl ] && kubectl delete svc --all
     for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }'); do umount $mount; done
     [ -e /usr/bin/kubeadm ] && kubeadm reset --force
     [ -e /usr/bin/docker ] && docker stop $(docker ps -a -q)
     [ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
+    [ -e /usr/bin/docker ] && docker system prune --force
+    [ -e /usr/bin/docker ] && docker network prune --force
     yum remove -y docker-ce docker containerd.io
     [ -e /usr/bin/docker ] && rm -rf /var/lib/docker
     yum remove -y kubeadm kubectl kubelet kubernetes-cni kube*
@@ -171,7 +173,7 @@ function delete_torch {
     [ -e /opt/cni ] && rm -rf /opt/cni
 
     ip link delete docker0
-
+set +x
     logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
     logSuccess "Make sure you Reboot the Node before Reinstalling \n"
 }
