@@ -138,7 +138,7 @@ function start {
 
 function delete_torch {
     echo "${RED}Deleting torch ${NC}"
-set -x
+    set -x
     [ -e /usr/bin/kubectl ] && kubectl delete deployment --all
     [ -e /usr/bin/kubectl ] && kubectl delete svc --all
     for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }'); do umount $mount; done
@@ -181,7 +181,6 @@ set -x
     logSuccess "Make sure you Reboot the Node before Reinstalling \n"
 }
 
-
 if [ "$1" == "status" ]; then
     status
 fi
@@ -195,14 +194,14 @@ if [ "$1" == "start" ]; then
 fi
 
 if [ "$1" == "delete_torch" ]; then
+    stop
     delete_torch
 fi
 
 if [ "$1" == "install_torch_on_prem" ]; then
-    stop
     install_torch_on_prem
 fi
 if [ "$1" == "prep_node" ]; then
-diasble_swap
-increase_LVM
+    diasble_swap
+    increase_LVM
 fi
