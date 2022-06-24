@@ -107,6 +107,7 @@ function stop {
     kubectl -n rook-ceph patch daemonset rook-discover -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
     kubectl -n velero patch daemonset restic -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
     kubectl get job -n rook-ceph -o yaml >/home/job.yaml
+    # kubectl delete jobs -all
     logSuccess "Torch is Stopped\n"
 }
 
