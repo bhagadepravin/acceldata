@@ -31,7 +31,7 @@ Usage: $(basename $0) [install_torch_on_prem, status, stop, start, delete_troch]
     - ${BLUE}status${NC}: it will run "kubectl get all --all-namespaces"
     - ${BLUE}stop${NC}: Will Stop deployments, statefulset, deamonset
     - ${BLUE}start${NC}: Will Start deployments, statefulset, deamonset
-    - ${BLUE}prep_node${NC}: Disable Swap and Expand LVM(for New Node)
+    - ${BLUE}prep_node${NC}: Disable Swap and Expand LVM(for a New Node)
     - ${BLUE}delete_torch${NC}: Will Delete deployments, svc, Kubernetes , docker& K8 config files
   Examples:
     ./$(basename $0) ${GREEN}install_torch_on_prem${NC}
