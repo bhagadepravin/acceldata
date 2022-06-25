@@ -41,3 +41,11 @@ cat inventory/pravincluster/group_vars/k8s_cluster/k8s-cluster.yml
 
 # ansible-playbook -i inventory/pravincluster/hosts.yaml  --become --become-user=root cluster.yml
   
+
+
+#++++++++++++++++++++++++
+# You can remove node by node from your cluster simply adding specific node do section [kube-node] in inventory/mycluster/hosts.ini file (your hosts file) and run command:
+# ansible-playbook -i inventory/pravincluster/hosts.yaml  --become --become-user=root remove-node.yml
+
+# you can also reset the entire cluster for fresh installation:
+# ansible-playbook -i inventory/pravincluster/hosts.yaml  --become --become-user=root reset.yml
