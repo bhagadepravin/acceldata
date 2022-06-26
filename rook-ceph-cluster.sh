@@ -28,6 +28,7 @@ kubectl get all --all-namespaces
 
 # Dashboard:
 kubectl apply -f https://raw.githubusercontent.com/karan-kaushik/rook-ceph/main/rook/ceph/ceph-dashboard-loadbalancer.yaml
+# https://raw.githubusercontent.com/rook/rook/master/deploy/examples/dashboard-loadbalancer.yaml
 kubectl get service/rook-ceph-mgr-dashboard-loadbalancer -n rook-ceph
 kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o jsonpath="{['data']['password']}" | base64 --decode && echo
 
