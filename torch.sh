@@ -38,7 +38,7 @@ Usage: $(basename $0) [install_torch_on_prem, status, stop, start, delete_troch]
     ./$(basename $0) ${GREEN}status${NC}
     ./$(basename $0) ${GREEN}stop${NC}
     ./$(basename $0) ${GREEN}start${NC}
-    ./$(basename $0) ${GREEN}prep_node${NC}
+    ./$(basename $0) ${YELLOW}prep_node${NC}
     ./$(basename $0) ${RED}delete_torch${NC}                
 EOM
     exit 0
