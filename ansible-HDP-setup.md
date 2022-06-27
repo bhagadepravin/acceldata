@@ -99,6 +99,12 @@ ansible -i ~/ansible-hortonworks/inventory/static all -m setup
 ansible -i ~/ansible-hortonworks/inventory/static all -m setup | grep ansible_fqdn
 ```
 
+* Use below ansible to cmd to extend the LVM size, if its not increased
+```bash
+ansible -i ~/ansible-hortonworks/inventory/static all -m shell -a "yum -y -q install cloud-utils-growpart &2>/dev/null && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk"
+```
+
+
 
 ## Set the cluster variables
 
