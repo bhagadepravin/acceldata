@@ -104,7 +104,7 @@ ansible -i ~/ansible-hortonworks/inventory/static all -m setup | grep ansible_fq
 
 ### cluster config file
 
-Modify the file at `~/ansible-hortonworks/playbooks/group_vars/all` to set the cluster configuration.
+File at `~/ansible-hortonworks/playbooks/group_vars/all` to set the cluster configuration.
 
 | Variable                   | Description                                                                                                 |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -138,28 +138,17 @@ Modify the file at `~/ansible-hortonworks/playbooks/group_vars/all` to set the c
 
 
 
-Modify the file at ` ~/ansible-hortonworks/playbooks/group_vars/all`
-
-Modify below variables:
+Below are default configuration, you can change it by modifing in `~/ansible-hortonworks/playbooks/group_vars/all` file.
 
 ```bash
-cluster_name
-security
-http_authentication
-ambari_admin_password
-default_password
-host_group
+egrep "database:|security:|ambari_admin_password|Acceldata|host_group"  ~/ansible-hortonworks/playbooks/group_vars/all
 ```
+
 `host_group` Distribute the services accordingly.
-Sample files, make sure you edit/update in `all` file:  https://github.com/bhagadepravin/ansible-hortonworks/tree/master/playbooks/group_vars
 
-```bash
-egrep "cluster_name|security:|http_authentication|ambari_admin_password|host_group"  ~/ansible-hortonworks/playbooks/group_vars/all
-```
-Goto host_group section to devide the services.
-As currently we have 5 node.
+Sample files, make sure you edit/update in `all` file: https://bitbucket.org/pravinbhagade/ansible-hortonworks/src/master/playbooks/group_vars/
 
-
+Goto host_group section to divide the services.
 
 # Install the cluster
 
