@@ -198,7 +198,10 @@ if [ "$1" == "start" ]; then
 fi
 
 if [ "$1" == "delete_torch" ]; then
+    [ -e /etc/kubernetes/admin.conf ] &&
     stop
+    delete_torch
+else
     delete_torch
 fi
 
