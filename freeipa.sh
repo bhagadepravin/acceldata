@@ -32,7 +32,7 @@ then
          docker version
     fi
 
-         echo "${GREEN} Setup Docker Freeipa${NC}
+         echo "${GREEN} Setting up Docker Freeipa.............${NC}
 
 docker images freeipa-server | grep freeipa-server
 
