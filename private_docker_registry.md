@@ -139,7 +139,7 @@ sudo openssl genrsa -out private-registry-server.key 2048
 ```
 
 - Create a config file for generating a Certificate Signing Request (CSR) for docker registry server
-```
+```bash
 cat > /tmp/private-registry-server.conf <<EOF
 [ req ]
 default_bits = 2048
