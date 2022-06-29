@@ -48,6 +48,12 @@ cd && git clone https://github.com/freeipa/freeipa-container.git
 cd freeipa-container
 docker build -t freeipa-server -f Dockerfile.centos-7 .
 docker images freeipa-server
+
+echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
+echo "IP=${GREEN}${IP}${NC}"
+echo "DOMAIN=${GREEN}${REALM}${NC}"
+echo "REALM=${GREEN}${DOMAIN}${NC}"
+
 docker run  -e IPA_SERVER_IP=${IP} --name freeipa-server -ti -h ${HOSTNAME} \
 -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp \
 --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z \
