@@ -29,12 +29,12 @@ then
          yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io 2>/dev/null >/dev/null
          systemctl enable docker
          systemctl restart docker
-         docker version
+         docker version --format '{{.Server.Version}}'
     fi
 
          echo "${GREEN} Setting up Docker Freeipa.............${NC}
 
-docker images freeipa-server | grep freeipa-server
+docker images freeipa-server | grep freeipa-server 2>/dev/null >/dev/null
 
 if [ $? -eq 0 ]
 then
