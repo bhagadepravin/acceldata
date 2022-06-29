@@ -23,9 +23,9 @@ then
          echo "${GREEN}Docker Existing${NC}"  
     else
          echo "${RED}Install Docker${NC}"
-         sudo yum -y install yum-utils device-mapper-persistent-data lvm2
+         sudo yum -y install yum-utils device-mapper-persistent-data lvm2 2>/dev/null >/dev/null
          yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-         yum clean all && yum update all  && yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io
+         yum clean all && yum update all  && yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io 2>/dev/null >/dev/null
          systemctl enable docker
          systemctl restart docker
          docker version
@@ -37,9 +37,9 @@ mv  /var/lib/ipa-data  /var/lib/ipa-data_bk
 mkdir -p /var/lib/ipa-data
 
          echo "${GREEN} Enable Port forwading${NC}
-sysctl -w net.ipv4.ip_forward=1
-sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf"
-sudo sysctl -p /etc/sysctl.conf
+sysctl -w net.ipv4.ip_forward=1 2>/dev/null >/dev/null
+sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" 2>/dev/null >/dev/null
+sudo sysctl -p /etc/sysctl.conf 2>/dev/null >/dev/null
 
 docker images freeipa-server | grep freeipa-server
 
