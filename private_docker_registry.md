@@ -128,7 +128,7 @@ sudo openssl genrsa -out ca.key 2048
 sudo openssl req -x509 -new -nodes -key ca.key -subj "/CN=${MASTER_IP}" -days 10000 -out ca.crt
 ```
 
-You can replace **${MASTER_IP}** with your actual or persuade CA server ip address like
+- You can replace **${MASTER_IP}** with your actual or persuade CA server ip address like
 ```
  sudo openssl req -x509 -new -nodes -key ca.key -subj "/CN=8.8.8.8" -days 10000 -out ca.crt
 ```
@@ -139,7 +139,9 @@ sudo openssl genrsa -out private-registry-server.key 2048
 ```
 
 - Create a config file for generating a Certificate Signing Request (CSR) for docker registry server
+
 ```bash
+
 cat > /tmp/private-registry-server.conf <<EOF
 [ req ]
 default_bits = 2048
@@ -174,8 +176,9 @@ subjectAltName=@alt_names
 EOF
 sudo scp /tmp/private-registry-server.conf ./
 ```
+
 - Generate the certificate signing request based on the config file for docker registry server
-```
+```bash
 sudo openssl req -new -key  private-registry-server.key \
 -out private-registry-server.csr \
 -config private-registry-server.conf
