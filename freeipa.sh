@@ -68,7 +68,7 @@ fi
 # Example: docker run [...] freeipa-server exit-on-finished -U -r EXAMPLE.TEST
 
 # ldapsearch -x -h pravin2.sre.iti.acceldata.dev -D "uid=admin,cn=users,cn=accounts,dc=sre,dc=iti,dc=acceldata,dc=dev" -w admin-password \
--b "cn=users,cn=accounts,dc=sre,dc=iti,dc=acceldata,dc=dev"  dn
+# -b "cn=users,cn=accounts,dc=sre,dc=iti,dc=acceldata,dc=dev"  dn
 
 
 echo "${GREEN}FreeIPA WebUI${NC} --- ${RED}https://$HOSTNAME/ipa/ui${NC}"
