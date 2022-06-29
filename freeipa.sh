@@ -24,7 +24,9 @@ then
          echo "${RED}Install Docker${NC}"
          sudo yum -y install yum-utils device-mapper-persistent-data lvm2 2>/dev/null >/dev/null
          yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-         yum clean all 2>/dev/null >/dev/null && yum update all 2>/dev/null >/dev/null  && yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io 2>/dev/null >/dev/null
+         yum clean all 2>/dev/null >/dev/null && yum update all 2>/dev/null >/dev/null  
+         echo "${GREEN}Installing Docker Packages${NC}"
+         yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io 2>/dev/null >/dev/null
          systemctl enable docker
          systemctl restart docker
          docker version
