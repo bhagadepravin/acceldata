@@ -64,9 +64,10 @@ docker run  -e IPA_SERVER_IP=${IP} --name freeipa-server -ti -h ${HOSTNAME} \
 --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z \
 -e PASSWORD=admin-password freeipa-server ipa-server-install -U -r ${REALM} --ds-password=admin-password --admin-password=admin-password \
 --domain=${DOMAIN} --no-ntp 
-docker stop freeipa-server
-docker start freeipa-server
 fi
+# docker stop freeipa-server
+# docker start freeipa-server
+
 
 # Note: Else it will keep on running.
 # * exit-on-finished  # Once added , make sure to start docker container.
