@@ -15,7 +15,7 @@ echo "IP=${GREEN}${IP}${NC}"
 echo "DOMAIN=${GREEN}${REALM}${NC}"
 echo "REALM=${GREEN}${DOMAIN}${NC}"
 
-which docker &&  docker --version | grep "Docker version"
+which docker 2>/dev/null >/dev/null &&  docker --version | grep "Docker version"  2>/dev/null >/dev/null
 
 if [ $? -eq 0 ]
 then
