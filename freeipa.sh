@@ -5,7 +5,6 @@
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
-# echo "I ${RED}love${NC} ${GREEN}Stack Overflow${NC}"
 
 HOSTNAME=`hostname -f`
 IP=`hostname -i`
