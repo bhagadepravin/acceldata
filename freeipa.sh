@@ -11,10 +11,10 @@ HOSTNAME=`hostname -f`
 IP=`hostname -i`
 DOMAIN=`hostname -d`
 REALM="${DOMAIN^^}"
-echo "${GREEN}${HOSTNAME}${NC}"
-echo "${GREEN}${IP}${NC}"
-echo "${GREEN}${REALM}${NC}"
-echo "${GREEN}${DOMAIN}${NC}"
+echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
+echo "IP=${GREEN}${IP}${NC}"
+echo "DOMAIN=${GREEN}${REALM}${NC}"
+echo "REALM=${GREEN}${DOMAIN}${NC}"
 
 which docker &&  docker --version | grep "Docker version"
 
