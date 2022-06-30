@@ -3,7 +3,7 @@
 # Company: Acceldata
 # Designation: Staff SRE
 
-# rm -rf torch.sh && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/torch.sh && chmod +x torch.sh && ./torch.sh
+# rm -rf torch.sh && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/full-torch/torch.sh && chmod +x torch.sh && ./torch.sh
 
 set -E
 
