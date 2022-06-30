@@ -83,3 +83,7 @@ echo "Add to local machine "$IP $HOSTNAME" >> /etc/hosts"
 
 # docker stop freeipa-server
 # docker rm freeipa-server
+
+# Join Client
+# yum install ipa-client -y
+# sudo ipa-client-install --hostname=${HOSTNAME} --mkhomedir --server=${HOSTNAME} --domain ${DOMAIN} --realm ${REALM} --force-join
