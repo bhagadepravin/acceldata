@@ -74,7 +74,7 @@ curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer
 kubectl kots install torch  --license-file ~/inhouse-pre-sales-department.yaml  --namespace torch-auto --shared-password Acceldata123 --config-values ~/complete_config.yaml  --port-forward false --skip-preflights
 
     logSuccess "Torch is Installed\n"
-    logSuccess "http://${IPADDRESS}:/torch
+    logSuccess "http://${IPADDRESS}:/torch"
     logSuccess "Make sure you copy Kotsadm URL and Password. \n"
     logStep "Use this cmd to reset the Kotsadm password --- 'kubectl kots reset-password -n default'\n"
 }
