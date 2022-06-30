@@ -65,7 +65,7 @@ function install_torch_full {
     logStep "Installing Torch........\n"
     #curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
     curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash
-    [ -e ~/complete_config.yaml ] && mv ~/complete_config.yaml ~/complete_config.yaml.bk
+    [ -e ~/complete_config.yaml ] && mv -f ~/complete_config.yaml ~/complete_config.yaml.bk
     wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/8029c47d6471506112a00b1e63279a13c3e2ec25/complete_config.yaml
     IPADDRESS=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
     sed -i "s/IPADDRESS/${IPADDRESS}/g" ~/complete_config.yaml
