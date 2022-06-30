@@ -154,7 +154,7 @@ function delete_torch {
     [ -e /usr/bin/docker ] && docker system prune --force
     [ -e /usr/bin/docker ] && docker network prune --force
     yum remove -q -y docker-ce docker containerd.io && rm -rf /var/lib/docker > /dev/null
-    yum remove -q -y kubeadm kubectl kubelet kubernetes-cni kube* && rm -rf /usr/bin/kubeadm 
+    yum remove -q -y kubeadm kubectl kubelet kubernetes-cni && rm -rf /usr/bin/kubeadm 
     [ -e /usr/local/bin/kubectl ] && rm -rf /usr/local/bin/kubectl
     [ -e /var/lib/kubelet ] && rm -rf /var/lib/kubelet
     [ -e /var/lib/replicated ] && rm -rf /var/lib/replicated
@@ -178,7 +178,6 @@ function delete_torch {
     [ -e ~/.kube ] && rm -rf ~/.kube
     [ -e /etc/kubernetes ] && rm -rf /etc/kubernetes
     [ -e /opt/cni ] && rm -rf /opt/cni
-
     ip link delete docker0
 
     logSuccess "Torch is DELETED also  docker & K8 is removed completely\n"
