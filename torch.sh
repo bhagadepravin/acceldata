@@ -66,12 +66,12 @@ function install_torch_on_prem {
     #curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
     curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash
     [ -e ~/complete_config.yaml ] && mv ~/complete_config.yaml ~/complete_config.yaml.bk
-wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/83fba69a058e606d8ca717dda68f312d947f3221/complete_config.yaml
-IPADDRESS=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
-sed -i "s/IPADDRESS/${IPADDRESS}/g" ~/complete_config.yaml
-wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/83fba69a058e606d8ca717dda68f312d947f3221/inhouse-pre-sales-department.yaml 
-curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
-kubectl kots install torch  --license-file ~/inhouse-pre-sales-department.yaml  --namespace torch-auto --shared-password Acceldata123 --config-values ~/complete_config.yaml  --port-forward false --skip-preflights
+    wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/8029c47d6471506112a00b1e63279a13c3e2ec25/complete_config.yaml
+    IPADDRESS=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
+    sed -i "s/IPADDRESS/${IPADDRESS}/g" ~/complete_config.yaml
+    wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/83fba69a058e606d8ca717dda68f312d947f3221/inhouse-pre-sales-department.yaml
+    curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
+    kubectl kots install torch --license-file ~/inhouse-pre-sales-department.yaml --namespace torch-auto --shared-password Acceldata123 --config-values ~/complete_config.yaml --port-forward false --skip-preflights
 
     logSuccess "Torch is Installed\n"
     logSuccess "http://${IPADDRESS}:/torch"
@@ -200,7 +200,7 @@ fi
 
 if [ "$1" == "delete_torch" ]; then
     [ -e /etc/kubernetes/admin.conf ] &&
-    stop
+        stop
     delete_torch
 else
     delete_torch
