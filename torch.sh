@@ -63,15 +63,18 @@ function increase_LVM {
 
 function install_torch_on_prem {
     logStep "Installing Torch........\n"
-    curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
-    #curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash
-    curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
-    yum install -y -q git
-    git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
-    kubectl create -f kubernetes-metrics-server/
-    kubectl kots install torch/db-kots -n default
-    logSuccess "Torch is Installed\n"
+    #curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
+    curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash
+    [ -e ~/complete_config.yaml ] && mv ~/complete_config.yaml ~/complete_config.yaml.bk
+wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/83fba69a058e606d8ca717dda68f312d947f3221/complete_config.yaml
+IPADDRESS=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
+sed -i "s/IPADDRESS/${IPADDRESS}/g" ~/complete_config.yaml
+wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/83fba69a058e606d8ca717dda68f312d947f3221/inhouse-pre-sales-department.yaml 
+curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
+kubectl kots install torch  --license-file ~/inhouse-pre-sales-department.yaml  --namespace torch-auto --shared-password Acceldata123 --config-values ~/complete_config.yaml  --port-forward false --skip-preflights
 
+    logSuccess "Torch is Installed\n"
+    logSuccess "http://${IPADDRESS}:/torch
     logSuccess "Make sure you copy Kotsadm URL and Password. \n"
     logStep "Use this cmd to reset the Kotsadm password --- 'kubectl kots reset-password -n default'\n"
 }
