@@ -143,7 +143,6 @@ function start {
 
 function delete_torch {
     echo "${RED}Deleting torch ${NC}"
-    set -x
     [ -e /usr/bin/kubectl ] && kubectl delete deployment --all
     for mount in $(mount | egrep "/dev|tmpfs|overlay" | grep '/var/lib' | awk '{ print $3 }'); do umount $mount; done
     [ -e /usr/bin/kubeadm ] && kubeadm reset --force
@@ -154,7 +153,6 @@ function delete_torch {
     yum remove -q -y docker-ce docker* containerd.io
     [ -e /usr/bin/docker ] && rm -rf /var/lib/docker
     yum remove -q -y kubeadm kubectl kubelet kubernetes-cni kube*
-    set +x
     [ -e /usr/local/bin/kubectl ] && rm -rf /usr/local/bin/kubectl*
     [ -e /var/lib/kubelet ] && rm -rf /var/lib/kubelet
     [ -e /var/lib/replicated ] && rm -rf /var/lib/replicated
