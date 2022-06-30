@@ -14,7 +14,7 @@ YELLOW=$'\033[0;33m'
 NC=$'\e[0m'
 
 logSuccess() {
-    printf "${GREEN}✔ e$1${NC}\n" 1>&2
+    printf "${GREEN}✔ $1${NC}\n" 1>&2
 }
 logStep() {
     printf "${BLUE}✔ $1${NC}\n" 1>&2
