@@ -27,14 +27,14 @@ usage() {
     cat <<EOM
 Usage: $(basename $0) [install_torch_on_prem, status, stop, start, delete_troch]
   Parameter:
-    - ${BLUE}install_torch_on_prem${NC}: Intsall torch-db-kots, kots and admin console torch/db-kots in default namespace
+    - ${BLUE}install_torch_full${NC}: Intsall torch-db-kots, kots and admin console torch/db-kots in default namespace
     - ${BLUE}status${NC}: it will run "kubectl get all --all-namespaces"
     - ${BLUE}stop${NC}: Will Stop deployments, statefulset, deamonset
     - ${BLUE}start${NC}: Will Start deployments, statefulset, deamonset
     - ${BLUE}prep_node${NC}: Disable Swap and Expand LVM(for a New Node)
     - ${BLUE}delete_torch${NC}: Will Delete deployments, svc, Kubernetes , docker& K8 config files
   Examples:
-    ./$(basename $0) ${GREEN}install_torch_on_prem${NC}
+    ./$(basename $0) ${GREEN}install_torch_full${NC}
     ./$(basename $0) ${GREEN}status${NC}
     ./$(basename $0) ${GREEN}stop${NC}
     ./$(basename $0) ${GREEN}start${NC}
@@ -61,7 +61,7 @@ function increase_LVM {
     lsblk
 }
 
-function install_torch_on_prem {
+function install_torch_full {
     logStep "Installing Torch........\n"
     #curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
     curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash
@@ -206,8 +206,8 @@ else
     delete_torch
 fi
 
-if [ "$1" == "install_torch_on_prem" ]; then
-    install_torch_on_prem
+if [ "$1" == "install_torch_full" ]; then
+    install_torch_full
 fi
 if [ "$1" == "prep_node" ]; then
     diasble_swap
