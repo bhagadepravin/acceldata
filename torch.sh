@@ -25,7 +25,7 @@ logWarn() {
 
 usage() {
     cat <<EOM
-Usage: $(basename $0) [install_torch_on_prem, status, stop, start, delete_troch]
+Usage: $(basename $0) [install_torch_full, status, stop, start, delete_troch]
   Parameter:
     - ${BLUE}install_torch_full${NC}: Intsall torch-db-kots, kots and admin console torch/db-kots in default namespace
     - ${BLUE}status${NC}: it will run "kubectl get all --all-namespaces"
