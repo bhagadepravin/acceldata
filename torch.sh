@@ -64,7 +64,8 @@ function increase_LVM {
 function install_torch_full {
     logStep "Installing Torch........\n"
     #curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
-    curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash
+    logStep "host-preflight-ignore, exclude-builtin-host-preflights\n"
+    curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash -s host-preflight-ignore exclude-builtin-host-preflights
     [ -e ~/complete_config.yaml ] && mv -f ~/complete_config.yaml ~/complete_config.yaml.bk
     wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/5ee168a8660b699079023f67511b0a473cdc75a7/complete_config.yaml
     IPADDRESS=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
