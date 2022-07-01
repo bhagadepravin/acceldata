@@ -78,7 +78,8 @@ function install_torch_full {
     logSuccess "http://${IPADDRESS}:80/torch"
     logSuccess "https://${IPADDRESS}:/torch"
     logSuccess "Make sure you copy Kotsadm URL and Password. \n"
-    logStep "Use this cmd to reset the Kotsadm password --- 'kubectl kots reset-password -n default'\n"
+    logStep "Use this cmd to reset the Kotsadm password --- 'echo Acceldata123 | kubectl kots reset-password  -n torch-auto'\n"
+    logStep " Admin Console https://${IPADDRESS}:8800"
 }
 
 function status {
