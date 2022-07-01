@@ -75,7 +75,8 @@ function install_torch_full {
     kubectl kots install torch --license-file ~/inhouse-pre-sales-department.yaml --namespace torch-auto --shared-password Acceldata123 --config-values ~/complete_config.yaml --port-forward false --skip-rbac-check --skip-preflights --wait-duration 8m
 
     logSuccess "Torch is Installed\n"
-    logSuccess "http://${IPADDRESS}:/torch"
+    logSuccess "http://${IPADDRESS}:80/torch"
+    logSuccess "https://${IPADDRESS}:/torch"
     logSuccess "Make sure you copy Kotsadm URL and Password. \n"
     logStep "Use this cmd to reset the Kotsadm password --- 'kubectl kots reset-password -n default'\n"
 }
