@@ -72,7 +72,7 @@ function install_torch_full {
     sed -i "s/IPADDRESS/${IPADDRESS}/g" ~/complete_config.yaml
     wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/83fba69a058e606d8ca717dda68f312d947f3221/inhouse-pre-sales-department.yaml
     curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
-    kubectl kots install torch --license-file ~/inhouse-pre-sales-department.yaml --namespace torch-auto --shared-password Acceldata123 --config-values ~/complete_config.yaml --port-forward false --skip-rbac-check --skip-preflights
+    kubectl kots install torch --license-file ~/inhouse-pre-sales-department.yaml --namespace torch-auto --shared-password Acceldata123 --config-values ~/complete_config.yaml --port-forward false --skip-rbac-check --skip-preflights --wait-duration 8m
 
     logSuccess "Torch is Installed\n"
     logSuccess "http://${IPADDRESS}:/torch"
