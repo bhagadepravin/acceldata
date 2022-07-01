@@ -150,7 +150,7 @@ function delete_torch {
     [ -e /usr/bin/docker ] && docker rm $(docker ps -a -q)
     [ -e /usr/bin/docker ] && docker system prune --force
     [ -e /usr/bin/docker ] && docker network prune --force
-    yum remove -q -y docker-ce docker* containerd.io
+    yum remove -q -y docker-ce docker-ce-cli containerd.io
     [ -e /usr/bin/docker ] && rm -rf /var/lib/docker
     yum remove -q -y kubeadm kubectl kubelet kubernetes-cni kube* && rm -rf /usr/bin/kubeadm 
     [ -e /usr/local/bin/kubectl ] && rm -rf /usr/local/bin/kubectl*
