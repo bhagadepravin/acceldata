@@ -62,7 +62,7 @@ function increase_LVM {
 }
 
 function install_torch_full {
-    logStep "Installing Torch........\n"
+    logStep "Installing Torch........ via "https://k8s.kurl.sh/torch-pre-sales" "\n"
     #curl -sSL https://k8s.kurl.sh/torch-db-kots | sudo bash
     logStep "host-preflight-ignore, exclude-builtin-host-preflights\n"
     curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash -s host-preflight-ignore exclude-builtin-host-preflights
