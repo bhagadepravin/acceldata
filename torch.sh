@@ -67,7 +67,7 @@ function install_torch_full {
     logStep "host-preflight-ignore, exclude-builtin-host-preflights\n"
     curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash -s host-preflight-ignore exclude-builtin-host-preflights
     [ -e ~/complete_config.yaml ] && mv -f ~/complete_config.yaml ~/complete_config.yaml.bk
-    wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/5ee168a8660b699079023f67511b0a473cdc75a7/complete_config.yaml
+    wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/68398ec3fa27f9493a168c35697fd11b00b23058/complete_config_no_smtp.yaml
     IPADDRESS=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
     sed -i "s/IPADDRESS/${IPADDRESS}/g" ~/complete_config.yaml
     wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/83fba69a058e606d8ca717dda68f312d947f3221/inhouse-pre-sales-department.yaml
