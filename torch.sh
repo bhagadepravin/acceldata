@@ -67,10 +67,10 @@ function install_torch_full {
     logStep "host-preflight-ignore, exclude-builtin-host-preflights\n"
     curl -sSL https://k8s.kurl.sh/torch-pre-sales | sudo bash -s host-preflight-ignore exclude-builtin-host-preflights
     [ -e ~/complete_config_no_smtp.yaml ] && mv -f ~/complete_config_no_smtp.yaml ~/complete_config_no_smtp.yaml.bk
-    wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/68398ec3fa27f9493a168c35697fd11b00b23058/complete_config_no_smtp.yaml
+   # complete_config_no_smtp.yaml
     IPADDRESS=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
     sed -i "s/IPADDRESS/${IPADDRESS}/g" ~/complete_config_no_smtp.yaml
-    wget -P ~/ https://bitbucket.org/pravinbhagade/testing/raw/83fba69a058e606d8ca717dda68f312d947f3221/inhouse-pre-sales-department.yaml
+    # inhouse-pre-sales-department.yaml
     curl https://gitlab.com/api/v4/projects/29750065/repository/files/kots-installer-1.48.0.sh/raw | bash
     kubectl kots install torch --license-file ~/inhouse-pre-sales-department.yaml --namespace torch-auto --shared-password Acceldata123 --config-values ~/complete_config.yaml --port-forward false --skip-rbac-check --skip-preflights --wait-duration 8m
 
