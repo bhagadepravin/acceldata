@@ -46,10 +46,12 @@ echo "${GREEN} Enable Port forwading${NC}
     sysctl -w net.ipv4.ip_forward=1
     sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" >/dev/null
     sudo sysctl -p /etc/sysctl.conf >/dev/null
-    cd && git clone https://github.com/freeipa/freeipa-container.git
-    cd freeipa-container
-    docker build -t freeipa-server -f Dockerfile.centos-7 .
-    docker images freeipa-server
+   # cd && git clone https://github.com/freeipa/freeipa-container.git
+   # cd freeipa-container
+   # docker build -t freeipa-server -f Dockerfile.centos-7 .
+   # docker images freeipa-server
+   docker login -u pravinbhagade -p "Welcome@123"
+   docker pull pravinbhagade/freeipa-server:latest
 
     echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
     echo "IP=${GREEN}${IP}${NC}"
