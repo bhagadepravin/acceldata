@@ -70,6 +70,7 @@ function install_torch_on_prem {
     git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
     kubectl create -f kubernetes-metrics-server/
     kubectl kots install torch/db-kots -n default
+    kubectl -n default annotate secret kotsadm-tls acceptAnonymousUploads=0 --overwrite
     logSuccess "Torch is Installed\n"
 
     logSuccess "Make sure you copy Kotsadm URL and Password. \n"
