@@ -12,10 +12,10 @@ HOSTNAME=$(hostname -f)
 IP=$(hostname -i)
 DOMAIN=$(hostname -d)
 REALM="${DOMAIN^^}"
-echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
-echo "IP=${GREEN}${IP}${NC}"
-echo "DOMAIN=${GREEN}${REALM}${NC}"
-echo "REALM=${GREEN}${DOMAIN}${NC}"
+    echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
+    echo "IP=${GREEN}${IP}${NC}"
+    echo "DOMAIN=${GREEN}${DOMAIN}${NC}"
+    echo "REALM=${GREEN}${REALM}${NC}"
 
 which docker >/dev/null && docker --version | grep "Docker version" >/dev/null
 
@@ -50,13 +50,14 @@ echo "${GREEN} Enable Port forwading${NC}
    # cd freeipa-container
    # docker build -t freeipa-server -f Dockerfile.centos-7 .
    # docker images freeipa-server
-   docker login -u pravinbhagade -p "Welcome@123"
+   cd && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/my_password.txt 
+   cat ~/my_password.txt | docker login --username pravinbhagade --password-stdin
    docker pull pravinbhagade/freeipa-server:latest
 
     echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
     echo "IP=${GREEN}${IP}${NC}"
-    echo "DOMAIN=${GREEN}${REALM}${NC}"
-    echo "REALM=${GREEN}${DOMAIN}${NC}"
+    echo "DOMAIN=${GREEN}${DOMAIN}${NC}"
+    echo "REALM=${GREEN}${REALM}${NC}"
     
 docker run -e IPA_SERVER_IP=${IP} --name freeipa-server -ti -h ${HOSTNAME} \
         -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp \
