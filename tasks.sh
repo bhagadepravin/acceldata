@@ -75,6 +75,15 @@ function confirmN() {
     return 1
 }
 
+function prompts_can_prompt() {
+    # Need the TTY to accept input and stdout to display
+    # Prompts when running the script through the terminal but not as a subshell
+    if [ -t 1 ] && [ -c /dev/tty ]; then
+        return 0
+    fi
+    return 1
+}
+
 function kubernetes_resource_exists() {
     local namespace=$1
     local kind=$2
