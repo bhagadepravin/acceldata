@@ -81,4 +81,11 @@ echo "Add to local machine "$IP $HOSTNAME" >> /etc/hosts"
 
 # Join Client
 # yum install ipa-client -y
-# sudo ipa-client-install --hostname=${HOSTNAME} --mkhomedir --server=${HOSTNAME} --domain ${DOMAIN} --realm ${REALM} --force-join
+# sudo ipa-client-install --hostname=${HOSTNAME} --mkhomedir --server=${HOSTNAME} --domain ${DOMAIN} --realm ${REALM}
+# --force-join
+
+# To re-register:
+# If you want to reinstall the IPA client, uninstall it first using 'ipa-client-install --uninstall'.
+# ipa-client-install --uninstall
+# HOSTNAME=$(hostname -f)
+# ipa-client-install --hostname=${HOSTNAME} --mkhomedir --server=pravintorch.sre.iti.acceldata.dev --domain sre.iti.acceldata.dev  --realm SRE.ITI.ACCELDATA.DEV
