@@ -2,7 +2,7 @@
 
 # curl -s https://raw.githubusercontent.com/bhagadepravin/acceldata/main/freeipa.sh | bash
 
-set -e
+set -E
 
 GREEN=$'\e[0;32m'
 RED=$'\e[0;31m'
