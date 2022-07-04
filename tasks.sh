@@ -155,20 +155,6 @@ function kubernetes_scale_down() {
 
     kubectl -n "$ns" scale "$kind" "$name" --replicas=0
 }
-function reset_dnf_module_kurl_local() {
-    if ! commandExists dnf; then
-        return
-    fi
-    if ! dnf module list | grep -q kurl.local ; then
-        return
-    fi
-    yum module reset -y kurl.local
-}
-
-
-PV_BASE_PATH=/opt/replicated/rook
-
-
 
 function kubeadm_reset() {
     if [ -z "$WEAVE_TAG" ]; then
