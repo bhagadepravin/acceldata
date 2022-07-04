@@ -33,7 +33,7 @@ else
     docker version --format '{{.Server.Version}}'
 fi
 
-docker images freeipa-server | grep freeipa-server 2>/dev/null >/dev/null
+docker images freeipa-server | grep freeipa-server
 
 if [ $? -eq 0 ]; then
     echo "${GREEN}Freeipa-server image exists ${NC}"
