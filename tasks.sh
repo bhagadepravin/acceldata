@@ -57,6 +57,24 @@ bail() {
     exit 1
 }
 
+function confirmN() {
+    printf "(y/N) "
+    if [ "$ASSUME_YES" = "1" ]; then
+        echo "Y"
+        return 0
+    fi
+    if ! prompts_can_prompt ; then
+        echo "N"
+        logWarn "Automatically declining prompt, shell is not interactive"
+        return 1
+    fi
+    prompt
+    if [ "$PROMPT_RESULT" = "y" ] || [ "$PROMPT_RESULT" = "Y" ]; then
+        return 0
+    fi
+    return 1
+}
+
 function kubernetes_resource_exists() {
     local namespace=$1
     local kind=$2
@@ -290,8 +308,6 @@ function kubeadm_weave_reset() {
 
 K8S_DISTRO=
 function tasks() {
-    # ensure /usr/local/bin/kubectl-plugin is in the path
-    path_add "/usr/local/bin"
 
     DOCKER_VERSION="$(get_docker_version)"
 
