@@ -46,9 +46,9 @@ then
 mv  /var/lib/ipa-data  /var/lib/ipa-data_bk
 mkdir -p /var/lib/ipa-data
 echo "${GREEN} Enable Port forwading${NC}
-sysctl -w net.ipv4.ip_forward=1 2>/dev/null >/dev/null
-sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" 2>/dev/null >/dev/null
-sudo sysctl -p /etc/sysctl.conf 2>/dev/null >/dev/null
+sysctl -w net.ipv4.ip_forward=1 
+sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf"  >/dev/null
+sudo sysctl -p /etc/sysctl.conf  >/dev/null
 cd && git clone https://github.com/freeipa/freeipa-container.git
 cd freeipa-container
 docker build -t freeipa-server -f Dockerfile.centos-7 .
