@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-set -x
 
 KUBEADM_CONF_DIR=/opt/replicated
 KUBEADM_CONF_FILE="$KUBEADM_CONF_DIR/kubeadm.conf"
