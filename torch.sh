@@ -4,6 +4,7 @@
 # Designation: Staff SRE
 
 # rm -rf torch.sh && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/torch-eks/torch.sh && chmod +x torch.sh && ./torch.sh
+
 set -E
 
 GREEN=$'\e[0;32m'
@@ -81,7 +82,7 @@ function install_torch_eks() {
         fi
     fi
 
-    kubectl get svc -A | grep -q torch-api-gateway1 >/dev/null && echo $?
+    which kubectl >/dev/null && kubectl get nodes >/dev/null && kubectl get svc -A | grep -q torch-api-gateway && echo $? >/dev/null
     if [ $? -eq 0 ]; then
         echo "${GREEN}Torch service pods are already deployed${NC}"
     else
