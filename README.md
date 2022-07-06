@@ -15,6 +15,10 @@ snap install k9s
 yum install -y -q git
 git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
 kubectl create -f kubernetes-metrics-server/
+
+or:
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 #### Portainer WebUi for Docker
 ```bash
