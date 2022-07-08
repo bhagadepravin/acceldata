@@ -85,11 +85,13 @@ function status {
 }
 
 function stop {
-    echo "${RED} Stopping Torch ${NC}"
+   echo "${RED} Stopping Torch... ${NC}"
     # Deployments
-    kubectl get deployments.apps -o name | xargs -I % kubectl scale % --replicas=0
-    kubectl get deployments.apps deployment.apps/torch-query-analyzer | xargs -I % kubectl scale % --replicas=0
-    kubectl get deployments.apps deployment.apps/torch-reporting | xargs -I % kubectl scale % --replicas=0
+    kubectl get deployments.apps -n torch-auto -o name | xargs -I % kubectl scale % --replicas=0 -n torch-auto
+    while $(kubectl get pods -n torch-auto | awk '{print $1}' | egrep -q '^ad*|^admin*|^nats*|^redis*|^torch*'); do
+        echo "Waiting for Torch pods to be removed"
+        sleep 1
+    done
     kubectl get deploy -n kurl -o name | xargs -I % kubectl scale % --replicas=0 -n kurl
     kubectl get deploy -n rook-ceph -o name | xargs -I % kubectl scale % --replicas=0 -n rook-ceph
     kubectl get deploy -n spark-operator -o name | xargs -I % kubectl scale % --replicas=0 -n spark-operator
@@ -109,6 +111,10 @@ function stop {
     kubectl -n rook-ceph patch daemonset rook-discover -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
     kubectl -n velero patch daemonset restic -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
     kubectl get job -n rook-ceph -o yaml >/home/job.yaml
+    sleep 5
+    #  Delete any pod which is in Terminating state:
+    kubectl get pods -o custom-columns=:metadata.name | xargs kubectl delete pod --force --grace-period=0
+    kubectl get pods -o custom-columns=:metadata.name -n torch-auto | xargs kubectl delete pod --force --grace-period=0 -n torch-auto
     # kubectl delete jobs -all
     logSuccess "Torch is Stopped\n"
 }
