@@ -41,7 +41,7 @@ else
     echo "${GREEN} Setting up Docker Freeipa.............${NC}"
 mv  /var/lib/ipa-data  /var/lib/ipa-data_bk >/dev/null
 mkdir -p /var/lib/ipa-data >/dev/null
-echo "${GREEN} Enable Port forwading${NC}
+echo "${GREEN} Enable Port forwading${NC}"
     sed -i "/enp0s3/d" /etc/sysctl.conf 2>/dev/null >/dev/null
     sysctl -w net.ipv4.ip_forward=1
         sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" >/dev/null
