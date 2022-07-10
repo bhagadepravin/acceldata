@@ -12,10 +12,10 @@ HOSTNAME=$(hostname -f)
 IP=$(hostname -i)
 DOMAIN=$(hostname -d)
 REALM="${DOMAIN^^}"
-    echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
-    echo "IP=${GREEN}${IP}${NC}"
-    echo "DOMAIN=${GREEN}${DOMAIN}${NC}"
-    echo "REALM=${GREEN}${REALM}${NC}"
+echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
+echo "IP=${GREEN}${IP}${NC}"
+echo "DOMAIN=${GREEN}${DOMAIN}${NC}"
+echo "REALM=${GREEN}${REALM}${NC}"
 
 which docker 2>/dev/null && docker --version | grep "Docker version" >/dev/null
 
@@ -39,29 +39,29 @@ if [ $? -eq 0 ]; then
     echo "${GREEN}Freeipa-server image exists ${NC}"
 else
     echo "${GREEN} Setting up Docker Freeipa.............${NC}"
-mv  /var/lib/ipa-data  /var/lib/ipa-data_bk >/dev/null
-mkdir -p /var/lib/ipa-data >/dev/null
-echo "${GREEN} Enable Port forwading${NC}"
+    mv -f /var/lib/ipa-data /var/lib/ipa-data_bk >/dev/null
+    mkdir -p /var/lib/ipa-data >/dev/null
+    echo "${GREEN} Enable Port forwading${NC}"
     sed -i "/enp0s3/d" /etc/sysctl.conf 2>/dev/null >/dev/null
     sysctl -w net.ipv4.ip_forward=1
-        sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" >/dev/null
+    sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" >/dev/null
     sudo sysctl -p /etc/sysctl.conf >/dev/null
-   # cd && git clone https://github.com/freeipa/freeipa-container.git
-   # cd freeipa-container
-   # docker build -t freeipa-server -f Dockerfile.centos-7 .
-   # docker images freeipa-server
-   cd && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/my_password.txt  2>/dev/null >/dev/null
-   echo "${GREEN} Docker login...${NC}"
-   cat ~/my_password.txt | docker login --username pravinbhagade --password-stdin 
-   docker pull pravinbhagade/freeipa-server:latest
-    
+    # cd && git clone https://github.com/freeipa/freeipa-container.git
+    # cd freeipa-container
+    # docker build -t freeipa-server -f Dockerfile.centos-7 .
+    # docker images freeipa-server
+    cd && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/my_password.txt 2>/dev/null >/dev/null
+    echo "${GREEN} Docker login...${NC}"
+    cat ~/my_password.txt | docker login --username pravinbhagade --password-stdin
+    docker pull pravinbhagade/freeipa-server:latest
+
     echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
     echo "IP=${GREEN}${IP}${NC}"
     echo "DOMAIN=${GREEN}${DOMAIN}${NC}"
     echo "REALM=${GREEN}${REALM}${NC}"
 
-echo "run below cmd\n"    
-docker run -e IPA_SERVER_IP=${IP} --name freeipa-server -h ${HOSTNAME} \
+    echo "run below cmd\n"
+    docker run -e IPA_SERVER_IP=${IP} --name freeipa-server -h ${HOSTNAME} \
         -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp \
         --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z \
         -e PASSWORD=admin-password pravinbhagade/freeipa-server ipa-server-install -U -r ${REALM} --ds-password=admin-password --admin-password=admin-password \
