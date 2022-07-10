@@ -78,8 +78,8 @@ fi
 # -b "cn=users,cn=accounts,dc=sre,dc=iti,dc=acceldata,dc=dev"  dn
 
 echo "${GREEN}FreeIPA WebUI${NC} --- ${RED}https://$HOSTNAME/ipa/ui${NC}"
-
-# echo "Add to local machine $IP $HOSTNAME >> /etc/hosts"
+echo "${GREEN}password=admin-password${NC}"
+echo "Add to local machine $IP $HOSTNAME >> /etc/hosts"
 
 # docker stop freeipa-server
 # docker rm freeipa-server
