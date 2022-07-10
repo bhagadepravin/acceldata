@@ -35,3 +35,14 @@ docker volume rm -f portainer_data
 https://www.oracle.com/java/technologies/downloads/#java8-mac
 https://www.oracle.com/tools/downloads/sqldev-downloads.html
 ```
+
+#### Install Helm
+```bash
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update # Make sure we get the latest list of charts
+helm list
+```
