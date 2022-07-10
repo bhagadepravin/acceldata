@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# curl -sSL https://raw.githubusercontent.com/bhagadepravin/acceldata/main/kubespray.sh | bash
+
 yum -y install epel-release
 yum -y update
 yum -y groupinstall "Development Tools"
