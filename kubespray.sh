@@ -47,7 +47,7 @@ echo "vim inventory/pravincluster/group_vars/k8s_cluster/k8s-cluster.yml\n"
 # /proc/sys/net/ipv6/conf/default/disable_ipv6
 # /proc/sys/net/ipv6/conf/<interface>/disable_ipv6
 
-# ansible-playbook -i inventory/pravincluster/hosts.yaml  --become --become-user=root cluster.yml
+ansible-playbook -i inventory/pravincluster/hosts.yaml  --become --become-user=root cluster.yml
   
 
 
