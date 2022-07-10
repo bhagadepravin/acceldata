@@ -22,13 +22,13 @@ which docker 2>/dev/null && docker --version | grep "Docker version" >/dev/null
 if [ $? -eq 0 ]; then
     echo "${GREEN}Docker Existing${NC}"
 else
-    echo "${RED}Install Docker${NC}"
+    echo "${RED}Install Docker.......${NC}"
     sudo yum -y install yum-utils device-mapper-persistent-data lvm2 2>/dev/null >/dev/null
-    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 2>/dev/null >/dev/null
     yum clean all 2>/dev/null >/dev/null && yum update all 2>/dev/null >/dev/null
     echo "${GREEN}Installing Docker Packages${NC}"
     yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io 2>/dev/null >/dev/null
-    systemctl enable docker
+    systemctl enable docker 2>/dev/null >/dev/null
     systemctl restart docker
     docker version --format '{{.Server.Version}}'
 fi
@@ -38,7 +38,7 @@ docker images freeipa-server | grep freeipa-server
 if [ $? -eq 0 ]; then
     echo "${GREEN}Freeipa-server image exists ${NC}"
 else
-    echo "${GREEN} Setting up Docker Freeipa.............${NC}
+    echo "${GREEN} Setting up Docker Freeipa.............${NC}"
 mv  /var/lib/ipa-data  /var/lib/ipa-data_bk >/dev/null
 mkdir -p /var/lib/ipa-data >/dev/null
 echo "${GREEN} Enable Port forwading${NC}
@@ -50,10 +50,11 @@ echo "${GREEN} Enable Port forwading${NC}
    # cd freeipa-container
    # docker build -t freeipa-server -f Dockerfile.centos-7 .
    # docker images freeipa-server
-   cd && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/my_password.txt 
-   cat ~/my_password.txt | docker login --username pravinbhagade --password-stdin
+   cd && wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/my_password.txt  2>/dev/null >/dev/null
+   echo "${GREEN} Docker login...${NC}"
+   cat ~/my_password.txt | docker login --username pravinbhagade --password-stdin 
    docker pull pravinbhagade/freeipa-server:latest
-
+    
     echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
     echo "IP=${GREEN}${IP}${NC}"
     echo "DOMAIN=${GREEN}${DOMAIN}${NC}"
