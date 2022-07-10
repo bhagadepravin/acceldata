@@ -31,7 +31,7 @@ test -f requirements-$ANSIBLE_VERSION.yml && \
   ansible-galaxy role install -r requirements-$ANSIBLE_VERSION.yml && \
   ansible-galaxy collection -r requirements-$ANSIBLE_VERSION.yml
   
- cp -rfp inventory/sample inventory/pravincluster
+ # cp -rfp inventory/sample inventory/pravincluster
  # Review and change parameters under ``inventory/mycluster/group_vars``
 echo "vim inventory/pravincluster/group_vars/all/all.yml\n"
 echo "vim inventory/pravincluster/group_vars/k8s_cluster/k8s-cluster.yml\n"
