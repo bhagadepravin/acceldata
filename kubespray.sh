@@ -20,8 +20,7 @@ else
     printf "done!\n"
 fi
 
-sudo yum -y install gcc gcc-c++ python-virtualenv python-pip python-devel libffi-devel openssl-devel libyaml-devel sshpass git vim-enhanced 2>/dev/null >/dev/null
-python3 get-pip.py
+sudo yum -y install gcc gcc-c++ python-virtualenv python-pip python3-pip python-devel libffi-devel openssl-devel libyaml-devel sshpass git vim-enhanced 2>/dev/null >/dev/null
 pip3 install virtualenv
 pip3 install virtualenvwrapper
 cd
@@ -48,8 +47,8 @@ test -f requirements-$ANSIBLE_VERSION.yml && \
   
  # cp -rfp inventory/sample inventory/pravincluster
  # Review and change parameters under ``inventory/mycluster/group_vars``
-echo "vim inventory/pravincluster/group_vars/all/all.yml\n"
-echo "vim inventory/pravincluster/group_vars/k8s_cluster/k8s-cluster.yml\n"
+echo "vim inventory/pravincluster/group_vars/all/all.yml"
+echo "vim inventory/pravincluster/group_vars/k8s_cluster/k8s-cluster.yml"
 
 # Delete any entries which look like below from /etc/sysctl.conf file
 # /proc/sys/net/ipv6/conf/all/disable_ipv6=1
