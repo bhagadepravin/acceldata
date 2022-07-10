@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # curl -sSL https://raw.githubusercontent.com/bhagadepravin/acceldata/main/kubespray.sh | bash
+# around 35mins to install K8 cluster
 
 yum -y install epel-release 2>/dev/null >/dev/null
 yum -y update  2>/dev/null >/dev/null
