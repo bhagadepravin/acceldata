@@ -59,12 +59,13 @@ echo "${GREEN} Enable Port forwading${NC}
     echo "IP=${GREEN}${IP}${NC}"
     echo "DOMAIN=${GREEN}${DOMAIN}${NC}"
     echo "REALM=${GREEN}${REALM}${NC}"
-    
-docker run -e IPA_SERVER_IP=${IP} --name freeipa-server -ti -h ${HOSTNAME} \
+
+echo "run below cmd\n"    
+echo "docker run -e IPA_SERVER_IP=${IP} --name freeipa-server -ti -h ${HOSTNAME} \
         -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp \
         --sysctl net.ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /var/lib/ipa-data:/data:Z \
         -e PASSWORD=admin-password freeipa-server ipa-server-install -U -r ${REALM} --ds-password=admin-password --admin-password=admin-password \
-        --domain=${DOMAIN} --no-ntp
+        --domain=${DOMAIN} --no-ntp"
 fi
 # docker stop freeipa-server
 # docker start freeipa-server
