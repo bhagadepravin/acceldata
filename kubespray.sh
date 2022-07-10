@@ -26,18 +26,17 @@ pip3 install virtualenv
 pip3 install virtualenvwrapper
 cd
 #git clone https://github.com/kubernetes-sigs/kubespray.git
-git clone  https://github.com/bhagadepravin/kubespray.git 2>/dev/null >/dev/null
+[ -d ~/kubespray ] && echo "Github kubespray repo exists" || git clone  https://github.com/bhagadepravin/kubespray.git 2>/dev/null >/dev/null
 HOSTNAME=`hostname -f`
 IPADDRESS=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
 sed -i "s/IPADDRESS/${IPADDRESS}/g" kubespray/inventory/pravincluster/inventory.ini 2>/dev/null >/dev/null
 sed -i "s/IPADDRESS/${IPADDRESS}/g" kubespray/inventory/pravincluster/hosts.yaml 2>/dev/null >/dev/null
 sed -i "s/HOSTNAME/${HOSTNAME}/g" kubespray/inventory/pravincluster/inventory.ini 2>/dev/null >/dev/null
 
-
 # Modify few files:https://accelcentral.atlassian.net/wiki/spaces/PCI/pages/156663971/Single+Node+k8s+-+Pulse+On-Prem+Deployment
 VENVDIR=kubespray-venv
 KUBESPRAYDIR=kubespray
-ANSIBLE_VERSION=2.11
+ANSIBLE_VERSION=2.12
 virtualenv  --python=$(which python3.8) $VENVDIR
 source $VENVDIR/bin/activate
 cd $KUBESPRAYDIR
