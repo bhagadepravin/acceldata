@@ -17,7 +17,7 @@ REALM="${DOMAIN^^}"
     echo "DOMAIN=${GREEN}${DOMAIN}${NC}"
     echo "REALM=${GREEN}${REALM}${NC}"
 
-which docker >/dev/null && docker --version | grep "Docker version" >/dev/null
+which docker 2>/dev/null && docker --version | grep "Docker version" >/dev/null
 
 if [ $? -eq 0 ]; then
     echo "${GREEN}Docker Existing${NC}"
@@ -44,7 +44,7 @@ mkdir -p /var/lib/ipa-data >/dev/null
 echo "${GREEN} Enable Port forwading${NC}
     sed -i "/enp0s3/d" /etc/sysctl.conf 2>/dev/null >/dev/null
     sysctl -w net.ipv4.ip_forward=1
-    sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" >/dev/null
+        sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" >/dev/null
     sudo sysctl -p /etc/sysctl.conf >/dev/null
    # cd && git clone https://github.com/freeipa/freeipa-container.git
    # cd freeipa-container
