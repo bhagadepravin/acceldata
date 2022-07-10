@@ -12,13 +12,8 @@ HOSTNAME=$(hostname -f)
 IP=$(hostname -i)
 DOMAIN=$(hostname -d)
 REALM="${DOMAIN^^}"
-echo "HOSTNAME=${GREEN}${HOSTNAME}${NC}"
-echo "IP=${GREEN}${IP}${NC}"
-echo "DOMAIN=${GREEN}${DOMAIN}${NC}"
-echo "REALM=${GREEN}${REALM}${NC}"
 
 which docker 2>/dev/null && docker --version | grep "Docker version" >/dev/null
-
 if [ $? -eq 0 ]; then
     echo "${GREEN}Docker Existing${NC}"
 else
