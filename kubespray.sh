@@ -18,7 +18,8 @@ python3 get-pip.py
 pip3 install virtualenv
 pip3 install virtualenvwrapper
 cd
-git clone https://github.com/kubernetes-sigs/kubespray.git
+#git clone https://github.com/kubernetes-sigs/kubespray.git
+git clone  https://github.com/bhagadepravin/kubespray.git
 # Modify few files:https://accelcentral.atlassian.net/wiki/spaces/PCI/pages/156663971/Single+Node+k8s+-+Pulse+On-Prem+Deployment
 VENVDIR=kubespray-venv
 KUBESPRAYDIR=kubespray
