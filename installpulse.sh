@@ -63,7 +63,7 @@ echo "Firewall Status"
 sudo firewall-cmd --state
 firewall-cmd --get-default-zone
 firewall-cmd --get-active-zones
-systemctl status firewalld && systemctl stop firewalld
+systemctl status firewalld 2>/dev/null >/dev/null && systemctl stop firewalld
 
 # Increase LVM size for root
 # yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
