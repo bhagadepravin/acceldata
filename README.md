@@ -49,8 +49,8 @@ helm list
 
 #### Pulse reset admin password
 ```bash
-accelo admin encrypt  | tee ~/test.log
-grep ENCRYPTED ~/test.log | awk -F " " '{print $2}'
+accelo admin encrypt  | tee ~/passwd.log
+grep ENCRYPTED ~/passwd.log | awk -F " " '{print $2}'
 PASSWORD=`grep ENCRYPTED ~/test.log | awk -F " " '{print $2}'`
 cd $AcceloHome/config
 sed -i 's/8ulzObak4uWP3dJWktqTuA==/$PASSWORD/g' acceldata_*.conf
