@@ -2,6 +2,7 @@
 # Pravin Bhagade
 
 # wget https://raw.githubusercontent.com/bhagadepravin/acceldata/main/installpulse.sh && chmod +x installpulse.sh && bash installpulse.sh
+# curl -sSL https://raw.githubusercontent.com/bhagadepravin/acceldata/main/installpulse.sh | bash
 
 # What does script Do:
 # Set JAVA_HOME, umask, selinux, sysctl, firewalld, install and setup docker.
