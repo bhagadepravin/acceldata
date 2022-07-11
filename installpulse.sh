@@ -70,13 +70,13 @@ systemctl status firewalld && systemctl stop firewalld
 
 which docker 2>/dev/null && docker --version | grep "Docker version" >/dev/null
 if [ $? -eq 0 ]; then
-    echo "${GREEN}Docker Existing${NC}"
+    echo "${RED}Docker Existing${NC}"
 else
-    echo "${RED}Install Docker.......${NC}"
+    echo "${GREEN}Install Docker ${NC}"
     sudo yum -y install yum-utils device-mapper-persistent-data lvm2 2>/dev/null >/dev/null
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 2>/dev/null >/dev/null
     yum clean all 2>/dev/null >/dev/null && yum update all 2>/dev/null >/dev/null
-    echo "${GREEN}Installing Docker Packages${NC}"
+    echo "${GREEN}Installing Docker Packages....${NC}"
     yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io 2>/dev/null >/dev/null
     cat > /etc/docker/daemon.json <<EOF
 {
