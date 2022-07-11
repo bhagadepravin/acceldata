@@ -47,7 +47,7 @@ helm repo update # Make sure we get the latest list of charts
 helm list
 ```
 
-## Pulse reset admin password
+#### Pulse reset admin password
 ```bash
 accelo admin encrypt  | tee ~/test.log
 grep ENCRYPTED ~/test.log | awk -F " " '{print $2}'
