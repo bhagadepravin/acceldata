@@ -34,6 +34,7 @@ fi
 
 grep 022 /etc/profile 2>/dev/null >/dev/null
 if [ $? -eq 0 ]; then
+   echo "umask 022 exists"
 else
    echo "umask 0022" >> /etc/profile
    fi
