@@ -65,18 +65,6 @@ firewall-cmd --get-default-zone
 firewall-cmd --get-active-zones
 systemctl status firewalld 2>/dev/null >/dev/null && systemctl stop firewalld
 
-    cat > /etc/docker/daemon.json <<EOF
-{
-"live-restore": true,
-"log-driver": "json-file",
-"log-opts": {
-"mode": "non-blocking",
-"max-buffer-size": "4m",
-"max-size": "10m",
-"max-file": "3"
-}
-}
-EOF
 
 # Increase LVM size for root
 # yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
@@ -91,10 +79,18 @@ else
     yum clean all 2>/dev/null >/dev/null && yum update all 2>/dev/null >/dev/null
     echo "${GREEN}Installing Docker Packages....${NC}"
     yum install -y docker-ce iptables docker-ce-cli containerd.io 
-systemctl daemon-reload
-systemctl enable docker 2>/dev/null >/dev/null
-systemctl restart docker
-    docker version --format '{{.Server.Version}}'
+    cat > /etc/docker/daemon.json <<EOF
+{
+  "live-restore": true,
+  "log-driver": "json-file",
+  "log-opts": {
+    "mode": "non-blocking",
+    "max-buffer-size": "4m",
+    "max-size": "10m",
+    "max-file": "3"
+  }
+}
+EOF
 fi
 
  [ -e /acceldata ] && echo "/acceldata exists" && mv -f /acceldata /acceldata_bk || mkdir -p /acceldata
