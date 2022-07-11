@@ -93,7 +93,7 @@ else
 EOF
 fi
 
- [ -e /acceldata ] && echo "/acceldata exists" && mv -f /acceldata /acceldata_bk || mkdir -p /acceldata
+ [ -d /acceldata ] && echo "/acceldata exists" && mv -f /acceldata /acceldata_bk || mkdir -p /acceldata
  
 
 # Cluster Configuration Changes
