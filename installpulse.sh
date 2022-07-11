@@ -69,7 +69,7 @@ systemctl status firewalld 2>/dev/null >/dev/null && systemctl stop firewalld
 # Increase LVM size for root
 # yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
 
-which docker 2>/dev/null && docker --version | grep "Docker version" >/dev/null
+which docker >/dev/null 2>/dev/null && docker --version | grep "Docker version" >/dev/null
 if [ $? -eq 0 ]; then
     echo "${RED}Docker Existing${NC}"
 else
