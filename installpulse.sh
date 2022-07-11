@@ -73,11 +73,11 @@ if [ $? -eq 0 ]; then
     echo "${RED}Docker Existing${NC}"
 else
     echo "${GREEN}Install Docker ${NC}"
-    sudo yum -y install yum-utils device-mapper-persistent-data lvm2 2>/dev/null >/dev/null
+    sudo yum -y install yum-utils device-mapper-persistent-data git vim wget lvm2 2>/dev/null >/dev/null
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 2>/dev/null >/dev/null
     yum clean all 2>/dev/null >/dev/null && yum update all 2>/dev/null >/dev/null
     echo "${GREEN}Installing Docker Packages....${NC}"
-    yum install -y wget git vim docker-ce iptables docker-ce-cli containerd.io 2>/dev/null >/dev/null
+    yum install -y docker-ce iptables docker-ce-cli containerd.io 
     cat > /etc/docker/daemon.json <<EOF
 {
 "live-restore": true,
