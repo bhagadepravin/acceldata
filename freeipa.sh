@@ -37,10 +37,9 @@ else
     mv -f /var/lib/ipa-data /var/lib/ipa-data_bk >/dev/null
     mkdir -p /var/lib/ipa-data >/dev/null
     echo "${GREEN} Enable Port forwading${NC}"
-    sed -i "/enp0s3/d" /etc/sysctl.conf 2>/dev/null >/dev/null
-    sysctl -w net.ipv4.ip_forward=1
-    sudo sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" >/dev/null
-    sudo sysctl -p /etc/sysctl.conf >/dev/null
+    grep "enp0s3"  /etc/sysctl.conf > /dev/null || sed -i "/enp0s3/d" /etc/sysctl.conf 2>/dev/null >/dev/null
+    grep "net.ipv4.ip_forward=1"  /etc/sysctl.conf > /dev/null || sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" 2>/dev/null >/dev/null
+    sudo sysctl -p /etc/sysctl.conf 2>/dev/null >/dev/null
     # cd && git clone https://github.com/freeipa/freeipa-container.git
     # cd freeipa-container
     # docker build -t freeipa-server -f Dockerfile.centos-7 .
