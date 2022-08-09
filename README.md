@@ -60,3 +60,16 @@ cd $AcceloHome/config
 sed -i 's/8ulzObak4uWP3dJWktqTuA==/$PASSWORD/g' acceldata_*.conf
 accelo admin database push-config -a
 ```
+
+##### custom Spark default config
+```
+spark.driver.memoryOverhead 1024
+spark.network.timeout 10000000
+spark.eventLog.enabled true
+spark.executor.extraJavaOptions -XX:+UseG1GC -XX:+PrintFlagsFinal -XX:+PrintReferenceGC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintAdaptiveSizePolicy -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=85 -XX:ConcGCThread=20
+spark.executor.heartbeatInterval 1000000
+spark.executor.memoryOverhead 1024
+spark.history.fs.cleaner.enabled true
+spark.history.fs.cleaner.interval 1h
+spark.history.fs.cleaner.maxAge 12h
+```
