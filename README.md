@@ -14,6 +14,13 @@ systemctl enable --now snapd.socket
 ln -s /var/lib/snapd/snap /snap
 su -
 snap install k9s
+
+
++++++
+curl -sS https://webinstall.dev/k9s | bash
+source ~/.config/envman/PATH.env
+echo "source ~/.config/envman/PATH.env" >> ~/.bash_profile
+echo "source ~/.config/envman/PATH.env" >> ~/.bashrc
 ```
 
 #### Enable metrics for K8
