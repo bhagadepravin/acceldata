@@ -12,6 +12,7 @@ yum install epel-release -y
 yum install -y snapd
 systemctl enable --now snapd.socket
 ln -s /var/lib/snapd/snap /snap
+su -
 snap install k9s
 ```
 
