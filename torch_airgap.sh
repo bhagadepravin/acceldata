@@ -93,7 +93,8 @@ function torch_minimum_rbac_install {
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path to config.yaml file="$RESET)" CONFIG
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide a namespace to deploy Torch="$RESET)" NAMESPACE
   read -sp "$(echo -e $BOLD$YELLOW1"Pass the shared password="$RESET)" PASSWORD
-
+  echo ""
+  logWarn "Copy and Run below cmd to Install Torch with Minimum RBAC privileges"
   logStep "kubectl kots install torch --license-file $LICENSE --namespace $NAMESPACE --shared-password $PASSWORD --config-values $CONFIG --ensure-rbac=false --disable-image-push --wait-duration 30m --skip-rbac-check --skip-preflights"
 }
 
@@ -102,7 +103,8 @@ function torch_install {
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path to config.yaml file="$RESET)" CONFIG
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide a namespace to deploy Torch="$RESET)" NAMESPACE
   read -sp "$(echo -e $BOLD$YELLOW1"Pass the shared password="$RESET)" PASSWORD
-
+  echo ""
+  logWarn "Copy and Run below cmd to Install Torch"
   logStep "kubectl kots install torch --license-file $LICENSE --namespace $NAMESPACE --shared-password $PASSWORD --config-values $CONFIG --skip-rbac-check --skip-preflights --wait-duration 30m"
 }
 
