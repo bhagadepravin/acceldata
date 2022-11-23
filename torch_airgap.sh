@@ -72,7 +72,6 @@ function minimum_rbac {
 }
 
 function torch_airgap_upload {
-  prerequisite
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path of KOTS Airgap Bundle tar file(kotsadm.tar.gz)="$RESET)" KOTSADM
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path of TORCH Airgap Bundle (.airgap)="$RESET)" TORCH
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide Private registry URL="$RESET)" URL
@@ -94,7 +93,7 @@ function torch_minimum_rbac_install {
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path to config.yaml file="$RESET)" CONFIG
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide a namespace to deploy Torch="$RESET)" NAMESPACE
   read -sp "$(echo -e $BOLD$YELLOW1"Pass the shared password="$RESET)" PASSWORD
-  prerequisite
+
   kubectl kots install torch --license-file $LICENSE --namespace $NAMESPACE --shared-password $PASSWORD --config-values $CONFIG --ensure-rbac=false --disable-image-push --wait-duration 30m --skip-rbac-check --skip-preflights
 }
 
@@ -103,7 +102,7 @@ function torch_install {
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path to config.yaml file="$RESET)" CONFIG
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide a namespace to deploy Torch="$RESET)" NAMESPACE
   read -sp "$(echo -e $BOLD$YELLOW1"Pass the shared password="$RESET)" PASSWORD
-  prerequisite
+
   kubectl kots install torch --license-file $LICENSE --namespace $NAMESPACE --shared-password $PASSWORD --config-values $CONFIG --skip-rbac-check --skip-preflights --wait-duration 30m
 }
 
