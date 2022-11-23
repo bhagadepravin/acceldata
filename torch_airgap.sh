@@ -32,7 +32,7 @@ usage() {
     ${NC} 
 
   ${Cyan}/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ ${NC}
-
+  Usage: $(basename $0)  ${YELLOW}[prerequisite, minimum_rbac, torch_airgap_upload, torch_install....]${NC}
   ${Purple} Parameter:${NC}
     - ${BLUE}prerequisite${NC}:...............Check kubectl, kubectl-kots, Gather necessary infomation.
     - ${BLUE}minimum_rbac${NC}:...............Guidelines for minimum_rbac setup for k8 cluster.
@@ -56,7 +56,7 @@ EOM
 }
 [ -z $1 ] && { usage; }
 
-function prerequisite() {
+function prerequisite {
   which kubectl 2>/dev/null >/dev/null && echo "kubectl utility present" || echo "kubectl not present, Please install **kubectl** Ref: https://kubernetes.io/docs/tasks/tools/"
   [ -f /usr/local/bin/kubectl-kots ] && echo "kubectl-kots exists." || echo "kubectl-kots does not exists." && echo "Install kubectl-kots --> curl https://kots.io/install/1.84.0 | bash"
   logWarn "Please make sure have below infomation from your Private Registry"
@@ -66,12 +66,12 @@ function prerequisite() {
   logWarn "kubernetes User used to install torch make sure it admin priviligies or Minimum RBAC"
 }
 
-function minimum_rbac() {
+function minimum_rbac {
   logWarn "Please share miminum-rbac.yml which is namespace scoped to K8 admin team"
   logWarn "Please Create necessary CRD's required for torch setup"
 }
 
-function torch_airgap_upload() {
+function torch_airgap_upload {
   prerequisite
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path of KOTS Airgap Bundle tar file(kotsadm.tar.gz)="$RESET)" KOTSADM
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path of TORCH Airgap Bundle (.airgap)="$RESET)" TORCH
@@ -89,7 +89,7 @@ function torch_airgap_upload() {
 
 }
 
-function torch_minimum_rbac_install() {
+function torch_minimum_rbac_install {
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path of license file="$RESET)" LICENSE
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path to config.yaml file="$RESET)" CONFIG
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide a namespace to deploy Torch="$RESET)" NAMESPACE
@@ -98,7 +98,7 @@ function torch_minimum_rbac_install() {
   kubectl kots install torch --license-file $LICENSE --namespace $NAMESPACE --shared-password $PASSWORD --config-values $CONFIG --ensure-rbac=false --disable-image-push --wait-duration 30m --skip-rbac-check --skip-preflights
 }
 
-function torch_install() {
+function torch_install {
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path of license file="$RESET)" LICENSE
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide complete path to config.yaml file="$RESET)" CONFIG
   read -e -p "$(echo -e $BOLD$YELLOW1"Provide a namespace to deploy Torch="$RESET)" NAMESPACE
@@ -107,6 +107,30 @@ function torch_install() {
   kubectl kots install torch --license-file $LICENSE --namespace $NAMESPACE --shared-password $PASSWORD --config-values $CONFIG --skip-rbac-check --skip-preflights --wait-duration 30m
 }
 
-function uninstall_torch() {
-  #statements
+function uninstall_torch {
+  echo "uninstall_torch"
 }
+
+if [ "$1" == "prerequisite" ]; then
+    prerequisite
+fi
+
+if [ "$1" == "minimum_rbac" ]; then
+    minimum_rbac
+fi
+
+if [ "$1" == "torch_airgap_upload" ]; then
+    torch_airgap_upload
+fi
+
+if [ "$1" == "torch_minimum_rbac_install" ]; then
+    torch_minimum_rbac_install
+fi
+
+if [ "$1" == "torch_install" ]; then
+    torch_install
+fi
+
+if [ "$1" == "uninstall_torch" ]; then
+    uninstall_torch
+fi
