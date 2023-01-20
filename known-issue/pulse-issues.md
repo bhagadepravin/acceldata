@@ -1,3 +1,6 @@
+** 1. Pulse File Explorer / ad-fsanalitics container issue
+** 2. Steps to download latest tar docker image, load , replace with old image 
+
 ## 1. Pulse File Explorer / ad-fsanalitics container issue
 
 ```bash
@@ -87,7 +90,7 @@ ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
 ```
 
 
-## Steps to download latest tar docker image, load , replace with old image 
+## 2. Steps to download latest tar docker image, load , replace with old image 
 ```
 # download image.tar file
 wget https://example.com/image.tar
