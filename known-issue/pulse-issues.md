@@ -1,4 +1,4 @@
-1. Pulse File Explorer / ad-fsanalitics container issue
+# 1. Pulse File Explorer / ad-fsanalitics container issue
 
 ```bash
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
