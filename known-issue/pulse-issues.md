@@ -54,12 +54,12 @@ If not present, Generate the ad-fsanalyticsv2-connector.yml configuration file b
 
 Update the new nn.service.keytab to ad-fsanalyticsv2-connector container, we need to add mount point for keytab.
 
-vi ad-fsanalyticsv2-connector.yml
+`vi ad-fsanalyticsv2-connector.yml`
 
-* Add new mount under volumes: sections
+* Add new mount under **volumes:** sections
 * You can copy the nanenode serice keytab under below dir.
 
-cp nn.service.keytab $AcceloHome/config/krb/security
+`cp nn.service.keytab $AcceloHome/config/krb/security`
 
 how that mount point will looks below, replace the actual acceloHome path
 `- $AcceloHome/config/krb/security:/krb/security/kerberos.keytab`
