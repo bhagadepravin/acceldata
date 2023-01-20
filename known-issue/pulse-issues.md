@@ -19,8 +19,8 @@ Copy it on Pulse Server node.
 
 Goto AcceloHome dir.
 ```
-cd $AcceloHome
-cd work/<CLUSTER_NAME>/fsanalytics/
+$ cd $AcceloHome
+$ cd work/<CLUSTER_NAME>/fsanalytics/
 ```
 We need to update below two script with nn service principal rather an hdfs headless principal
 Example: here I am using Namenode serivice principal as `nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM`
@@ -32,7 +32,7 @@ In customer case:
 * kinit_fsimage.sh
 
 ```bash
-cat kinit_fsimage.sh
+$ cat kinit_fsimage.sh
 #!/bin/bash
 
 kinit -kt /krb/security/kerberos.keytab nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM
@@ -54,12 +54,12 @@ If not present, Generate the ad-fsanalyticsv2-connector.yml configuration file b
 
 Update the new nn.service.keytab to ad-fsanalyticsv2-connector container, we need to add mount point for keytab.
 
-`vi ad-fsanalyticsv2-connector.yml`
+`$ vi ad-fsanalyticsv2-connector.yml`
 
 * Add new mount under **volumes:** sections
 * You can copy the nanenode serice keytab under below dir.
 
-`cp nn.service.keytab $AcceloHome/config/krb/security`
+`$ cp nn.service.keytab $AcceloHome/config/krb/security`
 
 how that mount point will looks below, replace the actual acceloHome path
 `- $AcceloHome/config/krb/security:/krb/security/kerberos.keytab`
