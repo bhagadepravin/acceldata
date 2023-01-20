@@ -106,4 +106,6 @@ docker rmi  REPOSITORY:TAG
 $ docker tag REPOSITORY:NEW_TAG  REPOSITORY:OLD_TAG
 
 $ docker images 
+
+# Restart the continer to use new image 
 ```
