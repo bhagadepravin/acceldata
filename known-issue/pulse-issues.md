@@ -87,4 +87,23 @@ ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
 ```
 
 
+## Steps to download latest tar docker image, load , replace with old image 
+```
+# download image.tar file
+wget https://example.com/image.tar
 
+# load the image
+docker load -i image.tar
+
+# To delete the container image with TAG VERSION, use the command:
+
+docker images 
+# Replace the repository and tag name which you want to delete.
+docker rmi  REPOSITORY:TAG
+
+# To change the image tag of container from NEW_TAG to OLD_TAG, use the command:
+
+$ docker tag REPOSITORY:NEW_TAG  REPOSITORY:OLD_TAG
+
+$ docker images 
+```
