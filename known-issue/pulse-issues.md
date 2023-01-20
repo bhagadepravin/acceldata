@@ -23,7 +23,7 @@ cd $AcceloHome
 cd work/<CLUSTER_NAME>/fsanalytics/
 ```
 We need to update below two script with nn service principal rather an hdfs headless principal
-Example: here I am using Namenode serivice principal as "nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM"
+Example: here I am using Namenode serivice principal as `nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM`
 In customer case:
 
 `$ klist -kt /etc/security/keytab/nn.service.keytab`
