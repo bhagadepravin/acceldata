@@ -1,5 +1,5 @@
-** 1. Pulse File Explorer / ad-fsanalitics container issue
-** 2. Steps to download latest tar docker image, load , replace with old image 
+* 1. Pulse File Explorer / ad-fsanalitics container issue
+* 2. [Steps to download latest tar docker image, load , replace with old image](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#2-steps-to-download-latest-tar-docker-image-load--replace-with-old-image)
 
 ## 1. Pulse File Explorer / ad-fsanalitics container issue
 
