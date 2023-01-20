@@ -14,20 +14,22 @@
 We need to get the HDFS nn service principal from HDFS active namenode.
 
 Get /etc/security/keytab/nn.service.keytab
+
 Copy it on Pulse Server node.
 
 Goto AcceloHome dir.
+```
 cd $AcceloHome
-
 cd work/<CLUSTER_NAME>/fsanalytics/
+```
 We need to update below two script with nn service principal rather an hdfs headless principal
 Example: here I am using Namenode serivice principal as "nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM"
 In customer case:
 
-$ klist -kt /etc/security/keytab/nn.service.keytab
+`$ klist -kt /etc/security/keytab/nn.service.keytab`
 
-update_fsimage.sh
-kinit_fsimage.sh
+* update_fsimage.sh
+* kinit_fsimage.sh
 
 ```bash
 cat kinit_fsimage.sh
