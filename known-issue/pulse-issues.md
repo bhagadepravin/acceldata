@@ -1,4 +1,4 @@
-# 1. Pulse File Explorer / ad-fsanalitics container issue
+## 1. Pulse File Explorer / ad-fsanalitics container issue
 
 ```bash
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
@@ -45,7 +45,7 @@ update_fsimage.sh
   /usr/bin/gurl -X GET -u "hdfs:" -k -kt /krb/security/kerberos.keytab -kp nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM -o /etc/fsanalytics/$1/fsimage -l "http://hdp314-lab2.iti.acceldata.dev:50070/imagetransfer?getimage=1&txid=latest"
 ```
 
-*Next step:*
+**Next step:**
 
 Navigate to the  ad-fsanalyticsv2-connector.yml file located in the <$AcceloHome>/config/docker/addons directory
 
