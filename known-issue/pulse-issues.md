@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="center">
-   Acceldata <br/>
+   Enterprise Data Observability for the Modern Data Stack <br/>
 </h1>
 
 
