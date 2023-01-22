@@ -1,4 +1,9 @@
-1. Pulse File Explorer / ad-fsanalitics container issue
+<div style="text-align:center">
+  <img src="https://user-images.githubusercontent.com/28974904/213919727-b58089c7-b9bf-4650-af10-89cda5bb41b7.jpeg" alt="1663675655108">
+</div>
+
+
+1. [Pulse File Explorer / ad-fsanalitics container issue](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#1-pulse-file-explorer--ad-fsanalitics-container-issue)
 2. [Steps to download latest tar docker image, load , replace with old image](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#2-steps-to-download-latest-tar-docker-image-load--replace-with-old-image)
 
 ## 1. Pulse File Explorer / ad-fsanalitics container issue
