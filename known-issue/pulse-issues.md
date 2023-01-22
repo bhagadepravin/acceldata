@@ -1,6 +1,11 @@
-<div style="text-align:center">
-  <img style="margin:auto" src="https://user-images.githubusercontent.com/28974904/213919727-b58089c7-b9bf-4650-af10-89cda5bb41b7.jpeg" alt="1663675655108">
-</div>
+<p align="center">
+  <a href="https://www.acceldata.io">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/213919727-b58089c7-b9bf-4650-af10-89cda5bb41b7.jpeg" />
+  </a>
+</p>
+<h1 align="center">
+   Acceldata <br/>
+</h1>
 
 
 
