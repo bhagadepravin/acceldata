@@ -97,19 +97,19 @@ ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
 
 1. Download the new `image.tar` file:
 ```
-wget https://example.com/image.tar
+$ wget https://example.com/image.tar
 ```
 
 2. Load the image
 ```
-docker load -i image.tar
+$ docker load -i image.tar
 ```
 
 3. To delete the container image with a specific tag version, use the command:
 ```bash
-docker images 
+$ docker images 
 # This will list all the images. Replace the repository and tag name of the image that you want to delete.
-docker rmi  REPOSITORY:TAG
+$ docker rmi  REPOSITORY:TAG
 ```
 
 4. To change the image tag of a container from a new tag to an old tag, use the command:
@@ -120,6 +120,6 @@ $ docker images
 ```
 5. Restart the container to use the new image
 ```
-accelo restart CONTAINER_NAME
+$ accelo restart CONTAINER_NAME
 ```
 With these steps, you will be able to download the latest tar docker image, load it, and replace it with the old image.
