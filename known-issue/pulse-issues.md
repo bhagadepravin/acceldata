@@ -9,7 +9,7 @@
 
 
 1. [Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution..](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#1-pulse-file-explorer--ad-fsanalitics-container-hdfs-fsimage-access-error-solution)
-2. [Steps to download latest tar docker image, load , replace with old image](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#2-steps-to-download-latest-tar-docker-image-load--replace-with-old-image)
+2. [Upgrading a Docker Image with a Tar File: Download, Load, Replace](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#2-steps-to-download-latest-tar-docker-image-load--replace-with-old-image)
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
@@ -103,7 +103,7 @@ ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
 ```
 
 
-## 2. Steps to download latest tar docker image, load , replace with old image 
+## 2. Upgrading a Docker Image with a Tar File: Download, Load, Replace
 
 1. Download the new `image.tar` file:
 ```
