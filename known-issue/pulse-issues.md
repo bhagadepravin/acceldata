@@ -3,6 +3,8 @@
 
 ## 1. Pulse File Explorer / ad-fsanalitics container issue
 
+When trying to download the HDFS fsimage, the hdfs headless user is encountering a 403 error:
+
 ```bash
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 <title>Error 403 Only Namenode, Secondary Namenode, and administrators may access this servlet</title>
@@ -12,25 +14,18 @@
 <pre>    Only Namenode, Secondary Namenode, and administrators may access this servlet</pre></p><hr /><i><small>Powered by Jetty://</small></i><br/>
 ```
 
---> hdfs headless user is not able to download hdfs fsimage
+The solution to this issue is to use the HDFS nn service principal from the HDFS active namenode instead of the hdfs headless principal.
 
-We need to get the HDFS nn service principal from HDFS active namenode.
-
-Get /etc/security/keytab/nn.service.keytab
-
-Copy it on Pulse Server node.
-
-Goto AcceloHome dir.
+1. Get the `nn.service.keytab` file from the HDFS active namenode's `/etc/security/keytab/` directory
+2. Copy the keytab file to the Pulse Server node
+3. Go to the AcceloHome directory:
 ```
 $ cd $AcceloHome
 $ cd work/<CLUSTER_NAME>/fsanalytics/
 ```
-We need to update below two script with nn service principal rather an hdfs headless principal
-Example: here I am using Namenode serivice principal as `nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM`
-In customer case:
+4. Update the following two scripts with the nn service principal:
 
-`$ klist -kt /etc/security/keytab/nn.service.keytab`
-
+Example: Using the Namenode service principal nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM
 * update_fsimage.sh
 * kinit_fsimage.sh
 
@@ -48,27 +43,34 @@ update_fsimage.sh
   /usr/bin/gurl -X GET -u "hdfs:" -k -kt /krb/security/kerberos.keytab -kp nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM -o /etc/fsanalytics/$1/fsimage -l "http://hdp314-lab2.iti.acceldata.dev:50070/imagetransfer?getimage=1&txid=latest"
 ```
 
-**Next step:**
+Note: In customer case use the below command to check the Namenode service principal
+$ klist -kt /etc/security/keytab/nn.service.keytab
 
-Navigate to the  ad-fsanalyticsv2-connector.yml file located in the <$AcceloHome>/config/docker/addons directory
+5. Navigate to the ad-fsanalyticsv2-connector.yml file located in the <$AcceloHome>/config/docker/addons directory.
 
-If not present, Generate the ad-fsanalyticsv2-connector.yml configuration file by executing the command
+6. If not present, Generate the ad-fsanalyticsv2-connector.yml configuration file by executing the command
 `$ accelo admin makeconfig ad-fsanalyticsv2-connector`
 
-Update the new nn.service.keytab to ad-fsanalyticsv2-connector container, we need to add mount point for keytab.
+7. Update the new nn.service.keytab to ad-fsanalyticsv2-connector container, we need to add mount point for keytab.
 
 `$ vi ad-fsanalyticsv2-connector.yml`
 
-* Add new mount under **volumes:** sections
-* You can copy the nanenode serice keytab under below dir.
+8. Add a new mount under the **volumes:** section. You can copy the nanenode service keytab under the directory:
 
 `$ cp nn.service.keytab $AcceloHome/config/krb/security`
 
-how that mount point will looks below, replace the actual acceloHome path
+The mount point should look like this (replace the actual $AcceloHome path):
 `- $AcceloHome/config/krb/security:/krb/security/kerberos.keytab`
 
+9. Restart ad-fsanalyticsv2-connector and Load the fsimage again
+```
+accelo restart ad-fsanalyticsv2-connector
+accelo admin fsa load
+```
 
-Few cmds to troubeshoot
+Once these steps are completed, the HDFS fsimage should be able to be downloaded without any 403 errors.
+
+10. Troubleshoot:
 ```bash
 docker logs -f ad-fsanalyticsv2-connector_default
 docker logs -f ad-connectors_default
@@ -91,24 +93,32 @@ ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
 
 
 ## 2. Steps to download latest tar docker image, load , replace with old image 
+
+1. Download the image.tar file:
 ```
-# download image.tar file
 wget https://example.com/image.tar
-
-# load the image
-docker load -i image.tar
-
-# To delete the container image with TAG VERSION, use the command:
-
-docker images 
-# Replace the repository and tag name which you want to delete.
-docker rmi  REPOSITORY:TAG
-
-# To change the image tag of container from NEW_TAG to OLD_TAG, use the command:
-
-$ docker tag REPOSITORY:NEW_TAG  REPOSITORY:OLD_TAG
-
-$ docker images 
-
-# Restart the continer to use new image 
 ```
+
+2. Load the image
+```
+docker load -i image.tar
+```
+
+3. To delete the container image with a specific tag version, use the command:
+```bash
+docker images 
+# This will list all the images. Replace the repository and tag name of the image that you want to delete.
+docker rmi  REPOSITORY:TAG
+```
+
+4. To change the image tag of a container from a new tag to an old tag, use the command:
+```bash
+$ docker tag REPOSITORY:NEW_TAG  REPOSITORY:OLD_TAG
+# You can check the image with the new tag by running
+$ docker images 
+```
+5. Restart the container to use the new image
+```
+accelo restart CONTAINER_NAME
+```
+With these steps, you will be able to download the latest tar docker image, load it, and replace it with the old image.
