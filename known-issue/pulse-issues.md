@@ -8,7 +8,7 @@
 </h1>
 
 
-1. [Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution..](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#1-pulse-file-explorer--ad-fsanalitics-container-issue)
+1. [Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution..](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#1-pulse-file-explorer--ad-fsanalitics-container-hdfs-fsimage-access-error-solution)
 2. [Steps to download latest tar docker image, load , replace with old image](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#2-steps-to-download-latest-tar-docker-image-load--replace-with-old-image)
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
