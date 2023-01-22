@@ -25,7 +25,7 @@ $ cd work/<CLUSTER_NAME>/fsanalytics/
 ```
 4. Update the following two scripts with the nn service principal:
 
-Example: Using the Namenode service principal nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM
+Example: Using the Namenode service principal `nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM`
 * a. update_fsimage.sh
 * b. kinit_fsimage.sh
 
@@ -44,14 +44,15 @@ update_fsimage.sh
 ```
 
 Note: In customer case use the below command to check the Namenode service principal
+```
 $ klist -kt /etc/security/keytab/nn.service.keytab
+```
+5. Navigate to the `ad-fsanalyticsv2-connector.yml` file located in the `<$AcceloHome>/config/docker/addons` directory.
 
-5. Navigate to the ad-fsanalyticsv2-connector.yml file located in the <$AcceloHome>/config/docker/addons directory.
-
-6. If not present, Generate the ad-fsanalyticsv2-connector.yml configuration file by executing the command
+6. If not present, Generate the `ad-fsanalyticsv2-connector.yml` configuration file by executing the command
 `$ accelo admin makeconfig ad-fsanalyticsv2-connector`
 
-7. Update the new nn.service.keytab to ad-fsanalyticsv2-connector container, we need to add mount point for keytab.
+7. Update the new `nn.service.keytab` to `ad-fsanalyticsv2-connector` container, we need to add mount point for keytab.
 
 `$ vi ad-fsanalyticsv2-connector.yml`
 
@@ -59,7 +60,7 @@ $ klist -kt /etc/security/keytab/nn.service.keytab
 
 `$ cp nn.service.keytab $AcceloHome/config/krb/security`
 
-The mount point should look like this (replace the actual $AcceloHome path):
+The mount point should look like this (replace the actual `$AcceloHome` path):
 `- $AcceloHome/config/krb/security:/krb/security/kerberos.keytab`
 
 9. Restart ad-fsanalyticsv2-connector and Load the fsimage again
@@ -94,7 +95,7 @@ ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
 
 ## 2. Steps to download latest tar docker image, load , replace with old image 
 
-1. Download the image.tar file:
+1. Download the new `image.tar` file:
 ```
 wget https://example.com/image.tar
 ```
