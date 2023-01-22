@@ -1,12 +1,11 @@
 <p align="center">
   <a href="https://www.acceldata.io">
-    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/213919727-b58089c7-b9bf-4650-af10-89cda5bb41b7.jpeg" />
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/213919961-56b0dfbf-a5a4-45b1-aa16-ec5f6fd1ac78.png" />
   </a>
 </p>
 <h1 align="center">
    Enterprise Data Observability for the Modern Data Stack <br/>
 </h1>
-
 
 
 1. [Pulse File Explorer / ad-fsanalitics container issue](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#1-pulse-file-explorer--ad-fsanalitics-container-issue)
