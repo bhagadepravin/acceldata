@@ -8,10 +8,10 @@
 </h1>
 
 
-1. [Pulse File Explorer / ad-fsanalitics container issue](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#1-pulse-file-explorer--ad-fsanalitics-container-issue)
+1. [Fixing the Pulse File Explorer / ad-fsanalitics Container Configuration for HDFS fsimage Access.](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#1-pulse-file-explorer--ad-fsanalitics-container-issue)
 2. [Steps to download latest tar docker image, load , replace with old image](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#2-steps-to-download-latest-tar-docker-image-load--replace-with-old-image)
 
-## 1. Pulse File Explorer / ad-fsanalitics container issue
+## 1. Fixing the Pulse File Explorer / ad-fsanalitics Container Configuration for HDFS fsimage Access.
 
 When trying to download the HDFS fsimage, the hdfs headless user is encountering a 403 error:
 
