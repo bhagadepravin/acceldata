@@ -133,3 +133,46 @@ $ docker images
 $ accelo restart CONTAINER_NAME
 ```
 With these steps, you will be able to download the latest tar docker image, load it, and replace it with the old image.
+
+## Troubleshooting LogSearch UI on Pulse Server
+
+###### If LogSearch UI is missing any service logs such as datanode or resourcemanager, follow these steps to troubleshoot:
+
+1. Log in to the respective service node on the Hadoop cluster.
+2. Check the following log file:
+```bash
+$ cat /opt/pulse/logs/log/messages
+```
+The `pulselogs` agent is responsible for sending data to Logstash and Elastic.
+
+#### Enable debug logging for the pulselog agent by editing the `logs.yml` file:
+```bash
+$ vi /opt/pulse/logs/config/logs.yml
+```
+* Search for "level" and change it from "info" to "debug".
+* Restart the `pulselogs` service.
+
+```bash
+$ service pulselogs status
+$ service pulselogs restart
+```
+#### Collect the following logs:
+```bash
+(hostname;date)  | tee /tmp/ad-logstash_default.log ; docker logs  ad-logstash_default >> /tmp/ad-logstash_default.log
+(hostname;date)  | tee /tmp/ad-connectors_default.log ; docker logs  ad-connectors_default >> /tmp/ad-connectors_default.log
+(hostname;date)  | tee /tmp/ad-logstash_default.log ; docker logs  ad-logstash_default >> /tmp/ad-logstash_default.log
+(hostname;date)  | tee /tmp/ad-elastic_default.log ; docker logs  ad-elastic_default >> /tmp/ad-elastic_default.log
+(hostname;date)  | tee /tmp/ad-logsearch-curator_default.log ; docker logs  ad-logsearch-curator_default >> /tmp/ad-logsearch-curator_default.log
+(hostname;date)  | tee /tmp/ad-graphql_default.log ; docker logs  ad-graphql_default >> /tmp/ad-graphql_default.log
+tar cvzf /tmp/pulse_logs.tar.gz /tmp/ad-*
+```
+Attach the `/tmp/pulse_logs.tar.gz` file to your support request.
+
+#### For browser-related data collection, please follow these steps:
+
+* Open the Developer Tool in your browser
+* Reproduce the issue
+* Download the HAR file
+* Follow the steps in the following link: https://support.zendesk.com/hc/en-us/articles/4408828867098-Generating-a-HAR-file-for-troubleshooting
+
+Please provide this log files and har file with your support request for troubleshoot the LogSearch UI in Hadoop Cluster.
