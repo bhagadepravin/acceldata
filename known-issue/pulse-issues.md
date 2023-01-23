@@ -134,7 +134,7 @@ $ accelo restart CONTAINER_NAME
 ```
 With these steps, you will be able to download the latest tar docker image, load it, and replace it with the old image.
 
-## Troubleshooting LogSearch UI on Pulse Server
+## 3. Troubleshooting LogSearch UI on Pulse Server
 
 ###### If LogSearch UI is missing any service logs such as datanode or resourcemanager, follow these steps to troubleshoot:
 
