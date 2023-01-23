@@ -160,10 +160,10 @@ $ service pulselogs restart
 #### Collect the following logs:
 ```bash
 for container in "ad-logstash" "ad-connectors" "ad-elastic" "ad-logsearch-curator" "ad-graphql"; do 
-  (hostname;date) | tee /tmp/"$container"_default.log ; 
-  docker logs "$container" >> /tmp/"$container"_default.log 
+  echo "$(date +%Y-%m-%d-%H:%M:%S) $(hostname)" >> /tmp/"$container"_default.log;
+  docker logs "$container"_default >> /tmp/"$container"_default.log 2>&1
 done
-tar cvzf /tmp/pulse_logs.tar.gz /tmp/ad-*
+tar cvzf /tmp/pulse_logs.tar.gz /tmp/ad-* 2> /dev/null
 ```
 Attach the `/tmp/pulse_logs.tar.gz` file to your support request.
 
