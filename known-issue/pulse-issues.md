@@ -11,6 +11,7 @@
 1. [Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution..](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#1-pulse-file-explorer--ad-fsanalitics-container-hdfs-fsimage-access-error-solution)
 2. [Upgrading a Docker Image with a Tar File: Download, Load, Replace](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#2-upgrading-a-docker-image-with-a-tar-file-download-load-replace)
 3. [Troubleshooting LogSearch UI on Pulse Server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#3-troubleshooting-logsearch-ui-on-pulse-server)
+4. Enable SSL debug logging for container.
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
@@ -175,3 +176,11 @@ Attach the `/tmp/pulse_logs.tar.gz` file to your support request.
 * Follow the steps in the following link: https://support.zendesk.com/hc/en-us/articles/4408828867098-Generating-a-HAR-file-for-troubleshooting
 
 Please provide this log files and har file with your support request for troubleshoot the LogSearch UI in Hadoop Cluster.
+
+## 4. Enable SSL debug logging for container.
+
+To add an SSL debug parameter in a Docker container file, you can add the following line to the `environment` section of the container configuration/yml file:
+
+```
+- JAVA_OPTS=-Djavax.net.debug=ssl
+```
