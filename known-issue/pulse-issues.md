@@ -62,6 +62,7 @@ $ klist -kt /etc/security/keytab/nn.service.keytab
 5. Navigate to the `ad-fsanalyticsv2-connector.yml` file located in the `<$AcceloHome>/config/docker/addons` directory.
 
 6. If not present, Generate the `ad-fsanalyticsv2-connector.yml` configuration file by executing the command
+
 `$ accelo admin makeconfig ad-fsanalyticsv2-connector`
 
 7. Update the new `nn.service.keytab` to `ad-fsanalyticsv2-connector` container, we need to add mount point for keytab.
