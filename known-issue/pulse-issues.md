@@ -161,15 +161,25 @@ $ vi /opt/pulse/logs/config/logs.yml
 $ service pulselogs status
 $ service pulselogs restart
 ```
-#### Collect the following logs:
+#### Collect docker logs:
+ad-streaming container is required for Logsearch to work.
 ```bash
-for container in "ad-logstash" "ad-connectors" "ad-elastic" "ad-logsearch-curator" "ad-graphql"; do 
+docker ps
+docker logs ad-elastic_default 
+docker logs ad-logstash_default
+docker logs ad-logsearch-curator_default
+```
+```bash
+for container in "ad-logstash" "ad-connectors" "ad-elastic" "ad-streaming" "ad-logsearch-curator" "ad-graphql"; do 
   echo "$(date +%Y-%m-%d-%H:%M:%S) $(hostname)" >> /tmp/"$container"_default.log;
   docker logs "$container"_default >> /tmp/"$container"_default.log 2>&1
 done
 tar cvzf /tmp/pulse_logs.tar.gz /tmp/ad-* 2> /dev/null
 ```
 Attach the `/tmp/pulse_logs.tar.gz` file to your support request.
+
+* `ad-logstash` - used for parsing not for storage
+* `ad-logsearch-curator` - used for pruging older indices
 
 #### For browser-related data collection, please follow these steps:
 
