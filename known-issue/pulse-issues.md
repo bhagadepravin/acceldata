@@ -181,6 +181,20 @@ Attach the `/tmp/pulse_logs.tar.gz` file to your support request.
 * `ad-logstash` - used for parsing not for storage
 * `ad-logsearch-curator` - used for pruging older indices
 
+
+#### Check logsearch indices
+```sql
+curl -X GET http://localhost:19013/_cat/indices
+```
+* Check log specific indices
+example: datanode logs
+```sql
+curl -X GET http://localhost:19013/_cat/indices?v    | grep "hdfs_datanode"
+```
+* Here is a sample query in Elasticsearch to retrieve data from the specified indices:
+```sql
+curl -X GET "http://localhost:19013/hdp310-logs-hdfs_datanode-error-2023.01.26/_search?pretty"
+```
 #### For browser-related data collection, please follow these steps:
 
 * Open the Developer Tool in your browser
