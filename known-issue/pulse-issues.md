@@ -73,7 +73,9 @@ $ klist -kt /etc/security/keytab/nn.service.keytab
 `$ cp nn.service.keytab $AcceloHome/config/krb/security`
 
 The mount point should look like this (replace the actual `$AcceloHome` path):
-`- $AcceloHome/config/krb/security:/krb/security/kerberos.keytab`
+```bash
+    - $AcceloHome/config/krb/security/nn.service.keytab:/krb/security/kerberos.keytab
+```
 
 9. Restart ad-fsanalyticsv2-connector and Load the fsimage again
 ```
