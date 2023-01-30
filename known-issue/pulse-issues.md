@@ -195,6 +195,75 @@ curl -X GET http://localhost:19013/_cat/indices?v    | grep "hdfs_datanode"
 ```sql
 curl -X GET "http://localhost:19013/hdp310-logs-hdfs_datanode-error-2023.01.26/_search?pretty"
 ```
+
+```sql
+$ curl -X GET http://localhost:19013/_cat/indices?v    | grep "hdfs_datanode-error"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 18432  100 18432    0     0  99389      0 --:--:-- --:--:-- --:--:--   97k
+green  open   hdp310-logs-hdfs_datanode-error-2023.01.27       XWsgSXLMTOC4uuE5kPjJsg   3   0       4306            0      1.4mb          1.4mb
+green  open   hdp310-logs-hdfs_datanode-error-2023.01.26       xnmj0FMNSzKDaec029NhyA   3   0       4317            0      1.4mb          1.4mb
+green  open   hdp310-logs-hdfs_datanode-error-2023.01.30       YqEcM40NRU6K2Ub1EXs2yg   3   0       3217            0      2.1mb          2.1mb
+green  open   hdp310-logs-hdfs_datanode-error-2023.01.28       7EypegR-RIS2hagVrSviag   3   0       4317            0      1.2mb          1.2mb
+green  open   hdp310-logs-hdfs_datanode-error-2023.01.29       D1a-j7ApQw2MMmrrVB5Z_w   3   0       4316            0      1.3mb          1.3mb
+```
+```sql
+$ curl -X GET "http://localhost:19013/hdp310-logs-hdfs_datanode-error-2023.01.26/_search?pretty"
+100 20381  100 20381    0     0  2181k      0 --:--:-- --:--:-- --:--:-{     0
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 3,
+    "successful" : 3,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 4317,
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "hdp310-logs-hdfs_datanode-error-2023.01.26",
+        "_type" : "doc",
+        "_id" : "zcU36oUBFcSp6JqAGWSj",
+        "_score" : 1.0,
+        "_source" : {
+          "message" : "hdp310-lab3.iti.acceldata.dev:1019:DataXceiver error processing unknown operation  src: /10.90.6.157:44920 dst: /10.90.6.157:1019\njava.io.EOFException\n\tat java.io.DataInputStream.readInt(DataInputStream.java:392)\n\tat org.apache.hadoop.hdfs.protocol.datatransfer.sasl.SaslDataTransferServer.doSaslHandshake(SaslDataTransferServer.java:361)\n\tat org.apache.hadoop.hdfs.protocol.datatransfer.sasl.SaslDataTransferServer.getEncryptedStreams(SaslDataTransferServer.java:180)\n\tat org.apache.hadoop.hdfs.protocol.datatransfer.sasl.SaslDataTransferServer.receive(SaslDataTransferServer.java:112)\n\tat - 2487k
+org.apache.hadoop.hdfs.server.datanode.DataXceiver.run(DataXceiver.java:232)\n\tat java.lang.Thread.run(Thread.java:750)",
+          "logger_name" : "datanode.DataNode ",
+          "log" : {
+            "flags" : [
+              "multiline"
+            ],
+            "file" : {
+              "path" : "/var/log/hadoop/hdfs/hadoop-hdfs-root-datanode-hdp310-lab3.iti.acceldata.dev.log"
+            }
+          },
+          "file" : "DataXceiver.java",
+          "host" : {
+            "name" : "hdp310-lab3.iti.acceldata.dev"
+          },
+          "memsql_query_output_enable" : "false",
+          "source" : "/var/log/hadoop/hdfs/hadoop-hdfs-root-datanode-hdp310-lab3.iti.acceldata.dev.log",
+          "date" : "2023-01-26 00:05:48,009",
+          "ignore_older_logs_enable" : "true",
+          "fields" : {
+            "component" : [
+              "hdfs_datanode"
+            ],
+            "clusterName" : "hdp310"
+          },
+          "method" : "run",
+          "line_number" : "321",
+          "@timestamp" : "2023-01-26T00:05:48.009Z",
+          "offset" : 182106153,
+          "tags" : [
+            "beats_input_codec_plain_applied"
+          ],
+          "loglevel" : "ERROR"
+        }
+      },
+```
 #### For browser-related data collection, please follow these steps:
 
 * Open the Developer Tool in your browser
