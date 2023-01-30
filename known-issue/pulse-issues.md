@@ -211,6 +211,7 @@ green  open   hdp310-logs-hdfs_datanode-error-2023.01.29       D1a-j7ApQw2MMmrrV
 <details>
 <summary>curl -X GET http://localhost:19013/_cat/indices?v    | grep "hdfs_datanode-error</summary>
 <br>
+  ```sql
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 18432  100 18432    0     0  99389      0 --:--:-- --:--:-- --:--:--   97k
@@ -219,6 +220,7 @@ green  open   hdp310-logs-hdfs_datanode-error-2023.01.26       xnmj0FMNSzKDaec02
 green  open   hdp310-logs-hdfs_datanode-error-2023.01.30       YqEcM40NRU6K2Ub1EXs2yg   3   0       3217            0      2.1mb          2.1mb
 green  open   hdp310-logs-hdfs_datanode-error-2023.01.28       7EypegR-RIS2hagVrSviag   3   0       4317            0      1.2mb          1.2mb
 green  open   hdp310-logs-hdfs_datanode-error-2023.01.29       D1a-j7ApQw2MMmrrVB5Z_w   3   0       4316            0      1.3mb          1.3mb
+```
 </details>
 
 ```sql
