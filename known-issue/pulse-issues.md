@@ -265,6 +265,37 @@ org.apache.hadoop.hdfs.server.datanode.DataXceiver.run(DataXceiver.java:232)\n\t
         }
       },
 ```
+
+* Here is an example Elasticsearch query to search for documents containing the field `loglevel` with a value of `ERROR`:
+replace the index_name
+```sql
+curl -X GET "http://localhost:19013/index_name/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+    "query": {
+        "match": {
+            "loglevel": "ERROR"
+        }
+    }
+}
+'
+```
+
+* To sort Elasticsearch results for the indices in the above example, you can add a sort parameter to your query. 
+For example: or "order": "asc"
+```sql
+curl -X GET "localhost:19013/index_name/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+'
+```
+
 #### For browser-related data collection, please follow these steps:
 
 * Open the Developer Tool in your browser
