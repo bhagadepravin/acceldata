@@ -116,17 +116,20 @@ curl -X DELETE http://localhost:19013/*fsimage*
 accelo restart ad-fsanalyticsv2-connector
 accelo admin fsa load
 docker logs -f ad-fsanalyticsv2-connector_default
+```
 
-# Any socket timeout related error
-add these in ad-fsanalyticsv2-connector file config/docker/addons folder
+#### Any socket timeout related error
+add these in `ad-fsanalyticsv2-connector.yml` file `$AcceloHome/config/docker/addons` folder
+```
 ES_CLIENT_SOCKET_TIMEOUT_SECS=120
 ES_CLIENT_CONNECT_TIMEOUT_SECS=120
 ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
+```
 
-
-# Modify JVM memory of FS Analytics
+#### Modify JVM memory of FS Analytics
 https://docs.acceldata.io/pulse/change-component-resource-limit#modify-jvm-memory-of-fs-analytics
-Update property `JAVA_OPTS=-XX:+UseG1GC -XX:+UseStringDeduplication -Xms<VALUE>g -Xmx<VALUE>g`, here value will be equivalent to 4 times the FS Image size, save the file and restart ad-fsanalyticsv2-connector:
+* Update property `JAVA_OPTS=-XX:+UseG1GC -XX:+UseStringDeduplication -Xms<VALUE>g -Xmx<VALUE>g`, 
+here value will be equivalent to 4 times the FS Image size, save the file and restart ad-fsanalyticsv2-connector:
 
 ```
 
