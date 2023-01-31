@@ -28,7 +28,8 @@ When trying to download the HDFS fsimage, the hdfs headless user is encountering
 
 The solution to this issue is to use the HDFS nn service principal from the HDFS active namenode instead of the hdfs headless principal.
 
-<details open>
+
+<details>
 <summary>If you want to verify which user has access to download FSimage, you can use the following command</summary>
 <br>
 kinit <user>
