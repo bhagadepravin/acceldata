@@ -32,7 +32,8 @@ The solution to this issue is to use the HDFS nn service principal from the HDFS
 <details>
 <summary>If you want to verify which user has access to download FSimage, you can use the following command</summary>
 <br>
-$ kinit <user>
+$ kinit user
+  
 $ hdfs dfsadmin -fetchImage /tmp
 
 * once its downloaded you can delete fsimage from /tmp location
