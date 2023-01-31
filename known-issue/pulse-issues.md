@@ -39,7 +39,7 @@ $ kinit user
 $ hdfs dfsadmin -fetchImage /tmp
 
 * once its downloaded you can delete fsimage from /tmp location
-* users part of dfs.cluster.administrators can download fsimage
+* users part of *dfs.cluster.administrators* property in HDFS can download fsimage
 * Here nn service principal works, because, HDFS auth_to_local rules converts nn service principal to hdfs before authentication to hdfs.
 * RULE:[2:$1@$0](nn@REALM.COM)s/.*/hdfs/
 </details>
