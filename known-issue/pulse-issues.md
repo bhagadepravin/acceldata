@@ -33,6 +33,7 @@ The solution to this issue is to use the HDFS nn service principal from the HDFS
 <summary>If you want to verify which user has access to download FSimage, you can use the following command</summary>
 <br>
 Login into Hadoop node and execute below cmds.
+  
 $ kinit user
   
 $ hdfs dfsadmin -fetchImage /tmp
