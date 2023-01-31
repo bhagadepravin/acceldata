@@ -28,7 +28,8 @@ When trying to download the HDFS fsimage, the hdfs headless user is encountering
 
 The solution to this issue is to use the HDFS nn service principal from the HDFS active namenode instead of the hdfs headless principal.
 
-You can use below cmd to verify which user has access to download fsimage
+** You can use below cmd to verify which user has access to download fsimage
+
 ```bash
 kinit <user>
 hdfs dfsadmin -fetchImage /tmp
@@ -36,7 +37,7 @@ hdfs dfsadmin -fetchImage /tmp
 # once its downloaded you can delete fsimage from /tmp location
 # users part of dfs.cluster.administrators can download fsimage
 # Here nn service principal works, because, HDFS auth_to_local rules converts nn service principal to hdfs before authentication to hdfs
-RULE:[2:$1@$0](nn@REALM.COM)s/.*/hdfs/
+# RULE:[2:$1@$0](nn@REALM.COM)s/.*/hdfs/
 ```
 
 1. Get the `nn.service.keytab` file from the HDFS active namenode's `/etc/security/keytab/` directory
