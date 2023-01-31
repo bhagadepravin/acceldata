@@ -73,7 +73,7 @@ update_fsimage.sh
   /usr/bin/gurl -X GET -u "hdfs:" -k -kt /krb/security/kerberos.keytab -kp nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM -o /etc/fsanalytics/$1/fsimage -l "http://hdp314-lab2.iti.acceldata.dev:50070/imagetransfer?getimage=1&txid=latest"
 ```
 
-Note: In customer case use the below command to check the Namenode service principal
+**Note:** In customer case use the below command to check the Namenode service principal
 ```
 $ klist -kt /etc/security/keytab/nn.service.keytab
 ```
@@ -83,28 +83,27 @@ $ klist -kt /etc/security/keytab/nn.service.keytab
 
 `$ accelo admin makeconfig ad-fsanalyticsv2-connector`
 
-7. Update the new `nn.service.keytab` to `ad-fsanalyticsv2-connector` container, we need to add mount point for keytab.
+7. Add a new mount under the **volumes:** section. You can copy the nanenode service keytab under the directory:
+`$ cp nn.service.keytab $AcceloHome/config/krb/security`
+Update the new `nn.service.keytab` to `ad-fsanalyticsv2-connector` container, we need to add mount point for keytab.
+
 
 `$ vi ad-fsanalyticsv2-connector.yml`
-
-8. Add a new mount under the **volumes:** section. You can copy the nanenode service keytab under the directory:
-
-`$ cp nn.service.keytab $AcceloHome/config/krb/security`
-
 The mount point should look like this (replace the actual `$AcceloHome` path):
 ```bash
     - $AcceloHome/config/krb/security/nn.service.keytab:/krb/security/kerberos.keytab
 ```
 
-9. Restart ad-fsanalyticsv2-connector and Load the fsimage again
+8. Restart ad-fsanalyticsv2-connector and Load the fsimage again
 ```
 accelo restart ad-fsanalyticsv2-connector
 accelo admin fsa load
+docker logs -f ad-fsanalyticsv2-connector_default
 ```
 
 Once these steps are completed, the HDFS fsimage should be able to be downloaded without any 403 errors.
 
-10. Troubleshoot:
+9. Troubleshoot:
 ```bash
 docker logs -f ad-fsanalyticsv2-connector_default
 docker logs -f ad-connectors_default
@@ -123,6 +122,12 @@ add these in ad-fsanalyticsv2-connector file config/docker/addons folder
 ES_CLIENT_SOCKET_TIMEOUT_SECS=120
 ES_CLIENT_CONNECT_TIMEOUT_SECS=120
 ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
+
+
+# Modify JVM memory of FS Analytics
+https://docs.acceldata.io/pulse/change-component-resource-limit#modify-jvm-memory-of-fs-analytics
+Update property `JAVA_OPTS=-XX:+UseG1GC -XX:+UseStringDeduplication -Xms<VALUE>g -Xmx<VALUE>g`, here value will be equivalent to 4 times the FS Image size, save the file and restart ad-fsanalyticsv2-connector:
+
 ```
 
 
