@@ -129,6 +129,7 @@ ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
 ##### Modify JVM memory of FS Analytics
 
 Update property `JAVA_OPTS=-XX:+UseG1GC -XX:+UseStringDeduplication -Xms<VALUE>g -Xmx<VALUE>g`, 
+
 here value will be equivalent to 4 times the FS Image size, save the file and restart ad-fsanalyticsv2-connector:
 
 https://docs.acceldata.io/pulse/change-component-resource-limit#modify-jvm-memory-of-fs-analytics
