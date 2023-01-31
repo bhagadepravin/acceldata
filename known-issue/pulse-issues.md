@@ -28,9 +28,9 @@ When trying to download the HDFS fsimage, the hdfs headless user is encountering
 
 The solution to this issue is to use the HDFS nn service principal from the HDFS active namenode instead of the hdfs headless principal.
 
-** You can use below cmd to verify which user has access to download fsimage
-
-```bash
+<details open>
+<summary>If you want to verify which user has access to download FSimage, you can use the following command</summary>
+<br>
 kinit <user>
 hdfs dfsadmin -fetchImage /tmp
 
@@ -38,7 +38,8 @@ hdfs dfsadmin -fetchImage /tmp
 # users part of dfs.cluster.administrators can download fsimage
 # Here nn service principal works, because, HDFS auth_to_local rules converts nn service principal to hdfs before authentication to hdfs
 # RULE:[2:$1@$0](nn@REALM.COM)s/.*/hdfs/
-```
+</details>
+
 
 1. Get the `nn.service.keytab` file from the HDFS active namenode's `/etc/security/keytab/` directory
 2. Copy the keytab file to the Pulse Server node
