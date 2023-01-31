@@ -42,6 +42,7 @@ $ hdfs dfsadmin -fetchImage /tmp
 * RULE:[2:$1@$0](nn@REALM.COM)s/.*/hdfs/
 </details>
 
+------------
 
 1. Get the `nn.service.keytab` file from the HDFS active namenode's `/etc/security/keytab/` directory
 2. Copy the keytab file to the Pulse Server node
