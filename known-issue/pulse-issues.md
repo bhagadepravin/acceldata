@@ -55,7 +55,7 @@ $ cd work/<CLUSTER_NAME>/fsanalytics/
 ```
 4. Update the following two scripts with the nn service principal:
 
-Example: Using the Namenode service principal `nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM`
+**Example**: Using the Namenode service principal `nn/hdp314-lab1.iti.acceldata.dev@ADSRE.COM`
 * a. update_fsimage.sh
 * b. kinit_fsimage.sh
 
