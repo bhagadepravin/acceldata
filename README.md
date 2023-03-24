@@ -3,6 +3,9 @@
 ##### LVM resize
 ```
 yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
+
+# for rocky linux 8 lab node
+yum -y install cloud-utils-growpart && growpart /dev/sda 3; pvresize /dev/sda3; lvextend -l+100%FREE /dev/mapper/rl-root; xfs_growfs /dev/mapper/rl-root;lsblk
 ```
 
 ##### K9s on Centos 7
