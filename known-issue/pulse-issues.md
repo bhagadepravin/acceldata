@@ -12,6 +12,7 @@
 2. [Upgrading a Docker Image with a Tar File: Download, Load, Replace](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#2-upgrading-a-docker-image-with-a-tar-file-download-load-replace)
 3. [Troubleshooting LogSearch UI on Pulse Server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#3-troubleshooting-logsearch-ui-on-pulse-server)
 4. [Enable SSL/Kerberos debug logging for container](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#4-enable-sslkerberos-debug-logging-for-container)
+5. Add Multple Clusters to existing Pulse server.
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
@@ -345,3 +346,17 @@ or
 ## Krberos debug
 - JAVA_OPTS=-Dsun.security.krb5.debug=true
 ```
+
+## 5. Add Multple Clusters to existing Pulse server.
+
+This code appears to be a set of command line interface (CLI) commands for configuring and managing clusters using Accelo. 
+
+- `$ accelo config cluster` allows the user to configure a cluster.
+- `$ accelo set` sets the configuration.
+- Upon running `$ accelo config cluster`, the user will be prompted to select a new cluster from the options provided. The selected cluster will be activated.
+- `$ accelo reconfig cluster` is used to reconfigure the cluster.
+- `$ accelo deploy hydra` deploys the hydra agent.
+- If any issues arise,run the following commands: 
+  - `$ accelo admin database push-config`
+  - `$ accelo restart all`
+
