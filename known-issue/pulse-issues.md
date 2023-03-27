@@ -13,6 +13,8 @@
 3. [Troubleshooting LogSearch UI on Pulse Server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#3-troubleshooting-logsearch-ui-on-pulse-server)
 4. [Enable SSL/Kerberos debug logging for container](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#4-enable-sslkerberos-debug-logging-for-container)
 5. [Add Multple Clusters to existing Pulse server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#5-add-multple-clusters-to-existing-pulse-server)
+6. Add a Node to existing Pulse Server
+7. How to remove a node from Pulse server
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
@@ -360,3 +362,24 @@ This code appears to be a set of command line interface (CLI) commands for confi
   - `$ accelo admin database push-config`
   - `$ accelo restart all`
 
+## 6. Add a Node to existing Pulse Server
+
+Below instructions for adding a node to an existing Pulse server:
+
+- First, log in to the Pulse server node and reconfigure the cluster by running `$ accelo reconfig cluster`.
+- Before proceeding, make a backup of the `hydra_hosts.yml` file located at `$AcceloHome/work/<CLUSRTER_NAME>/`.
+- Add only the host which was added recently and remove any existing hosts from the backup file.
+- Deploy the Hydra agent with the command `$ accelo deploy hydra`.
+- Once agents are deployed on new hosts, revert back the `hydra_hosts.yml` file located at `$AcceloHome/work/<CLUSRTER_NAME>/`.
+
+## 7. How to remove a node from Pulse server
+
+Below instructions for removing a node from a Pulse server and reconfiguring the cluster:
+
+- First, log in to the node that needs to be removed and run the command `$ /opt/pulse/hystaller uninstall` to uninstall the Pulse Agents.
+- Next, log in to the Pulse server node and reconfigure the cluster by running `$ accelo reconfig cluster`. This will remove the hosts from the following configuration files:
+  - `work/<ClusterName>/alerts/endpoints/default-endpoints.yml`
+  - `work/<ClusterName>/hydra_hosts.yml`
+  - `work/<ClusterName>/agents/node/hostRoleMap.yml`
+- Push the database configuration changes by running `$ accelo admin database push-config`.
+- Finally, restart all nodes using the command `$ accelo restart all -d`.
