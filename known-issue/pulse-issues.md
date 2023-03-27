@@ -349,6 +349,26 @@ or
 - JAVA_OPTS=-Dsun.security.krb5.debug=true
 ```
 
+```bash
+docker exec -it ad-fsanalyticsv2-connector_default sh
+
+Get the output of below cmds.
+
+cd /opt/docker/work/CLUSTER_NAME/fsanalytics
+cat kinit_fsimage.sh
+
+export KRB5_TRACE=/dev/stdout
+bash kinit_fsimage.sh
+klist -e 
+
+bash update_fsimage.sh CLUSTER_NAME
+Example:
+bash update_fsimage.sh hdp265
+
+env
+cat /krb/security/krb5.conf
+```
+
 ## 5. Add Multple Clusters to existing Pulse server.
 
 This code appears to be a set of command line interface (CLI) commands for configuring and managing clusters using Accelo. 
