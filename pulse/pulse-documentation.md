@@ -135,7 +135,7 @@ Acceldata Pulse provides the following features.
   - Editing Visualizations
   - Cloning Visualizations
   - Observing Visualizations
-  - (Dashboard](https://docs.acceldata.io/pulse/dashboards)
+  - [Dashboard](https://docs.acceldata.io/pulse/dashboards)
      - [Using Variables](https://docs.acceldata.io/pulse/using-variables)
   - [Visualization](https://docs.acceldata.io/pulse/visualization)
   - Visualization Dashboard
