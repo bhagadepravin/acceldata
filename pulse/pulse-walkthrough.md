@@ -45,3 +45,48 @@ The following metric tiles are displayed in the Clusters page.
 
 **Health** - It displays the health of the services running on a node. The green dot on the top right of the icon indicates that all the services are working at expected levels. Change in the dot color from green to amber or red indicates that one or more services is down on that node. Click on the icon to view the services impacted. Click on the service to view the details. It is demonstrated in the following example.
 
+![Health Button](https://user-images.githubusercontent.com/28974904/229272221-67a4ecf4-377a-40f5-93ed-8909342efbb7.gif)
+
+**Alerts** - Alerts display incident messages about clusters in your Hadoop ecosystem that may need attention depending upon the severity levels such as Critical, High, Medium and Low. Click the button for detailed incident notifications raised as shown in the following image. To manage alerts and associated incident messages, see Incidents.
+
+![image](https://user-images.githubusercontent.com/28974904/229272258-7ec45b7e-bad7-4148-8d48-d3832f4f540f.png)
+
+
+
+## 2. Incidents
+
+If an alert continues to occur consecutively for a particular threshold, then an incident is created for the alert. This is specified with either the number of times the alert has occurred or number of seconds it has lasted.
+
+**Viewing Incident Details**
+To view the details of an incident, perform the following:
+
+![incident details page](https://user-images.githubusercontent.com/28974904/229272430-9758c3e8-dd78-4016-a5c0-5d077b322add.png)
+
+
+2. Specify the name of an incident in the search bar. All the incidents related to it are displayed in the incidents panel.
+3. Click the name of the incident from the incidents panel to view its details on the right. From the incident details page you can also view the date and time at which the incident was raised. Click -> **Raised at** to view the **Evaluated at** details.
+4. Click the Alert tab to view the alert details for which the incident was created upon.
+
+![image](https://user-images.githubusercontent.com/28974904/229272425-dac4afef-52bd-42d8-a372-6869fb1656f7.png)
+
+#### Editing Details from the Incidents Page
+Once the incident is resolved, perform the following to change the status from **raised** to **cleared**:
+
+1. Select the alert for which you want to change the status.
+2. Click the **Clear** button. A **Reason** pop-up window is displayed.
+3. Enter the reason to clear an incident.
+4. Click **Ok**.
+
+#### Editing an Alert from the Incidents Page
+Click Edit button to make changes to the alert that you are viewing.
+
+#### Filtering & Sorting Incidents
+From the Alert Type panel, click the type of alert you want to view in the incident panel. Click ≡ to hide or view the Alert Type panel.
+
+Click the Sort By button and select one of the following:
+
+Date in ascending order
+Date in descending order
+Severity level
+By default, the incidents panel displays incidents that occurred in the last 24 hours. Click the  ![image](https://user-images.githubusercontent.com/28974904/229272587-65aec4d7-c94e-4e6a-afa6-f609be30beea.png)
+ icon to select a custom date and time.
