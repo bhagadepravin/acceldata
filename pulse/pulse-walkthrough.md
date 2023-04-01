@@ -139,7 +139,7 @@ To create a role, perform the following:
         - **Users:** The list of users to assign to a role. Select the user from the list and press enter. You can assign multiple users to a role.
 
   - c.**AD Mapping**
-        - **Groups:** The group of users in the active directory. Type the name of a group you want to add and press enter. You can add multiple groups to an active directory.
+    - **Groups:** The group of users in the active directory. Type the name of a group you want to add and press enter. You can add multiple groups to an active directory.
 
 3. Click **Save**.
 
