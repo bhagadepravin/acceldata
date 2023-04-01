@@ -130,15 +130,15 @@ To create a role, perform the following:
 1. Click the **Create Role** button. The **Create Role** wizard is displayed.
 
 2. Fill the following role assignment details.
-  - a.**Role Details**
+  - **Role Details**
     - **Name:** The name of the role.
-  -  b.**Permissions**
+  -  **Permissions**
      - **Page Permissions:** The list of services and pages to enable for the role. Click the checkbox next to these services and pages you want to enable. You can also expand the list of services and select specific modules to assign to that role.
      - **All Clusters:** Click the drop-down menu and select the clusters for which you would like to add queues and users for. Individual panels are                               displayed for the clusters selected.
         - **Queues:** The list of queues in YARN. Select the queue name from the list and press enter. You can assign multiple queues to a role.
         - **Users:** The list of users to assign to a role. Select the user from the list and press enter. You can assign multiple users to a role.
 
-  - c.**AD Mapping**
+  - **AD Mapping**
     - **Groups:** The group of users in the active directory. Type the name of a group you want to add and press enter. You can add multiple groups to an active directory.
 
 3. Click **Save**.
