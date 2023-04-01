@@ -45,7 +45,7 @@
      - Tasks Analysis by Metrics
 
 * [Tez Dashboard](https://docs.acceldata.io/pulse/tez-dashboard)
-> Using Pulse, you can monitor the tables and queries executed in Tez.
+<sub>Using Pulse, you can monitor the tables and queries executed in Tez. </sub>
   - [Tez Queries](https://docs.acceldata.io/pulse/tez-queries)
   - [Tez Query Details](https://docs.acceldata.io/pulse/tez-query-details)
     - Summary Panel
