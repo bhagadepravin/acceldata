@@ -167,7 +167,7 @@ To delete a role, perform the following:
 2. Select **Delete**.
 The role is deleted.
 
-##### Users
+#### Users
 A user represents a person interacting with Pulse, with certain privileges.
 
 The following details are displayed in the Users dashboard:
@@ -182,12 +182,11 @@ To create a user, perform the following.
 1. Click the **Create Role** button. The **Create User** wizard displays.
 
 2. Fill the following user details.
-
-  a. **User Name**: Login name of the user. Enter a unique value.
-  b. **Password**: Password of the user to login with.
-  c. **Confirm Password**: Password of the user. Enter the same value as **Password**.
-  d. **Role**: The nature of authorization assigned to the user. Select a value from the list. You can add only one to a user.
-  e. (Optional) **LDAP User**: User with directory services authentication.
+  - **User Name**: Login name of the user. Enter a unique value.
+  - **Password**: Password of the user to login with.
+  - **Confirm Password**: Password of the user. Enter the same value as **Password**.
+  - **Role**: The nature of authorization assigned to the user. Select a value from the list. You can add only one to a user.
+  - (Optional) **LDAP User**: User with directory services authentication.
 3. Click **Save**.
 
 The user is created.
