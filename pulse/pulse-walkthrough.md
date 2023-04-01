@@ -58,6 +58,7 @@ The following metric tiles are displayed in the Clusters page.
 If an alert continues to occur consecutively for a particular threshold, then an incident is created for the alert. This is specified with either the number of times the alert has occurred or number of seconds it has lasted.
 
 **Viewing Incident Details**
+
 To view the details of an incident, perform the following:
 
 ![incident details page](https://user-images.githubusercontent.com/28974904/229272430-9758c3e8-dd78-4016-a5c0-5d077b322add.png)
@@ -89,3 +90,122 @@ Date in ascending order
 Date in descending order
 Severity level
 By default, the incidents panel displays incidents that occurred in the last 24 hours. Click the :calendar: icon to select a custom date and time.
+
+![image](https://user-images.githubusercontent.com/28974904/229272790-af4baf1c-1acf-4cd2-bec7-f13598c5d2a2.png)
+
+## 3. User Management
+
+**Overview**
+
+User Management or Role based access control (RBAC) in Pulse enables administrators to govern user access to Pulse and integrated services. With RBAC, administrators can limit the operations that other users perform. For example, an Apache Spark developer can only be given access to Spark-related integrations in the Hadoop stack.
+
+The following table shows the roles and privileges given to that role.
+
+<img width="774" alt="image" src="https://user-images.githubusercontent.com/28974904/229272861-a8190717-a65e-4fe0-9837-9725f343fb5f.png">
+
+
+### Roles Dashboard
+
+The Roles dashboard displays the following tabs.
+
+Roles
+Users
+SSH Keys
+Keytabs
+
+#### Roles
+
+A role represents the level of privileges and authorization related to the user.
+
+The following details are displayed in the **Roles** dashboard.
+
+<img width="794" alt="image" src="https://user-images.githubusercontent.com/28974904/229272908-991064c4-64fd-407f-874c-4d92ff8cdf02.png">
+
+##### Creating a Role
+
+To create a role, perform the following:
+
+![image](https://user-images.githubusercontent.com/28974904/229272961-4523dfa8-b151-4c96-966f-438c2c1c4edd.png)
+
+1. Click the **Create Role** button. The **Create Role** wizard is displayed.
+
+2. Fill the following role assignment details.
+
+  a. **Role Details**
+    i. **Name:** The name of the role.
+  b. Permissions
+    i. **Page Permissions:** The list of services and pages to enable for the role. Click the checkbox next to these services and pages you want to enable.                              You can also expand the list of services and select specific modules to assign to that role.
+    ii. **All Clusters:** Click the drop-down menu and select the clusters for which you would like to add queues and users for. Individual panels are                               displayed for the clusters selected.
+        i. **Queues:** The list of queues in YARN. Select the queue name from the list and press enter. You can assign multiple queues to a role.
+        ii. **Users:** The list of users to assign to a role. Select the user from the list and press enter. You can assign multiple users to a role.
+
+  c. **AD Mapping**
+
+    i. **Groups:** The group of users in the active directory. Type the name of a group you want to add and press enter. You can add multiple groups to an                    active directory.
+
+3. Click **Save**.
+
+The new role is created.
+
+##### Viewing Role details
+To view the details of all the roles that you just created, click the Roles icon  from the main menu bar. The Roles page is displayed with the following table details:
+
+<img width="787" alt="image" src="https://user-images.githubusercontent.com/28974904/229273221-67d7f6c5-8056-40df-85ea-4ccf42ee9c0c.png">
+
+Click the  icon beside any column name to display the list of roles in either ascending or descending order respectively.
+
+##### Modify a Role
+To modify a role, perform the following:
+
+1. Click the role entry displayed in the **Roles** table.
+2. Edit the fields you want to modify.
+3. Click **Save**.
+The role is modified.
+
+##### Deleting a Role
+To delete a role, perform the following:
+
+1. Click the three dots icon towards the right of a role entry in the **Roles** table
+2. Select **Delete**.
+The role is deleted.
+
+##### Users
+A user represents a person interacting with Pulse, with certain privileges.
+
+The following details are displayed in the Users dashboard:
+
+<img width="789" alt="image" src="https://user-images.githubusercontent.com/28974904/229273315-2ea253a1-56a2-4831-a91a-329253a70ed9.png">
+
+
+##### Creating a User
+
+To create a user, perform the following.
+
+1. Click the **Create Role** button. The **Create User** wizard displays.
+
+2. Fill the following user details.
+
+  a. **User Name**: Login name of the user. Enter a unique value.
+  b. **Password**: Password of the user to login with.
+  c. **Confirm Password**: Password of the user. Enter the same value as **Password**.
+  d. **Role**: The nature of authorization assigned to the user. Select a value from the list. You can add only one to a user.
+  e. (Optional) **LDAP User**: User with directory services authentication.
+3. Click **Save**.
+
+The user is created.
+
+##### Modifying a User
+
+To modify a user, perform the following.
+
+1. Click the user entry displayed in the **Users** table.
+2. Edit the fields you want to modify. This also lets you change the role of a user.
+3. Click **Save**.
+The user details are modified.
+
+##### Deleting a User
+
+To delete a user, perform the following:
+
+1. Click the three dots icon towards the right of a user entry in the **Users** table > **Delete**.
+The user is deleted.
