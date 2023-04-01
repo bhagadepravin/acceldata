@@ -19,7 +19,7 @@
     - Deleting the Keytab
 
 * [HDFS Dashboard](https://docs.acceldata.io/pulse/hdfs-dashboard)
-<sub>Enabling HDFS monitoring on Pulse gives you an in-depth overview of the Hadoop file system within your cluster. You can also observe and monitor the overall health of your HDFS cluster pertaining to the CPU and memory usage. </sub>
+<sub>Enabling HDFS monitoring on Pulse gives you an in-depth overview of the Hadoop file system within your cluster.</sub>
   - Charts on HDFS Dashboard
   - [HDFS Analytics](https://docs.acceldata.io/pulse/hdfs-analytics)
   - [HDFS File Explorer](https://docs.acceldata.io/pulse/hdfs-file-explorer)
