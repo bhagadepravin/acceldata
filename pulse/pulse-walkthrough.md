@@ -88,5 +88,4 @@ Click the Sort By button and select one of the following:
 Date in ascending order
 Date in descending order
 Severity level
-By default, the incidents panel displays incidents that occurred in the last 24 hours. Click the  ![image](https://user-images.githubusercontent.com/28974904/229272587-65aec4d7-c94e-4e6a-afa6-f609be30beea.png)
- icon to select a custom date and time.
+By default, the incidents panel displays incidents that occurred in the last 24 hours. Click the <iframe src="calendar.svg"></iframe> icon to select a custom date and time.
