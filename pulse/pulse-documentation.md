@@ -18,6 +18,8 @@ Acceldata Pulse provides the following features.
 
 ![image](https://user-images.githubusercontent.com/28974904/229293849-33a9e7a2-6bce-4f2e-b549-7790e8770ada.png)
 
+![image](https://user-images.githubusercontent.com/28974904/229295857-1bb86f1a-03c5-4d43-b4b7-de481c4cf654.png)
+
 
 * [Dashboard](https://docs.acceldata.io/pulse/dashboard)
   - [Recommendations](https://docs.acceldata.io/pulse/dashboard#recommendations)
