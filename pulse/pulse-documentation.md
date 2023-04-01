@@ -33,14 +33,14 @@
 * [Spark Dashboard](https://docs.acceldata.io/pulse/spark-dashboard)
   - [Spark Batch Details](https://docs.acceldata.io/pulse/spark-batch-details)
   - [Spark Jobs](https://docs.acceldata.io/pulse/spark-jobs)
-  - [Spark Job Details](https://docs.acceldata.io/pulse/spark-job-details)
-     - Summary Panel
-     - Job Trends
-     - Configurations
-     - Spark Stages
-     - Timeseries Information
-     - Reports
-     - Application Logs
+    - [Spark Job Details](https://docs.acceldata.io/pulse/spark-job-details)
+       - Summary Panel
+       - Job Trends
+       - Configurations
+       - Spark Stages
+       - Timeseries Information
+       - Reports
+       - Application Logs
   - [Spark Stage Details](https://docs.acceldata.io/pulse/spark-stage-details)
      - Tasks Analysis by Metrics
 
@@ -56,3 +56,5 @@
     - Map Reduce Stats
     - Query Execution Metrics
     - Query DAG and Plan
+  - [Tez Tables](https://docs.acceldata.io/pulse/tez-tables)
+     - [Tez Table Details](https://docs.acceldata.io/pulse/tez-table-details)
