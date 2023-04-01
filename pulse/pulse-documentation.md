@@ -45,7 +45,7 @@ Enabling HDFS monitoring on Pulse gives you an in-depth overview of the Hadoop f
      - Tasks Analysis by Metrics
 
 * [Tez Dashboard](https://docs.acceldata.io/pulse/tez-dashboard)
-- Using Pulse, you can monitor the tables and queries executed in Tez.
++ Using Pulse, you can monitor the tables and queries executed in Tez.
   - [Tez Queries](https://docs.acceldata.io/pulse/tez-queries)
   - [Tez Query Details](https://docs.acceldata.io/pulse/tez-query-details)
     - Summary Panel
