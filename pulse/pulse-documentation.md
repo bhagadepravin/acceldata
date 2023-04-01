@@ -24,6 +24,11 @@
   - [HDFS Analytics](https://docs.acceldata.io/pulse/hdfs-analytics)
   - [HDFS File Explorer](https://docs.acceldata.io/pulse/hdfs-file-explorer)
 
+* Yarn Dashboard
+  - [YARN Capacity](https://docs.acceldata.io/pulse/yarn-capacity)
+  - [YARN Services](https://docs.acceldata.io/pulse/services)
+  - [YARN-Application Explorer](https://docs.acceldata.io/pulse/yarn-application-explorer)
+
 * [MR Dashboard](https://docs.acceldata.io/pulse/mrdashboard)
   - [MapReduce Queries](https://docs.acceldata.io/pulse/mapreduce-queries)
   - [MapReduce Query Details](https://docs.acceldata.io/pulse/mapreduce-query-details)
