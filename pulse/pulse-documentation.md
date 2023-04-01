@@ -94,7 +94,7 @@ Acceldata Pulse provides the following features.
      - [Tez Table Details](https://docs.acceldata.io/pulse/tez-table-details)
 
 * [Alerts](https://docs.acceldata.io/pulse/alerts)
-  - (Creating Alerts](https://docs.acceldata.io/pulse/creating-an-alert)
+  - [Creating Alerts](https://docs.acceldata.io/pulse/creating-an-alert)
   - [Incidents](https://docs.acceldata.io/pulse/incidents)
   - [Stock Alerts](https://docs.acceldata.io/pulse/stock-alerts)
 
