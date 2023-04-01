@@ -121,7 +121,7 @@ The following details are displayed in the **Roles** dashboard.
 
 <img width="794" alt="image" src="https://user-images.githubusercontent.com/28974904/229272908-991064c4-64fd-407f-874c-4d92ff8cdf02.png">
 
-##### Creating a Role
+#### Creating a Role
 
 To create a role, perform the following:
 
@@ -145,14 +145,14 @@ To create a role, perform the following:
 
 The new role is created.
 
-##### Viewing Role details
+#### Viewing Role details
 To view the details of all the roles that you just created, click the Roles icon  from the main menu bar. The Roles page is displayed with the following table details:
 
 <img width="787" alt="image" src="https://user-images.githubusercontent.com/28974904/229273221-67d7f6c5-8056-40df-85ea-4ccf42ee9c0c.png">
 
 Click the  icon beside any column name to display the list of roles in either ascending or descending order respectively.
 
-##### Modify a Role
+#### Modify a Role
 To modify a role, perform the following:
 
 1. Click the role entry displayed in the **Roles** table.
@@ -160,7 +160,7 @@ To modify a role, perform the following:
 3. Click **Save**.
 The role is modified.
 
-##### Deleting a Role
+#### Deleting a Role
 To delete a role, perform the following:
 
 1. Click the three dots icon towards the right of a role entry in the **Roles** table
@@ -175,7 +175,7 @@ The following details are displayed in the Users dashboard:
 <img width="789" alt="image" src="https://user-images.githubusercontent.com/28974904/229273315-2ea253a1-56a2-4831-a91a-329253a70ed9.png">
 
 
-##### Creating a User
+#### Creating a User
 
 To create a user, perform the following.
 
@@ -192,7 +192,7 @@ To create a user, perform the following.
 
 The user is created.
 
-##### Modifying a User
+#### Modifying a User
 
 To modify a user, perform the following.
 
@@ -201,7 +201,7 @@ To modify a user, perform the following.
 3. Click **Save**.
 The user details are modified.
 
-##### Deleting a User
+#### Deleting a User
 
 To delete a user, perform the following:
 
