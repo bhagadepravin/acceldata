@@ -51,6 +51,26 @@ The following metric tiles are displayed in the Clusters page.
 
 ![image](https://user-images.githubusercontent.com/28974904/229272258-7ec45b7e-bad7-4148-8d48-d3832f4f540f.png)
 
+**User Management** - Clicking on the icon directs you to the user management or role based access control. See User Management.
+
+**View** - The view button provides options to view the dashboard in Full Screen mode, to save the dashboard as a screenshot, or to visualize in the form of Dashplots. To visualize and manage the feature, see Dashplot.
+![image](https://user-images.githubusercontent.com/28974904/229274415-ae645af5-7a30-43f6-be0a-5c054a1c38ae.png)
+
+**User** - The user button contains the product and user-related information.
+
+![image](https://user-images.githubusercontent.com/28974904/229274430-4336979a-9114-4740-8ed2-6d0b1ec4b7b1.png)
+
+<img width="776" alt="image" src="https://user-images.githubusercontent.com/28974904/229274451-40ea4f8b-0332-4e31-b93e-d4e043657ce2.png">
+
+you can access the Help guides and API documentations from the Pulse UI.
+
+**Filtering by Time** - You can filter the data in all components or views using the filtering by time button, located at the right corner of the page.
+
+Pulse lets you display recent past metric data or all-time metric data with the **Duration** option. The duration can range from the **Last 15 mins** to the **Last 3 Months**.
+
+The following demonstration shows the functioning of the filter by time durations.
+
+![Filtering by Time](https://user-images.githubusercontent.com/28974904/229274505-c74a0764-1c22-43b6-a280-c7ffc53214d4.gif)
 
 
 ## 2. Incidents
@@ -206,3 +226,72 @@ To delete a user, perform the following:
 
 1. Click the three dots icon towards the right of a user entry in the **Users** table > **Delete**.
 The user is deleted.
+
+### SSH Keys
+SSH Key is key-based access method to the available clusters. SSH keys are used to individually manage the authorization and authentication methods.
+
+The following details are displayed in the **SSH Keys** dashboard.
+
+<img width="783" alt="image" src="https://user-images.githubusercontent.com/28974904/229274058-7418bb16-3213-4dec-9cc2-e4430095f5fd.png">
+
+#### Creating an SSH Key
+
+To create an SSH key, perform the following.
+
+1. Click **SSH Key** button. The **Create SSH Keys** wizard displays.
+
+2. Fill the following SSH keys details.
+
+  - **Title**: The title of the SSH key.
+  - **User name**: The user name of the SSH key to log in with.
+  - **Key File or Password**: The radio button allows you to choose if you want to add a key file or a password enabled file.
+  - **Content**: The content of the SSH key.
+3. Click **Save**.
+
+The SSH key has now been generated.
+
+![image](https://user-images.githubusercontent.com/28974904/229274129-2077cff7-768b-4ac9-90cf-53239190ce81.png)
+
+***An SSH key once created cannot be modified.***
+
+
+#### Deleting an SSH Key
+To delete an SSH key, perform the following.
+
+1. Click the three dots icon towards the right of an SSH key entry in the **Users** table > **Delete**.
+The SSH key entry is deleted.
+
+### Keytabs
+A keytab is a file that contains Kerberos principals. Pulse requests the user to provide keytab path for authentication to execute the commands.
+
+The following details are displayed in the **Keytabs** dashboard.
+
+<img width="782" alt="image" src="https://user-images.githubusercontent.com/28974904/229274191-8d071a6e-df53-4486-ae91-d79c804ee6d1.png">
+
+
+#### Uploading a Keytab
+
+To upload the Keytab click on the **+Upload Keytabs** button. The following page is displayed at the right side of the screen.
+
+![image](https://user-images.githubusercontent.com/28974904/229274237-45b38f71-6848-415a-87c4-035beb4d1575.png)
+
+1. Add the Principle name.
+2. To upload a file, use the mouse to drag and drop the file or click on a blank space to upload from your local system.
+3. Click on Save to to upload the Keytab.
+The Keytab is now uploaded.
+
+#### Deleting the Keytab
+To delete a Keytab, perform the following.
+
+1. Click the three dots icon towards the right of an keytab entry in the table.
+2. Select **Delete** to delete the Keytab.
+The Keytab is deleted.
+
+## View Environment Details
+You can view the details of your environment by clicking the  (user) icon at the top right corner. The following table lists the details:
+
+<img width="774" alt="image" src="https://user-images.githubusercontent.com/28974904/229274304-cab50b83-d818-46cf-9da6-0584fdcf0bf5.png">
+
+![image](https://user-images.githubusercontent.com/28974904/229274322-6c979133-fca7-4fea-8947-0eaab72470b4.png)
+
+
