@@ -51,7 +51,7 @@ The following metric tiles are displayed in the Clusters page.
 
 ![image](https://user-images.githubusercontent.com/28974904/229272258-7ec45b7e-bad7-4148-8d48-d3832f4f540f.png)
 
-**User Management** - Clicking on the icon directs you to the user management or role based access control. See (User Management)[https://github.com/bhagadepravin/acceldata/blob/main/pulse/pulse-walkthrough.md#3-user-management]
+**User Management** - Clicking on the icon directs you to the user management or role based access control. See [User Management](https://github.com/bhagadepravin/acceldata/blob/main/pulse/pulse-walkthrough.md#3-user-management)
 
 **View** - The view button provides options to view the dashboard in Full Screen mode, to save the dashboard as a screenshot, or to visualize in the form of Dashplots. To visualize and manage the feature, see Dashplot.
 ![image](https://user-images.githubusercontent.com/28974904/229274415-ae645af5-7a30-43f6-be0a-5c054a1c38ae.png)
