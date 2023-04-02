@@ -38,7 +38,6 @@ What are the available addon components and their purpose ?
 List of **ADDON** components:
 
 1. **Acceldata SQL Analysis service** - **ad-sql-analyser** - Service that connects directly with Hive metastore DB and fetch table stats and displays on following UI panels
-![image](https://user-images.githubusercontent.com/28974904/229343113-55430f2c-a889-4363-8e33-d7e608560f80.png)
 
 <p align="center">
   <a href="[https://docs.acceldata.io/pulse]">
@@ -49,59 +48,98 @@ List of **ADDON** components:
    Database Explorer <br/>
 </h1>
 
-Alerts (Agents MUST be configured) - **ad-alerts** - Service that enable stock alerts based on available metrics and connect with MongoDB for storing incidents and new alert details
+2. **Alerts** (Agents MUST be configured) - **ad-alerts** - Service that enable stock alerts based on available metrics and connect with MongoDB for storing incidents and new alert details
+
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343239-167c9ded-3b3c-489a-8735-b36677bea92e.png" />
+  </a>
+</p>
+<h1 align="center">
+   Alerts & Incidents <br/>
+</h1>
+
+3. **Core Connectors** -  **ad-connectors** - Service that creates connection to Namenode URL for reading Hive event logs stored on **HDFS**, connects with YARN to fetch latest applications**(Spark/Tez/MR)** and collect stats on defined polling intervals
+
+![image](https://user-images.githubusercontent.com/28974904/229343295-68735830-6661-47db-82b5-d91d74c6c97e.png)
+
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343295-68735830-6661-47db-82b5-d91d74c6c97e.png" />
+  </a>
+</p>
+<h1 align="center">
+    YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark<br/>
+</h1>
 
 
-Alerts & Incidents**
-Core Connectors -  ad-connectors - Service that creates connection to Namenode URL for reading Hive event logs stored on HDFS, connects with YARN to fetch latest applications(Spark/Tez/MR) and collect stats on defined polling intervals
+4. **Dashplot** - **ad-dashplots** & **ad-pg** - Service that creates connection to different datastores and provide studio to create and store custom reports
+
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343353-2ed37e4f-f719-4ab4-8e29-f920a1244ba1.png" />
+  </a>
+</p>
+<h1 align="center">
+    Dashplots<br/>
+</h1>
+
+5. **Director** (Agents MUST be configured) - **ad-director** - Service that enable an ansible framework backed automation utility to run any playbook on accessible host via Pulse UI
+
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343405-aa4d53e9-47b0-4a66-8c9b-a8723b9b72c5.png" />
+  </a>
+</p>
+<h1 align="center">
+    Actions & Executions<br/>
+</h1>
 
 
-YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark
-Dashplot - ad-dashplots & ad-pg - Service that creates connection to different datastores and provide studio to create and store custom reports
+6. **FS Analytics V2** - **ad-fsanalyticsv2-connector** - Service that connects with one of the Namenode UI to fetch FSImage, store critical attributes (such as file size, last modified, user, last accessed timestamp) as an index entity in Elastic search and run aggregated queries and store these reports on MongoDB(ad-db), this cycle is scheduled to run once per day
 
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343481-72b8f245-619e-4eca-ba8d-eaec94e39693.png" />
+  </a>
+</p>
+<h1 align="center">
+    HDFS - FSAnalytics & File Explorer, Database - Hive File Analytics<br/>
+</h1>
 
-Dashplots
-Director (Agents MUST be configured) - ad-director - Service that enable an ansible framework backed automation utility to run any playbook on accessible host via Pulse UI
+7. **FS Elastic** - **ad-fs-elastic** - Service that runs elastic service on port 19038, used only for standalone purposes on separate host
 
+8. **HA GraphQL** - **ad-ha-graphql** - Service that runs standalone UI component on separate host and connects with available datastores to provide an HA
 
-Actions & Executions
-FS Analytics V2 - ad-fsanalyticsv2-connector - Service that connects with one of the Namenode UI to fetch FSImage, store critical attributes (such as file size, last modified, user, last accessed timestamp) as an index entity in Elastic search and run aggregated queries and store these reports on MongoDB(ad-db), this cycle is scheduled to run once per day
+9. **HYDRA** - **ad-hydra** - Service to manage Hydra agent deployed across all hosts on cluster
 
+10. **Kafka 0.10.2 Connector** - **ad-kafka-0-10-2-connector** - Service that launches kafka connector for versions less than equal to Kafka v0.10.2 to collect Kafka events and object statistics
 
-HDFS - FSAnalytics & File Explorer, Database - Hive File Analytics
-FS Elastic - ad-fs-elastic - Service that runs elastic service on port 19038, used only for standalone purposes on separate host
-
-HA GraphQL - ad-ha-graphql - Service that runs standalone UI component on separate host and connects with available datastores to provide an HA
-
-HYDRA - ad-hydra - Service to manage Hydra agent deployed across all hosts on cluster
-
-Kafka 0.10.2 Connector - ad-kafka-0-10-2-connector - Service that launches kafka connector for versions less than equal to Kafka v0.10.2 to collect Kafka events and object statistics
-
-Kafka Connector - ad-kafka-connector - Service that launches kafka connector for versions greater than Kafka v0.10.2 to collect Kafka events and object statistics
+11. **Kafka Connector** - **ad-kafka-connector** - Service that launches kafka connector for versions greater than Kafka v0.10.2 to collect Kafka events and object statistics
 
 
 Kafka
-Impala Connector - ad-impala-connector - Service that launches container to collect Impala queries and corresponding stats
+12. **Impala Connector** - **ad-impala-connector** - Service that launches container to collect Impala queries and corresponding stats
 
 
 Impala
-LDAP - ad-ldap - Service that connects with LDAP server to allow SSO based login to Pulse UI
+13. **LDAP** - **ad-ldap** - Service that connects with LDAP server to allow SSO based login to Pulse UI
 
-LogSearch - Service that collects log messages from all hosts and store as indices on Elastic search
+14. **LogSearch** - Service that collects log messages from all hosts and store as indices on Elastic search
 
-ad-logstash -  Intercept log messages and parse messages into required attributes
+**ad-logstash** -  Intercept log messages and parse messages into required attributes
 
-ad-elastic - Storage for all log service messages and FS image indices
+**ad-elastic** - Storage for all log service messages and FS image indices
 
-ad-logsearch-curator - Curator to run cleanup on intervals for retaining indices for specified days
+**ad-logsearch-curator** - Curator to run cleanup on intervals for retaining indices for specified days
 
 
 Logsearch
-Notifications - ad-notifications - Service that connects with multiple notification channels to send raised incidents
+15. **Notifications** - **ad-notifications** - Service that connects with multiple notification channels to send raised incidents
 
 
 Notifications
-Proxy - ad-proxy - Service that provides support to enable TLS on Pulse UI
+16. **Proxy** - **ad-proxy** - Service that provides support to enable TLS on Pulse UI
 
 
 
