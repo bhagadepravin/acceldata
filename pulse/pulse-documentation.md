@@ -324,9 +324,9 @@ List of **ADDON** components:
 
 ## Pulse Usage:
 
-**PREDICT** - Trend Analysis
-**PREVETN** - Auto-Remediation & Alerting
-**RESOLVE** - Root Cause Analysis
+* **PREDICT** - Trend Analysis
+* **PREVENT** - Auto-Remediation & Alerting
+* **RESOLVE** - Root Cause Analysis
 <img width="1452" alt="image" src="https://user-images.githubusercontent.com/28974904/229356634-8d5866cb-c5c1-4cd1-bd90-84ff18ce956d.png">
 
 
