@@ -1,4 +1,3 @@
-# Pulse
 <p align="center">
   <a href="[https://www.jamify.org](https://docs.acceldata.io/pulse)">
     <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229342524-8e473930-911d-4233-b411-0357b6d42fe9.png" />
