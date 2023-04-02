@@ -21,6 +21,90 @@ Acceldata Pulse provides the following features.
 
 ![image](https://user-images.githubusercontent.com/28974904/229293219-59d9d58d-19da-44de-9b3e-08eb38b984e8.png)
 
+What components get deployed with **accelo deploy core** ?
+List of **CORE** components:
+
+1. **ad-graphql** - Container service running all UI components, creates connection to internal datasources
+2. **ad-streaming** - Container service used for collecting events multiple internal sources such as connectors, kafka, impala and store into respective datastores/databases
+3. **ad-db** - Container service running MongoDB instance
+4. **ad-tsdb** - (Decommissioned 3.x onwards) Container service running Influx DB instance
+5. **ad-vmselect** - Container service used for fetching and merging data from vmstorage during queries
+6. **ad-vmstorage** - Container service used for storing timeseries data
+7. **ad-vminsert** - Container service used for spreading timeseries across available storage nodes
+
+ 
+What are the available addon components and their purpose ?
+
+List of **ADDON** components:
+
+1. **Acceldata SQL Analysis service** - **ad-sql-analyser** - Service that connects directly with Hive metastore DB and fetch table stats and displays on following UI panels
+![image](https://user-images.githubusercontent.com/28974904/229343113-55430f2c-a889-4363-8e33-d7e608560f80.png)
+
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343113-55430f2c-a889-4363-8e33-d7e608560f80.png" />
+  </a>
+</p>
+<h1 align="center">
+   Database Explorer <br/>
+</h1>
+
+Alerts (Agents MUST be configured) - **ad-alerts** - Service that enable stock alerts based on available metrics and connect with MongoDB for storing incidents and new alert details
+
+
+Alerts & Incidents**
+Core Connectors -  ad-connectors - Service that creates connection to Namenode URL for reading Hive event logs stored on HDFS, connects with YARN to fetch latest applications(Spark/Tez/MR) and collect stats on defined polling intervals
+
+
+YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark
+Dashplot - ad-dashplots & ad-pg - Service that creates connection to different datastores and provide studio to create and store custom reports
+
+
+Dashplots
+Director (Agents MUST be configured) - ad-director - Service that enable an ansible framework backed automation utility to run any playbook on accessible host via Pulse UI
+
+
+Actions & Executions
+FS Analytics V2 - ad-fsanalyticsv2-connector - Service that connects with one of the Namenode UI to fetch FSImage, store critical attributes (such as file size, last modified, user, last accessed timestamp) as an index entity in Elastic search and run aggregated queries and store these reports on MongoDB(ad-db), this cycle is scheduled to run once per day
+
+
+HDFS - FSAnalytics & File Explorer, Database - Hive File Analytics
+FS Elastic - ad-fs-elastic - Service that runs elastic service on port 19038, used only for standalone purposes on separate host
+
+HA GraphQL - ad-ha-graphql - Service that runs standalone UI component on separate host and connects with available datastores to provide an HA
+
+HYDRA - ad-hydra - Service to manage Hydra agent deployed across all hosts on cluster
+
+Kafka 0.10.2 Connector - ad-kafka-0-10-2-connector - Service that launches kafka connector for versions less than equal to Kafka v0.10.2 to collect Kafka events and object statistics
+
+Kafka Connector - ad-kafka-connector - Service that launches kafka connector for versions greater than Kafka v0.10.2 to collect Kafka events and object statistics
+
+
+Kafka
+Impala Connector - ad-impala-connector - Service that launches container to collect Impala queries and corresponding stats
+
+
+Impala
+LDAP - ad-ldap - Service that connects with LDAP server to allow SSO based login to Pulse UI
+
+LogSearch - Service that collects log messages from all hosts and store as indices on Elastic search
+
+ad-logstash -  Intercept log messages and parse messages into required attributes
+
+ad-elastic - Storage for all log service messages and FS image indices
+
+ad-logsearch-curator - Curator to run cleanup on intervals for retaining indices for specified days
+
+
+Logsearch
+Notifications - ad-notifications - Service that connects with multiple notification channels to send raised incidents
+
+
+Notifications
+Proxy - ad-proxy - Service that provides support to enable TLS on Pulse UI
+
+
+
 ## [Pulse Architecture](https://docs.acceldata.io/pulse/architecture)
 
 <img width="861" alt="image" src="https://user-images.githubusercontent.com/28974904/229337305-0d142d4b-c661-41f2-a7e0-1852dddc8531.png">
