@@ -24,11 +24,15 @@ Acceldata Pulse provides the following features.
 
 <img width="861" alt="image" src="https://user-images.githubusercontent.com/28974904/229337305-0d142d4b-c661-41f2-a7e0-1852dddc8531.png">
 
-Pulse collects logs from various systems, stores them, and displays insights and analyses as an observability platform. Acceldata agents run different platforms such as Spark, Hive, Tez, or HBase. For each of the platforms, Pulse collects multiple other metrics. For example, Yarn metrics are collected for Spark, Time series data are collected for Hive, App data are collected for Tez.
+Pulse collects logs from various systems, stores them, and displays insights and analyses as an observability platform. **Acceldata agents** run different platforms such as Spark, Hive, Tez, or HBase. For each of the platforms, Pulse collects multiple other metrics. For example, **Yarn metrics** are collected for **Spark**, **Time series data** are collected for **Hive**, **App data** are collected for **Tez**.
 
 The data from the metrics are collected in one of the following three Acceldata Services such as Database, Time Series Data or Log Indices, and It is deployed via docker container.
 
 <img width="992" alt="image" src="https://user-images.githubusercontent.com/28974904/229337384-57fc1144-4828-42e4-a960-7f2d3f43d20d.png">
+
+The following diagram displays how various Pulse components such as **User Interface(UI), Data Stores,** and **Notifications** interact with each other to process the data.
+
+Information from the **Distributed Data Stores** is processed into the **Time Series Database(TSDB), Document Store,** and **Search DB**. Different services then read the data from the Data Stores in Pulse. Finally, they are displayed to the user through the **UI** or the **notification** channels.
 
 <img width="855" alt="image" src="https://user-images.githubusercontent.com/28974904/229337427-44b89d17-0042-4b8b-b52a-639b486596ed.png">
 
