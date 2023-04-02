@@ -215,7 +215,6 @@ List of **ADDON** components:
 
 3. **Core Connectors** -  **ad-connectors** - Service that creates connection to Namenode URL for reading Hive event logs stored on **HDFS**, connects with YARN to fetch latest applications**(Spark/Tez/MR)** and collect stats on defined polling intervals
 
-![image](https://user-images.githubusercontent.com/28974904/229343295-68735830-6661-47db-82b5-d91d74c6c97e.png)
 
 <p align="center">
   <a href="[https://docs.acceldata.io/pulse]">
@@ -226,10 +225,8 @@ List of **ADDON** components:
     YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark<br/>
 </h1>
 
-<p align="center">
-    <img width="900" src="https://user-images.githubusercontent.com/28974904/229343295-68735830-6661-47db-82b5-d91d74c6c97e.png" alt="YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark<">
-</p>
 
+<h1 align="center">Material Bread</h1>
 
 4. **Dashplot** - **ad-dashplots** & **ad-pg** - Service that creates connection to different datastores and provide studio to create and store custom reports
 
