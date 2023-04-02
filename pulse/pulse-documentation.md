@@ -4,10 +4,9 @@
   </a>
 </p>
 <h1 align="center">
-   Pulse <br/>
+   Pulse Overview <br/>
 </h1>
 
-## Overview
 Acceldata Pulse provides real-time intelligence across all your observability needs. You can build your workflows, and extend alerts for business requirements with algorithmic anomaly detection. Acceldata Pulse also provides recommendations and automation to keep your data systems performant, secure, and reliable.
 
 Acceldata Pulse provides the following features.
