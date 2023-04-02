@@ -227,7 +227,7 @@ List of **ADDON** components:
 </h1>
 
 <p align="center">
-    <img width="200" src="https://user-images.githubusercontent.com/28974904/229343295-68735830-6661-47db-82b5-d91d74c6c97e.png" alt="YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark<">
+    <img width="900" src="https://user-images.githubusercontent.com/28974904/229343295-68735830-6661-47db-82b5-d91d74c6c97e.png" alt="YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark<">
 </p>
 
 
