@@ -22,16 +22,18 @@ Pulse collects logs from various systems, stores them, and displays insights and
 
 The data from the metrics are collected in one of the following three Acceldata Services such as Database, Time Series Data or Log Indices, and It is deployed via docker container.
 
+### Platform Architecture
 <img width="992" alt="image" src="https://user-images.githubusercontent.com/28974904/229337384-57fc1144-4828-42e4-a960-7f2d3f43d20d.png">
 
 The following diagram displays how various Pulse components such as **User Interface(UI), Data Stores,** and **Notifications** interact with each other to process the data.
 
 Information from the **Distributed Data Stores** is processed into the **Time Series Database(TSDB), Document Store,** and **Search DB**. Different services then read the data from the Data Stores in Pulse. Finally, they are displayed to the user through the **UI** or the **notification** channels.
 
+### Deployment Architecture
 <img width="965" alt="image" src="https://user-images.githubusercontent.com/28974904/229337335-de159340-3a29-4993-bae9-fae82d33c97f.png">
 
 
-The Hadoop clusters such as Master Nodes, Compute Nodes, and Edge Nodes contain the Acceldata Agents. All the nodes report to Acceldata Server. The Acceldata Server includes MongoDB, TSDB, Accelo CI, AD AI, and AD UI.
+The Hadoop clusters such as **Master Nodes, Compute Nodes,** and **Edge Nodes** contain the **Acceldata Agents**. All the nodes report to Acceldata Server. The **Acceldata Server** includes **MongoDB, TSDB, Accelo CI, AD AI,** and **AD UI.**
 
 <img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/229337327-7a0323e1-f37a-4d2b-9127-1dc0e77b07e8.png">
 
