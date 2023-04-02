@@ -31,13 +31,13 @@ Information from the **Distributed Data Stores** is processed into the **Time Se
 <img width="965" alt="image" src="https://user-images.githubusercontent.com/28974904/229337335-de159340-3a29-4993-bae9-fae82d33c97f.png">
 
 
+The Hadoop clusters such as Master Nodes, Compute Nodes, and Edge Nodes contain the Acceldata Agents. All the nodes report to Acceldata Server. The Acceldata Server includes MongoDB, TSDB, Accelo CI, AD AI, and AD UI.
+
 <img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/229337327-7a0323e1-f37a-4d2b-9127-1dc0e77b07e8.png">
 
 
 <img width="855" alt="image" src="https://user-images.githubusercontent.com/28974904/229337427-44b89d17-0042-4b8b-b52a-639b486596ed.png">
 
-
-![image](https://user-images.githubusercontent.com/28974904/229295857-1bb86f1a-03c5-4d43-b4b7-de481c4cf654.png)
 
 
 * [Dashboard](https://docs.acceldata.io/pulse/dashboard)
