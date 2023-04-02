@@ -1,4 +1,12 @@
 # Pulse
+<p align="center">
+  <a href="[https://www.jamify.org](https://docs.acceldata.io/pulse)">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229342524-8e473930-911d-4233-b411-0357b6d42fe9.png" />
+  </a>
+</p>
+<h1 align="center">
+   Pulse <br/>
+</h1>
 
 ## Overview
 Acceldata Pulse provides real-time intelligence across all your observability needs. You can build your workflows, and extend alerts for business requirements with algorithmic anomaly detection. Acceldata Pulse also provides recommendations and automation to keep your data systems performant, secure, and reliable.
