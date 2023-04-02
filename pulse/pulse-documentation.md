@@ -227,6 +227,22 @@ List of **ADDON** components:
 </h1>
 
 
+<style>
+h1 {
+  font-size: 2rem; /* adjust the value as needed */
+}
+</style>
+
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343481-72b8f245-619e-4eca-ba8d-eaec94e39693.png" />
+  </a>
+</p>
+<h1 align="center">
+    HDFS - FSAnalytics & File Explorer, Database - Hive File Analytics<br/>
+</h1>
+
+
 4. **Dashplot** - **ad-dashplots** & **ad-pg** - Service that creates connection to different datastores and provide studio to create and store custom reports
 
 <p align="center">
