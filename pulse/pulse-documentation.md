@@ -321,3 +321,19 @@ List of **ADDON** components:
 
 16. **Proxy** - **ad-proxy** - Service that provides support to enable TLS on Pulse UI
 
+
+## Pulse Usage:
+
+**PREDICT** - Trend Analysis
+**PREVETN** - Auto-Remediation & Alerting
+**RESOLVE** - Root Cause Analysis
+<img width="1452" alt="image" src="https://user-images.githubusercontent.com/28974904/229356634-8d5866cb-c5c1-4cd1-bd90-84ff18ce956d.png">
+
+
+### Improving Job Performance w/ Configuration Recommendations & Workload Analysis
+
+<img width="1414" alt="image" src="https://user-images.githubusercontent.com/28974904/229356983-2c8ee864-7576-4e45-bb04-671a4a0766e1.png">
+
+### Resource Optimization
+
+<img width="1421" alt="image" src="https://user-images.githubusercontent.com/28974904/229357062-7dc0ed44-e772-40af-8de3-b82e8a60950a.png">
