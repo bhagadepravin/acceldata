@@ -226,21 +226,9 @@ List of **ADDON** components:
     YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark<br/>
 </h1>
 
-
-<style>
-h1 {
-  font-size: 2rem; /* adjust the value as needed */
-}
-</style>
-
 <p align="center">
-  <a href="[https://docs.acceldata.io/pulse]">
-    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343481-72b8f245-619e-4eca-ba8d-eaec94e39693.png" />
-  </a>
+    <img width="200" src="https://user-images.githubusercontent.com/28974904/229343295-68735830-6661-47db-82b5-d91d74c6c97e.png" alt="YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark<">
 </p>
-<h1 align="center">
-    HDFS - FSAnalytics & File Explorer, Database - Hive File Analytics<br/>
-</h1>
 
 
 4. **Dashplot** - **ad-dashplots** & **ad-pg** - Service that creates connection to different datastores and provide studio to create and store custom reports
