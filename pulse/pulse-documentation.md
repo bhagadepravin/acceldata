@@ -198,9 +198,9 @@ List of **ADDON** components:
     <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343113-55430f2c-a889-4363-8e33-d7e608560f80.png" />
   </a>
 </p>
-<h1 align="center">
+<h4 align="center">
    Database Explorer <br/>
-</h1>
+</h4>
 
 2. **Alerts** (Agents MUST be configured) - **ad-alerts** - Service that enable stock alerts based on available metrics and connect with MongoDB for storing incidents and new alert details
 
@@ -209,9 +209,9 @@ List of **ADDON** components:
     <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343239-167c9ded-3b3c-489a-8735-b36677bea92e.png" />
   </a>
 </p>
-<h1 align="center">
+<h4 align="center">
    Alerts & Incidents <br/>
-</h1>
+</h4>
 
 3. **Core Connectors** -  **ad-connectors** - Service that creates connection to Namenode URL for reading Hive event logs stored on **HDFS**, connects with YARN to fetch latest applications**(Spark/Tez/MR)** and collect stats on defined polling intervals
 
@@ -225,9 +225,6 @@ List of **ADDON** components:
     YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark<br/>
 </h4>
 
-
-<h1 align="center">Material Bread</h1>
-
 4. **Dashplot** - **ad-dashplots** & **ad-pg** - Service that creates connection to different datastores and provide studio to create and store custom reports
 
 <p align="center">
@@ -235,9 +232,9 @@ List of **ADDON** components:
     <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343353-2ed37e4f-f719-4ab4-8e29-f920a1244ba1.png" />
   </a>
 </p>
-<h1 align="center">
+<h4 align="center">
     Dashplots<br/>
-</h1>
+</h4>
 
 5. **Director** (Agents MUST be configured) - **ad-director** - Service that enable an ansible framework backed automation utility to run any playbook on accessible host via Pulse UI
 
@@ -246,9 +243,9 @@ List of **ADDON** components:
     <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343405-aa4d53e9-47b0-4a66-8c9b-a8723b9b72c5.png" />
   </a>
 </p>
-<h1 align="center">
+<h4 align="center">
     Actions & Executions<br/>
-</h1>
+</h4>
 
 
 6. **FS Analytics V2** - **ad-fsanalyticsv2-connector** - Service that connects with one of the Namenode UI to fetch FSImage, store critical attributes (such as file size, last modified, user, last accessed timestamp) as an index entity in Elastic search and run aggregated queries and store these reports on MongoDB(ad-db), this cycle is scheduled to run once per day
@@ -258,9 +255,9 @@ List of **ADDON** components:
     <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343481-72b8f245-619e-4eca-ba8d-eaec94e39693.png" />
   </a>
 </p>
-<h3 align="center">
+<h4 align="center">
     HDFS - FSAnalytics & File Explorer, Database - Hive File Analytics<br/>
-</h3>
+</h4>
 
 7. **FS Elastic** - **ad-fs-elastic** - Service that runs elastic service on port 19038, used only for standalone purposes on separate host
 
@@ -272,12 +269,27 @@ List of **ADDON** components:
 
 11. **Kafka Connector** - **ad-kafka-connector** - Service that launches kafka connector for versions greater than Kafka v0.10.2 to collect Kafka events and object statistics
 
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229344233-3ca01f79-d50d-4807-a20d-a3674a5c2168.png" />
+  </a>
+</p>
+<h4 align="center">
+    Kafka<br/>
+</h4>
 
-Kafka
 12. **Impala Connector** - **ad-impala-connector** - Service that launches container to collect Impala queries and corresponding stats
 
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229344239-b992c117-20cd-46b4-903a-f1b2d6b2c741.png" />
+  </a>
+</p>
+<h4 align="center">
+    Impala<br/>
+</h4>
 
-Impala
+
 13. **LDAP** - **ad-ldap** - Service that connects with LDAP server to allow SSO based login to Pulse UI
 
 14. **LogSearch** - Service that collects log messages from all hosts and store as indices on Elastic search
@@ -288,11 +300,25 @@ Impala
 
 **ad-logsearch-curator** - Curator to run cleanup on intervals for retaining indices for specified days
 
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229344334-555ddbf7-e384-4ea6-adfd-525fee2ef6e1.gif" />
+  </a>
+</p>
+<h4 align="center">
+    Logsearch<br/>
+</h4>
 
-Logsearch
 15. **Notifications** - **ad-notifications** - Service that connects with multiple notification channels to send raised incidents
 
+<p align="center">
+  <a href="[https://docs.acceldata.io/pulse]">
+    <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229344393-78696a6b-5b34-4d58-b77e-bd37094dbdac.png" />
+  </a>
+</p>
+<h4 align="center">
+    Notifications<br/>
+</h4>
 
-Notifications
 16. **Proxy** - **ad-proxy** - Service that provides support to enable TLS on Pulse UI
 
