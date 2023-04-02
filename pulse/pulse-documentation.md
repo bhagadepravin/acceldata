@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="[https://www.jamify.org](https://docs.acceldata.io/pulse)">
+  <a href="[https://docs.acceldata.io/pulse]">
     <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229342524-8e473930-911d-4233-b411-0357b6d42fe9.png" />
   </a>
 </p>
@@ -29,7 +29,7 @@ Pulse collects logs from various systems, stores them, and displays insights and
 
 The data from the metrics are collected in one of the following three Acceldata Services such as Database, Time Series Data or Log Indices, and It is deployed via docker container.
 
-<img width="508" alt="image" src="https://user-images.githubusercontent.com/28974904/229342330-ba6f4ca8-7053-4c03-bff4-02f2519b7f10.png">
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/28974904/229342330-ba6f4ca8-7053-4c03-bff4-02f2519b7f10.png">
 
 ## Deployment Architecture
 <img width="965" alt="image" src="https://user-images.githubusercontent.com/28974904/229337335-de159340-3a29-4993-bae9-fae82d33c97f.png">
