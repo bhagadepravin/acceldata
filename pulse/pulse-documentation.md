@@ -221,9 +221,9 @@ List of **ADDON** components:
     <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343295-68735830-6661-47db-82b5-d91d74c6c97e.png" />
   </a>
 </p>
-<h1 align="center">
+<h4 align="center">
     YARN Capacity/App Explorer, Tez, LLAP, Spark, Hive on MR, Hive on Spark<br/>
-</h1>
+</h4>
 
 
 <h1 align="center">Material Bread</h1>
@@ -258,9 +258,9 @@ List of **ADDON** components:
     <img alt="Jamify" src="https://user-images.githubusercontent.com/28974904/229343481-72b8f245-619e-4eca-ba8d-eaec94e39693.png" />
   </a>
 </p>
-<h1 align="center">
+<h3 align="center">
     HDFS - FSAnalytics & File Explorer, Database - Hive File Analytics<br/>
-</h1>
+</h3>
 
 7. **FS Elastic** - **ad-fs-elastic** - Service that runs elastic service on port 19038, used only for standalone purposes on separate host
 
