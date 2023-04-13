@@ -12,7 +12,7 @@
   - Pulse Architecture
       - Single Server Deployment
       - Multi Server Deployment
-  -  Pulse Demo
+  -  Pulse Demo/Walkthrough
 
 #  Pulse Overview
 
@@ -49,6 +49,7 @@ The Hadoop clusters such as **Master Nodes, Compute Nodes,** and **Edge Nodes** 
 <img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/229337327-7a0323e1-f37a-4d2b-9127-1dc0e77b07e8.png">
 
 
+- (Pulse Walkthrough](https://github.com/bhagadepravin/acceldata/blob/main/pulse/pulse-walkthrough.md)
 
 * [Dashboard](https://docs.acceldata.io/pulse/dashboard)
   - [Recommendations](https://docs.acceldata.io/pulse/dashboard#recommendations)
