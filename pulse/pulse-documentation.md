@@ -34,7 +34,7 @@ Acceldata Pulse provides the following features.
 <img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/231670233-a5f7c480-4af5-4eda-b422-fa2af387a3de.png">
 
 
-<img width="861" alt="image" src="https://user-images.githubusercontent.com/28974904/229337305-0d142d4b-c661-41f2-a7e0-1852dddc8531.png">
+<img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/231670830-2b353117-92ba-41c4-b166-eb24e53d3ca0.png">
 
 Pulse collects logs from various systems, stores them, and displays insights and analyses as an observability platform. **Acceldata agents** run different platforms such as Spark, Hive, Tez, or HBase. For each of the platforms, Pulse collects multiple other metrics. For example, **Yarn metrics** are collected for **Spark**, **Time series data** are collected for **Hive**, **App data** are collected for **Tez**.
 
