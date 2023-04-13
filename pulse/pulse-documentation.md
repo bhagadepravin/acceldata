@@ -31,7 +31,7 @@ Acceldata Pulse provides the following features.
 
 
 ## [Pulse Architecture](https://docs.acceldata.io/pulse/architecture)
-<img width="670" alt="image" src="https://user-images.githubusercontent.com/28974904/231670233-a5f7c480-4af5-4eda-b422-fa2af387a3de.png">
+<img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/231670233-a5f7c480-4af5-4eda-b422-fa2af387a3de.png">
 
 
 <img width="861" alt="image" src="https://user-images.githubusercontent.com/28974904/229337305-0d142d4b-c661-41f2-a7e0-1852dddc8531.png">
@@ -41,7 +41,7 @@ Pulse collects logs from various systems, stores them, and displays insights and
 The data from the metrics are collected in one of the following three Acceldata Services such as Database, Time Series Data or Log Indices, and It is deployed via docker container.
 
 ## Deployment Architecture
-<img width="1100" alt="image" src="https://user-images.githubusercontent.com/28974904/229337335-de159340-3a29-4993-bae9-fae82d33c97f.png">
+<img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/229337335-de159340-3a29-4993-bae9-fae82d33c97f.png">
 
 
 The Hadoop clusters such as **Master Nodes, Compute Nodes,** and **Edge Nodes** contain the **Acceldata Agents**. All the nodes report to Acceldata Server. The **Acceldata Server** includes **MongoDB, Victoria DB, Accelo CI, AD Core,** and **AD UI.**
