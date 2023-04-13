@@ -7,7 +7,7 @@
    <br/>
 </h1>
 
-* Agenda 
+- Agenda 
   - Pulse Overview
   - Pulse Architecture
       - Single Server Deployment
