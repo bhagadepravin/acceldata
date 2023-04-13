@@ -31,6 +31,8 @@ Acceldata Pulse provides the following features.
 
 
 ## [Pulse Architecture](https://docs.acceldata.io/pulse/architecture)
+<img width="670" alt="image" src="https://user-images.githubusercontent.com/28974904/231670233-a5f7c480-4af5-4eda-b422-fa2af387a3de.png">
+
 
 <img width="861" alt="image" src="https://user-images.githubusercontent.com/28974904/229337305-0d142d4b-c661-41f2-a7e0-1852dddc8531.png">
 
