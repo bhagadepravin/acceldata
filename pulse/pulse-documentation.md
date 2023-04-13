@@ -41,6 +41,9 @@ Pulse collects logs from various systems, stores them, and displays insights and
 The data from the metrics are collected in one of the following three Acceldata Services such as Database, Time Series Data or Log Indices, and It is deployed via docker container.
 
 ## Deployment Architecture
+
+<img width="1041" alt="image" src="https://user-images.githubusercontent.com/28974904/231672067-6b20f4eb-21ca-48e1-8a11-b8b02f8b6ff7.png">
+
 <img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/229337335-de159340-3a29-4993-bae9-fae82d33c97f.png">
 
 
