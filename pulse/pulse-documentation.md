@@ -48,6 +48,7 @@ The Hadoop clusters such as **Master Nodes, Compute Nodes,** and **Edge Nodes** 
 
 <img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/229337327-7a0323e1-f37a-4d2b-9127-1dc0e77b07e8.png">
 
+<img width="1060" alt="image" src="https://user-images.githubusercontent.com/28974904/231671661-8c989e3d-8733-4556-9923-36425d81ab9c.png">
 
 <img width="965" alt="image" src="https://user-images.githubusercontent.com/28974904/229342330-ba6f4ca8-7053-4c03-bff4-02f2519b7f10.png">
 
