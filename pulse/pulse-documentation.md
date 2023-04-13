@@ -40,9 +40,6 @@ The Hadoop clusters such as **Master Nodes, Compute Nodes,** and **Edge Nodes** 
 <img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/229337327-7a0323e1-f37a-4d2b-9127-1dc0e77b07e8.png">
 
 
-<img width="855" alt="image" src="https://user-images.githubusercontent.com/28974904/229337427-44b89d17-0042-4b8b-b52a-639b486596ed.png">
-
-
 
 * [Dashboard](https://docs.acceldata.io/pulse/dashboard)
   - [Recommendations](https://docs.acceldata.io/pulse/dashboard#recommendations)
