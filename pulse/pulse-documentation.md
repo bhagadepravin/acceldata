@@ -41,7 +41,7 @@ Pulse collects logs from various systems, stores them, and displays insights and
 The data from the metrics are collected in one of the following three Acceldata Services such as Database, Time Series Data or Log Indices, and It is deployed via docker container.
 
 ## Deployment Architecture
-<img width="965" alt="image" src="https://user-images.githubusercontent.com/28974904/229337335-de159340-3a29-4993-bae9-fae82d33c97f.png">
+<img width="1100" alt="image" src="https://user-images.githubusercontent.com/28974904/229337335-de159340-3a29-4993-bae9-fae82d33c97f.png">
 
 
 The Hadoop clusters such as **Master Nodes, Compute Nodes,** and **Edge Nodes** contain the **Acceldata Agents**. All the nodes report to Acceldata Server. The **Acceldata Server** includes **MongoDB, Victoria DB, Accelo CI, AD Core,** and **AD UI.**
