@@ -42,7 +42,7 @@ The data from the metrics are collected in one of the following three Acceldata 
 <img width="965" alt="image" src="https://user-images.githubusercontent.com/28974904/229337335-de159340-3a29-4993-bae9-fae82d33c97f.png">
 
 
-The Hadoop clusters such as **Master Nodes, Compute Nodes,** and **Edge Nodes** contain the **Acceldata Agents**. All the nodes report to Acceldata Server. The **Acceldata Server** includes **MongoDB, Victoria DB, Accelo CI, AD AI,** and **AD UI.**
+The Hadoop clusters such as **Master Nodes, Compute Nodes,** and **Edge Nodes** contain the **Acceldata Agents**. All the nodes report to Acceldata Server. The **Acceldata Server** includes **MongoDB, Victoria DB, Accelo CI, AD Core,** and **AD UI.**
 
 <img width="986" alt="image" src="https://user-images.githubusercontent.com/28974904/229337327-7a0323e1-f37a-4d2b-9127-1dc0e77b07e8.png">
 
