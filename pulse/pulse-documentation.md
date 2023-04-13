@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="center">
-   <br/>
+  Pulse <br/>
 </h1>
 
 - Agenda 
