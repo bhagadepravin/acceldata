@@ -15,6 +15,7 @@
 5. [Add Multple Clusters to existing Pulse server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#5-add-multple-clusters-to-existing-pulse-server)
 6. Add a Node to existing Pulse Server
 7. How to remove a node from Pulse server
+8. Pulse auto reconfigure not working after enabling SSL on Ambari?
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
