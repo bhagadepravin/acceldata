@@ -403,3 +403,47 @@ Below instructions for removing a node from a Pulse server and reconfiguring the
   - `work/<ClusterName>/agents/node/hostRoleMap.yml`
 - Push the database configuration changes by running `$ accelo admin database push-config`.
 - Finally, restart all nodes using the command `$ accelo restart all -d`.
+
+
+## 8 **What to do if Ambari SSL is enabled after Pulse Setup?
+**
+**Pulse auto reconfigure not working after enabling SSL on Ambari?**
+
+
+This auto reconfigure feature allows users to generate the Pulse configuration files without manual user intervention.
+
+To achieve auto reconfigure we will need the credentials to be stored in the Pulse machine (encrypted). As a migration / initial step the user will generate a file which contains the required information for the reconfiguration to work for each cluster configured in Pulse.
+
+The user should run the command `accelo admin dist-store` command. Follow the below steps to complete this migration.
+
+1. To generate a sample config file. Run the command `accelo admin dist-store` .
+
+2. This will generate the `distSecStore.yml` file inside the `<$AcceloHome>` directory. 
+
+    a. Sample `distSecStore.yml` file below with the Fields and their description
+
+```
+DistStore:
+  Cluster1:
+    DistType: hdp    ------ DistType values are ["hdp","cdh","standalone","custom","none"]
+    ClusterName: democluster1 ----- This is the clustername used by the CLI to create dirs in the work dir and the database names
+    ClusterOriginalName: Cluster1 ---- This is represents the Clustername given to the cluster in the Ambari or Cloudera
+    ClusterType: Ambari ---- This represents the type of cluster values: ["Ambari", "Cloudera", "StandAlone", "Custom"]
+    ClusterVersion: "3.0.1" --- This represents the ClusterVersion
+    DisplayName: Cluster1 ------ This is the clustername that you want to display in the Pulse UI
+    IsEdgeNode: false ------ If the Pulse Node is included in the Cluster --- Cloudera/Ambari
+    URI: http://host_ip:port ----- Cloudera/Ambari Host with the proper port
+    User: admin ----- Username used to login to the Cloudera/Ambari Managers
+    Password: admin 
+    Proxy: "" ----- URL of the proxy used to login to the Cloudera/Ambari Manager
+    SecProxy: false ---- Set to true if there is proxy involved
+    ProxyUser: ""  ----- Username to authorize the Proxy
+    ProxyPassword: ""  ----- Password of the Proxy
+```
+
+
+3. Now edit the above-generated file and fill in the correct information about each cluster such as Distro login credentials, ClusterName (Used for creating the work directory), ClusterDisplayName (given at the time of configuring core or get it from the acceldata_<ClusterName>.conf file).
+
+4. Once all the required details are filled in run the command `accelo admin dist-store -m` to create the `.dist` files in the correct `cluster name` directories inside the work directory. This file is encrypted and will be kept read-only. 
+
+You will now be able to reconfigure the clusters.`
