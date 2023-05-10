@@ -13,9 +13,9 @@
 3. [Troubleshooting LogSearch UI on Pulse Server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#3-troubleshooting-logsearch-ui-on-pulse-server)
 4. [Enable SSL/Kerberos debug logging for container](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#4-enable-sslkerberos-debug-logging-for-container)
 5. [Add Multple Clusters to existing Pulse server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#5-add-multple-clusters-to-existing-pulse-server)
-6. Add a Node to existing Pulse Server
-7. How to remove a node from Pulse server
-8. Pulse auto reconfigure not working after enabling SSL on Ambari?
+6. [Add a Node to existing Pulse Server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#6-add-a-node-to-existing-pulse-server)
+7. [How to remove a node from Pulse server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#7-how-to-remove-a-node-from-pulse-server)
+8. [Pulse auto reconfigure not working after enabling SSL on Ambari?](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#8-what-to-do-if-ambari-ssl-is-enabled-after-pulse-setup)
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
@@ -406,10 +406,9 @@ Below instructions for removing a node from a Pulse server and reconfiguring the
 - Finally, restart all nodes using the command `$ accelo restart all -d`.
 
 
-## 8 **What to do if Ambari SSL is enabled after Pulse Setup?
-**
-**Pulse auto reconfigure not working after enabling SSL on Ambari?**
+## 8 What to do if Ambari SSL is enabled after Pulse Setup?
 
+**Pulse auto reconfigure not working after enabling SSL on Ambari?**
 
 This auto reconfigure feature allows users to generate the Pulse configuration files without manual user intervention.
 
