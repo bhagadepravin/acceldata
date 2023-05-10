@@ -372,6 +372,12 @@ cat /krb/security/krb5.conf
 
 ## 5. Add Multple Clusters to existing Pulse server.
 
+** NOTE **
+
+- All the clusters should be homogenous - meaning one type of deployment - HDP/CDP/Standalone. It's should be one of them.
+- None of the cluster nodes of all the clusters should be overlapping. Otherwise hydra agent installation will have issues.
+- Make sure Pulse Server has resources good enough to hold multiple clusters data - related to retention of data.
+
 This code appears to be a set of command line interface (CLI) commands for configuring and managing clusters using Accelo. 
 
 - `$ accelo config cluster` allows the user to configure a cluster.
