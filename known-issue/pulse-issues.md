@@ -372,7 +372,7 @@ cat /krb/security/krb5.conf
 
 ## 5. Add Multple Clusters to existing Pulse server.
 
-** NOTE **
+**NOTE**
 
 - All the clusters should be homogenous - meaning one type of deployment - HDP/CDP/Standalone. It's should be one of them.
 - None of the cluster nodes of all the clusters should be overlapping. Otherwise hydra agent installation will have issues.
