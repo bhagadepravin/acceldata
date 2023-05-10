@@ -406,7 +406,7 @@ Below instructions for removing a node from a Pulse server and reconfiguring the
 - Finally, restart all nodes using the command `$ accelo restart all -d`.
 
 
-## 8 What to do if Ambari SSL is enabled after Pulse Setup?
+## 8. What to do if Ambari SSL is enabled after Pulse Setup?
 
 **Pulse auto reconfigure not working after enabling SSL on Ambari?**
 
