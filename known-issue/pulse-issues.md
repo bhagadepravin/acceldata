@@ -453,3 +453,107 @@ DistStore:
 4. Once all the required details are filled in run the command `accelo admin dist-store -m` to create the `.dist` files in the correct `cluster name` directories inside the work directory. This file is encrypted and will be kept read-only. 
 
 You will now be able to reconfigure the clusters.`
+
+## 9. Pulse LDAP setup with Active Directory with group mapping.
+Ref: https://docs.acceldata.io/pulse/ldap
+```sh
+  ldap {
+  configuration  {
+    # The Ldap host
+    host = "samba.activedirectory.adsre.com:636",
+    # The following field is required if using port 389.
+    insecureNoSSL = false
+    insecureSkipVerify = true
+    rootCA = "/etc/dex/ldap.ca",
+    bindDN = "Administrator@ADSRE.COM",
+    bindPW = "Welcome@12345",
+    specialSearch = true,
+    prefix = "CN=",
+    suffix = ",OU=users,OU=hadoop,DC=adsre,DC=com",
+    userSearch  {
+      # Would translate to the query "(&(objectClass=person)(uid=<username>))"
+      baseDN = "OU=users,OU=hadoop,DC=adsre,DC=com",
+      filter = "(objectClass=person)",
+      username = "sAMAccountName",
+      idAttr = "sAMAccountName",
+      emailAttr = "mail",
+      nameAttr = "name"
+      # Can be 'sub' or 'one'
+      scope = "sub"
+    }
+    groupSearch  {
+      # Would translate to the query "(&(objectClass=group)(member=<user uid>))"
+      baseDN = "OU=groups,OU=hadoop,DC=adsre,DC=com",
+      filter = "(objectClass=group)",
+      # Use if full DN is needed and not available as any other attribute
+      # Will only work if "DN" attribute does not exist in the record
+      # userAttr: DN
+      userAttr = "name",
+      groupAttr = "member",
+      nameAttr = "name"
+      # Can be 'sub' or 'one'
+      scope = "sub"
+    }
+  }
+}
+  ```
+
+Above Filters are used based on below properties
+```sh
+# Pravin Bhagade, users, hadoop, adsre.com
+dn: CN=Pravin Bhagade,OU=users,OU=hadoop,DC=adsre,DC=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+cn: Pravin Bhagade
+sn: Bhagade
+givenName: Pravin
+instanceType: 4
+whenCreated: 20230522161106.0Z
+whenChanged: 20230522161106.0Z
+displayName: Pravin Bhagade
+uSNCreated: 4083
+name: Pravin Bhagade
+objectGUID:: cGp99nJAnU+dCikwmFtnpA==
+badPwdCount: 0
+codePage: 0
+countryCode: 0
+badPasswordTime: 0
+lastLogoff: 0
+lastLogon: 0
+primaryGroupID: 513
+objectSid:: AQUAAAAAAAUVAAAAREN/6ZIYRb7TT457UQQAAA==
+accountExpires: 9223372036854775807
+logonCount: 0
+sAMAccountName: pb203481
+sAMAccountType: 805306368
+userPrincipalName: pb203481@adsre.com
+objectCategory: CN=Person,CN=Schema,CN=Configuration,DC=adsre,DC=com
+pwdLastSet: 133292454660272970
+userAccountControl: 512
+uSNChanged: 4085
+memberOf: CN=group1,OU=groups,OU=hadoop,DC=adsre,DC=com
+memberOf: CN=group2,OU=groups,OU=hadoop,DC=adsre,DC=com
+distinguishedName: CN=Pravin Bhagade,OU=users,OU=hadoop,DC=adsre,DC=com
+
+# group2, groups, hadoop, adsre.com
+dn: CN=group2,OU=groups,OU=hadoop,DC=adsre,DC=com
+objectClass: top
+objectClass: group
+cn: group2
+instanceType: 4
+whenCreated: 20230522161141.0Z
+uSNCreated: 4087
+name: group2
+objectGUID:: ZnT2EjoAR0S1P+M1rT/qZQ==
+objectSid:: AQUAAAAAAAUVAAAAREN/6ZIYRb7TT457UwQAAA==
+sAMAccountName: group2
+sAMAccountType: 268435456
+groupType: -2147483646
+objectCategory: CN=Group,CN=Schema,CN=Configuration,DC=adsre,DC=com
+member: CN=Pravin Bhagade,OU=users,OU=hadoop,DC=adsre,DC=com
+whenChanged: 20230522161148.0Z
+uSNChanged: 4089
+distinguishedName: CN=group2,OU=groups,OU=hadoop,DC=adsre,DC=com
+```
