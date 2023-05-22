@@ -16,7 +16,7 @@
 6. [Add a Node to existing Pulse Server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#6-add-a-node-to-existing-pulse-server)
 7. [How to remove a node from Pulse server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#7-how-to-remove-a-node-from-pulse-server)
 8. [Pulse auto reconfigure not working after enabling SSL on Ambari?](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#8-what-to-do-if-ambari-ssl-is-enabled-after-pulse-setup)
-
+9. [Pulse LDAP setup with Active Directory with group mapping.](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#9-pulse-ldap-setup-with-active-directory-with-group-mapping)
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
 When trying to download the HDFS fsimage, the hdfs headless user is encountering a 403 error:
