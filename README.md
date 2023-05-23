@@ -6,6 +6,15 @@ yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; 
 
 # for rocky linux 8 lab node
 yum -y install cloud-utils-growpart && growpart /dev/sda 3; pvresize /dev/sda3; lvextend -l+100%FREE /dev/mapper/rl-root; xfs_growfs /dev/mapper/rl-root;lsblk
+
+sudo apt-get update
+sudo apt-get install cloud-guest-utils cloud-utils  xfsprogs -y
+sudo growpart /dev/sda 1
+sudo pvresize /dev/sda1
+sudo lvextend -l+100%FREE /dev/mapper/ubuntu--vg-root
+sudo resize2fs /dev/mapper/ubuntu--vg-root
+sudo lsblk
+
 ```
 
 ##### K9s on Centos 7
