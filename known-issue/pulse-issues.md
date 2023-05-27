@@ -646,7 +646,7 @@ v`im /opt/pulse/acceldata/config/docker/addons/ad-logsearch.yml`
 5. Add property ES_JAVA_OPTS=-Xmx<VALUE>g -Xms<VALUE>g under ad-elastic environment section, save the file and restart ad-elastic container
 
 Example:
-# Add under the Environment section
+Add under the Environment section
 ad-elastic:
 ```
   - ES_JAVA_OPTS=-Xmx32g -Xms32g
@@ -670,7 +670,7 @@ vim /opt/pulse/acceldata/config/docker/addons/ad-logsearch.yml
 
 
 Example:
-# Add under the Environment section
+Add under the Environment section
 ad-logstash:
 ```
   -  LS_JAVA_OPTS=-Xmx32g -Xms32g
