@@ -17,6 +17,10 @@
 7. [How to remove a node from Pulse server](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#7-how-to-remove-a-node-from-pulse-server)
 8. [Pulse auto reconfigure not working after enabling SSL on Ambari?](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#8-what-to-do-if-ambari-ssl-is-enabled-after-pulse-setup)
 9. [Pulse LDAP setup with Active Directory with group mapping.](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#9-pulse-ldap-setup-with-active-directory-with-group-mapping)
+10. [Error: kinit: Resource temporarily unavailable while getting initial credentials](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#10-error-kinit-resource-temporarily-unavailable-while-getting-initial-credentials)
+11. [ERROR c.a.p.fsanalytics.FsImageService - updating fsimage failed java.io.IOException: listener timeout after waiting for [30000] ms](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#11-error-capfsanalyticsfsimageservice---updating-fsimage-failed-javaioioexception-listener-timeout-after-waiting-for-30000-ms)
+12. [ERROR c.a.p.f.elasticsearch.EsWriter - Failed to execute bulk java.net.SocketTimeoutException: null](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#12-error-capfelasticsearcheswriter---failed-to-execute-bulk-javanetsockettimeoutexception-null)
+
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
 When trying to download the HDFS fsimage, the hdfs headless user is encountering a 403 error:
