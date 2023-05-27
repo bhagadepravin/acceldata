@@ -623,3 +623,59 @@ Login into Pulse server:
 
 6. Execute below cmd to load fsimage and verify the logs.
 `$ accelo admin fsa load`
+
+## 12. ERROR c.a.p.f.elasticsearch.EsWriter - Failed to execute bulk java.net.SocketTimeoutException: null
+
+1. If you encounter the following error in the 'ad-elastic_default' container logs:
+```
+ERROR c.a.p.f.elasticsearch.EsWriter - Failed to execute bulk java.net.SocketTimeoutException: null
+```
+
+2. Login into Pulse Server:
+
+3. Modify JVM memory of Elastic Search
+
+3. To modify the JVM memory of Elastic container, create ad-logsearch.yml by running below command:
+
+$ accelo admin makeconfig ad-logsearch
+
+4. Open the 'ad-logsearch.yml' file using a text editor:
+
+v`im /opt/pulse/acceldata/config/docker/addons/ad-logsearch.yml`
+
+5. Add property ES_JAVA_OPTS=-Xmx<VALUE>g -Xms<VALUE>g under ad-elastic environment section, save the file and restart ad-elastic container
+
+Example:
+# Add under the Environment section
+ad-elastic:
+```
+  - ES_JAVA_OPTS=-Xmx32g -Xms32g
+```
+6. Save the file and restart the 'ad-elastic' container:
+
+`$ accelo restart ad-elastic `
+
+
+7. Modify JVM memory of Logstash
+
+8 .To modify the JVM memory of Logstash container, create ad-logsearch.yml by running below command:
+
+`$ accelo admin makeconfig ad-logsearch`
+
+9. Add property LS_JAVA_OPTS=-Xmx<VALUE>g -Xms<VALUE>g under ad-logstash environment section, save the file and restart ad-logstash container
+  
+10. Open the 'ad-logsearch.yml' file using a text editor:
+
+vim /opt/pulse/acceldata/config/docker/addons/ad-logsearch.yml
+
+
+Example:
+# Add under the Environment section
+ad-logstash:
+```
+  -  LS_JAVA_OPTS=-Xmx32g -Xms32g
+```
+Save it:
+
+11. Restart the 'ad-logstash' container:
+`$ accelo restart ad-logstash`
