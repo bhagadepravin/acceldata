@@ -558,7 +558,7 @@ uSNChanged: 4089
 distinguishedName: CN=group2,OU=groups,OU=hadoop,DC=adsre,DC=com
 ```
 
-## 9. Error: kinit: Resource temporarily unavailable while getting initial credentials
+## 10. Error: kinit: Resource temporarily unavailable while getting initial credentials
 
 1. Review the container logs of 'ad-fsanalyticsv2-connector_default' by executing the following command:
 
@@ -598,3 +598,21 @@ Ensure that you can ping the KDC host. If not, update the entry to use the full 
 
 * Update the hostnames of the Cluster nodes in the '/etc/hosts' file of the Pulse server.
 * Alternatively, you can mount '/etc/resolv.conf' on the 'ad-fsanalyticsv2-connector_default' container.
+
+## 11. ERROR c.a.p.fsanalytics.FsImageService - updating fsimage failed java.io.IOException: listener timeout after waiting for [30000] ms
+
+`$ accelo admin makeconfig ad-fsanalyticsv2-connector`
+
+`vim /opt/pulse/acceldata/config/docker/addons/ad-fsanalyticsv2-connector.yml`
+
+# Add under the Environment section
+```
+    - ES_CLIENT_SOCKET_TIMEOUT_SECS=120
+    - ES_CLIENT_CONNECT_TIMEOUT_SECS=120
+    - ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
+```
+`$ accelo restart ad-fsanalyticsv2-connector`
+
+wait for 1 min.
+
+`$ accelo admin fsa load`
