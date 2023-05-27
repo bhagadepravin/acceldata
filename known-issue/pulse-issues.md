@@ -601,18 +601,25 @@ Ensure that you can ping the KDC host. If not, update the entry to use the full 
 
 ## 11. ERROR c.a.p.fsanalytics.FsImageService - updating fsimage failed java.io.IOException: listener timeout after waiting for [30000] ms
 
+Login into Pulse server:
+
+1. Execute the following command to generate the configuration for 'ad-fsanalyticsv2-connector':
+
 `$ accelo admin makeconfig ad-fsanalyticsv2-connector`
 
+2. Open the 'ad-fsanalyticsv2-connector.yml' file using a text editor:
 `vim /opt/pulse/acceldata/config/docker/addons/ad-fsanalyticsv2-connector.yml`
 
-# Add under the Environment section
+3. Add the following lines under the 'Environment' section:
 ```
     - ES_CLIENT_SOCKET_TIMEOUT_SECS=120
     - ES_CLIENT_CONNECT_TIMEOUT_SECS=120
     - ES_CLIENT_MAX_RETRY_TIMEOUT_SECS=120
 ```
+4. Restart the 'ad-fsanalyticsv2-connector' service:
 `$ accelo restart ad-fsanalyticsv2-connector`
 
-wait for 1 min.
+5. Wait for approximately 1 minute to allow the service to restart properly.
 
+6. Execute below cmd to load fsimage and verify the logs.
 `$ accelo admin fsa load`
