@@ -557,3 +557,44 @@ whenChanged: 20230522161148.0Z
 uSNChanged: 4089
 distinguishedName: CN=group2,OU=groups,OU=hadoop,DC=adsre,DC=com
 ```
+
+## 9. Error: kinit: Resource temporarily unavailable while getting initial credentials
+
+1. Review the container logs of 'ad-fsanalyticsv2-connector_default' by executing the following command:
+
+`$ docker logs -f ad-fsanalyticsv2-connector_default &`
+
+`$ accelo admin fsa load`
+
+ 
+2. If you encounter the following error in the 'ad-fsanalyticsv2-connector_default' container logs:
+```
+kinit: Resource temporarily unavailable while getting initial credentials
+```
+
+3. Access the 'ad-fsanalyticsv2-connector' container by logging in with the following command:
+
+`$ docker exec -it ad-fsanalyticsv2-connector_default sh`
+
+Then, navigate to the following path:
+
+`# cat work/<CLUSTER_NAME>/fsanalytics/kinit_fsimage.sh`
+
+Check if you can successfully run the 'kinit' command. For example:
+
+`$ kinit -kt /krb/security/kerberos.keytab hdfs-hdp314@ADSRE.COM`
+
+If you encounter the following error:
+```
+kinit: Resource temporarily unavailable while getting initial credentials
+```
+Verify the contents of the 'krb5.conf' file:
+
+`# cat /krb/security/krb5.conf`
+
+Ensure that you can ping the KDC host. If not, update the entry to use the full FQDN if the current entry is a short name.
+
+**Note:**
+
+* Update the hostnames of the Cluster nodes in the '/etc/hosts' file of the Pulse server.
+* Alternatively, you can mount '/etc/resolv.conf' on the 'ad-fsanalyticsv2-connector_default' container.
