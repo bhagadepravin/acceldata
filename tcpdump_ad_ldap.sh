@@ -16,7 +16,7 @@ print_message() {
 # Function to check if a command is available
 check_command() {
     local command=$1
-    if ! command -v $command &> /dev/null; then
+    if ! command -v $command &> /dev/null && ! [[ -x "$(command -v $command)" ]]; then
         return 1
     fi
 }
@@ -85,8 +85,8 @@ if [[ -z "$container_id" ]]; then
     exit 1
 fi
 
-# Install Wireshark if not already installed
-if ! check_command wireshark; then
+# Check if Wireshark is already installed
+if ! check_command wireshark && ! check_command tshark; then
     print_message "Wireshark is not installed. Installing..." "$YELLOW"
     install_wireshark
 fi
