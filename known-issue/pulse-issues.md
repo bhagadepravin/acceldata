@@ -694,7 +694,7 @@ Login into Pulse Server and into the Mongo Database:
 ```
 $ docker exec -it ad-db_default sh
 
-> mongo mongodb://accel:ACCELUSER_01082018@localhost:27017/admin
+> mongo mongodb://accel:PASSWORD@localhost:27017/admin
 
 > show databases;
 # Select the rtcl3 cluster:
