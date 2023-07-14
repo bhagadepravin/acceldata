@@ -683,3 +683,48 @@ Save it:
 
 11. Restart the 'ad-logstash' container:
 `$ accelo restart ad-logstash`
+
+
+## Check Tez Query Dashboard Data missing.
+
+- Check ad-connector logs
+- Check in Backend if we see data.
+
+Login into Pulse Server and into the Mongo Database: 
+```
+$ docker exec -it ad-db_default sh
+
+> mongo mongodb://accel:ACCELUSER_01082018@localhost:27017/admin
+
+> show databases;
+# Select the rtcl3 cluster:
+
+Example:
+> use hdp314_zeus;
+switched to db hdp314_zeus
+
+
+db.yarn_tez_queries.count()
+db.yarn_tez_queries_details.count()
+db.yarn_yarnapps.count()
+```
+and share the output , having Data "yarn_tez_queries" meaning in Database we have yarn_tez_queries related data and its just not showing in WebUI.
+yarn_yarnapps is for Yarn application explorer, for which we already see Data in WebUI.
+
+if you see some counts in "db.yarn_tez_queries.count()" Lets get the first and last record from the tables.
+
+# To query the first record from the "yarn_tez_queries" collection, you can use the following query:
+`> db.yarn_tez_queries.find().sort({_id: 1}).limit(1)`
+
+# To query the last record, you can use the following query:
+`> db.yarn_tez_queries.find().sort({_id: -1}).limit(1)`
+
+
+Example: It would like below, You can share the above console outputs
+```
+> db.yarn_tez_queries.find().sort({_id: 1}).limit(1)
+{ "_id" : "hive_20230714060007_d1814e84-2e90-4562-8a0c-698c3796eaea", "appId" : "application_1688472573118_0238", "callerId" : "hive_20230714060007_d1814e84-2e90-4562-8a0c-698c3796eaea", "dagId" : "dag_1688472573118_0238_1", "queue" : "default", "time" : NumberLong("1689315908093"), "counters" : { "org_apache_tez_common_counters_FileSystemCounter" : { "HDFS_BYTES_WRITTEN" : 11318, "HDFS_BYTES_READ" : 694248208 }, "org_apache_tez_common_counters_TaskCounter" : { "PHYSICAL_MEMORY_BYTES" : NumberLong("27015512064"), "CPU_MILLISECONDS" : 56750 } }, "timeTaken" : 21679, "endTime" : NumberLong("1689294638392"), "hiveAddress" : "10.90.6.94", "join" : [ { "rightTable" : null, "rightCol" : "D_DATE_SK", "leftTable" : null, "resolved" : true, "leftCol" : "CS_SOLD_DATE_SK" }, { "rightTable" : null, "rightCol" : "I_ITEM_SK", "leftTable" : null, "resolved" : true, "leftCol" : "CS_ITEM_SK" }, { "rightTable" : null, "rightCol" : "CD_DEMO_SK", "leftTable" : null, "resolved" : true, "leftCol" : "CS_BILL_CDEMO_SK" }, { "rightTable" : null, "rightCol" : "P_PROMO_SK", "leftTable" : null, "resolved" : true, "leftCol" : "CS_PROMO_SK" } ], "llap" : false, "queryUid" : "8346EC875FBA9AFB20E967AD91906250", "startTime" : NumberLong("1689294607010"), "status" : "SUCCEEDED", "tablesUsed" : [ "ITEM", "CUSTOMER_DEMOGRAPHICS", "DATE_DIM", "CATALOG_SALES", "PROMOTION" ], "uid" : "2BAC3860104A4D9FE6EACCEBCD2627B1", "user" : "hive" }
+>
+> db.yarn_tez_queries.find().sort({_id: -1}).limit(1)
+{ "_id" : "hive_20230714121120_3504965e-002b-4f53-aeb3-4035811b57c6", "appId" : "application_1688472573118_0245", "callerId" : "hive_20230714121120_3504965e-002b-4f53-aeb3-4035811b57c6", "dagId" : "dag_1688472573118_0245_1", "queue" : "default", "time" : NumberLong("1689316961653"), "counters" : { "org_apache_tez_common_counters_FileSystemCounter" : { "HDFS_BYTES_WRITTEN" : 11307, "HDFS_BYTES_READ" : 883244425 }, "org_apache_tez_common_counters_TaskCounter" : { "PHYSICAL_MEMORY_BYTES" : NumberLong("46133149696"), "CPU_MILLISECONDS" : 69870 } }, "timeTaken" : 31463, "endTime" : NumberLong("1689316922302"), "hiveAddress" : "10.90.6.94", "join" : [ { "rightTable" : null, "rightCol" : "D_DATE_SK", "leftTable" : null, "resolved" : true, "leftCol" : "SS_SOLD_DATE_SK" }, { "rightTable" : null, "rightCol" : "I_ITEM_SK", "leftTable" : null, "resolved" : true, "leftCol" : "SS_ITEM_SK" }, { "rightTable" : null, "rightCol" : "CD_DEMO_SK", "leftTable" : null, "resolved" : true, "leftCol" : "SS_CDEMO_SK" }, { "rightTable" : null, "rightCol" : "P_PROMO_SK", "leftTable" : null, "resolved" : true, "leftCol" : "SS_PROMO_SK" } ], "llap" : false, "queryUid" : "5ED0EDDADF7785B1FDEE1448D50BC80F", "startTime" : NumberLong("1689316880090"), "status" : "SUCCEEDED", "tablesUsed" : [ "ITEM", "CUSTOMER_DEMOGRAPHICS", "DATE_DIM", "STORE_SALES", "PROMOTION" ], "uid" : "EE930585A8F4D40E84D486880BF1A30C", "user" : "hive" }
+```
