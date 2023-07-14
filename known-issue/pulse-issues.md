@@ -714,9 +714,11 @@ yarn_yarnapps is for Yarn application explorer, for which we already see Data in
 if you see some counts in "db.yarn_tez_queries.count()" Lets get the first and last record from the tables.
 
 - To query the first record from the "yarn_tez_queries" collection, you can use the following query:
+
 `> db.yarn_tez_queries.find().sort({_id: 1}).limit(1)`
 
 - To query the last record, you can use the following query:
+
 `> db.yarn_tez_queries.find().sort({_id: -1}).limit(1)`
 
 
