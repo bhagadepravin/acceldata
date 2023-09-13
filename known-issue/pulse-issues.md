@@ -164,7 +164,7 @@ $ docker rmi  REPOSITORY:TAG
 
 4. To change the image tag of a container from a new tag to an old tag, use the command:
 ```bash
-$ docker tag REPOSITORY:NEW_TAG  REPOSITORY:OLD_TAG
+$ docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 # You can check the image with the new tag by running
 $ docker images 
 ```
