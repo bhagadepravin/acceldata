@@ -220,9 +220,7 @@ configure_docker_daemon_settings() {
 
 install_pulse() {
   print_message "Installing Pulse"
-  separator="************************************************"
-  echo -e "${separator}"
-  echo -e "\e[1;34mPlease follow these steps to install Pulse:\e[0m"
+  echo -e "${YELLOW}Please follow these steps to install Pulse:\e[0m"
   echo ""
   echo -e "\e[1;34m1. Make sure you have set up the AcceloHome Data directory path (e.g., /data01/acceldata).\e[0m"
   echo -e "\e[1;34m2. Download and copy the 'accelo.linux' file to the AcceloHome Data directory path as '/data01/acceldata/accelo'.\e[0m"
@@ -230,10 +228,10 @@ install_pulse() {
   echo -e "\e[1;34m3. If Kerberos is enabled in Cluster, Please get hdfs keytab, krb5.conf file on Pulse server\e[0m"
   echo -e "\e[1;34m3. Please get Database credentials handy for Hive and Oozie database\e[0m"
   echo -e "\e[1;34m4. Make sure to load Pulse tar images into Docker using the provided command:\e[0m"
-  echo -e "\e[1;32m   'ls -1 *.tgz | xargs --no-run-if-empty -L 1 docker load -i'\e[0m"
+  echo -e "${YELLOW}   'ls -1 *.tgz | xargs --no-run-if-empty -L 1 docker load -i'\e[0m"
   echo ""
 
-  read -p "Do you want to proceed with these steps? (yes/no): " choice
+  read -p "Do you want to proceed with these steps? ${YELLOW}(yes/no)${NC}: " choice
   if [ "$choice" == "yes" ]; then
       read -p "Enter the AcceloHome Data dir path: " AcceloHome
       if [ -d "$AcceloHome" ]; then
