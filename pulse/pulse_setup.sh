@@ -1,23 +1,37 @@
 #!/bin/bash
 # Un-offical script
 # Define text colors for output
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-NC='\033[0m' # No Color
+YELLOW=$'\033[0;33m'
+GREEN=$'\e[0;32m'
+BLUE=$'\033[0;94m'
+RED=$'\e[0;31m'
+GREY=$'\033[90m'
+NC=$'\e[0m'
+TICK="✔"  # Tick symbol for indicating successful steps
+CROSS="❌" # Cross symbol for indicating failed steps
+
+logStep() {
+    printf "${BLUE}âš�~D� $1${NC}\n" 1>&2
+}
 
 # Function to print success messages with green color
+
+print_success1() {
+  echo -e "${BLUE}${TICK} Success: $1${NC}"
+}
+
 print_success() {
-  echo -e "${GREEN}Success: $1${NC}"
+  echo -e "${GREEN}${TICK} Success: $1${NC}"
 }
 
 # Function to print error messages with red color
 print_error() {
-  echo -e "${RED}Error: $1${NC}"
+  echo -e "${RED}${CROSS} Error: $1${NC}"
 }
 
 # Function to print a message with a separator
 print_message() {
-  separator="************************************************"
+  separator="${GREY}*********************************************************************${NC}"
   echo -e "${separator}"
   echo "$1"
   echo -e "${separator}"
@@ -26,17 +40,19 @@ print_message() {
 # Display usage information
 show_usage() {
   cat <<EOM
-Usage: $(basename $0) [check_os_prerequisites, check_docker_prerequisites, install_pulse, configure_ssl_for_pulse]
+${YELLOW}Usage: $(basename $0) [check_os_prerequisites, check_docker_prerequisites, install_pulse, configure_ssl_for_pulse]${NC}
 Parameters:
-  - check_os_prerequisites: Verify Umask, SELinux, and sysctl settings.
-  - check_docker_prerequisites: Check and install Docker with required settings.
-  - install_pulse: Install Acceldata Pulse following specific steps.
-  - configure_ssl_for_pulse: If SSL is enabled on Hadoop Cluster, Pass cacerts file to Pulse config.
+  - ${BLUE}check_os_prerequisites${NC}: Verify Umask, SELinux, and sysctl settings.
+  - ${BLUE}check_docker_prerequisites${NC}: Check and install Docker with required settings.
+  - ${BLUE}install_pulse${NC}: Install Acceldata Pulse following specific steps.
+  - ${BLUE}full_install_pulse${NC}: Include OS and Docker Pre-req setup and along with Pulse initial setup.
+  - ${BLUE}configure_ssl_for_pulse${NC}: If SSL is enabled on Hadoop Cluster, Pass cacerts file to Pulse config.
 Examples:
-  ./$(basename $0) check_os_prerequisites
-  ./$(basename $0) check_docker_prerequisites  
-  ./$(basename $0) install_pulse
-  ./$(basename $0) configure_ssl_for_pulse
+  ./$(basename $0) ${GREEN}check_os_prerequisites${NC}
+  ./$(basename $0) ${GREEN}check_docker_prerequisites${NC}
+  ./$(basename $0) ${GREEN}install_pulse${NC}
+  ./$(basename $0) ${GREEN}full_install_pulse${NC}
+  ./$(basename $0) ${GREEN}configure_ssl_for_pulse${NC}
 EOM
   exit 0
 }
@@ -55,10 +71,56 @@ check_docker_prerequisites () {
   configure_docker_daemon_settings
 }
 
-# Function to check and install Docker
+full_install_pulse () {
+  check_os_prerequisites
+  check_docker_prerequisites
+  install_pulse
+}
+
+
+# Function to check and set umask
+check_umask() {
+  print_message "Checking Umask..."
+  grep 022 /etc/profile 2>/dev/null >/dev/null
+  if [ $? -eq 0 ]; then
+      print_success1 "Umask is correctly set (022)."
+  else
+      echo "Umask not set. Setting umask to 0022."
+      echo "umask 0022" >> /etc/profile 2>/dev/null >/dev/null
+      print_success "Umask set to 0022."
+  fi
+}
+
+# Function to check and disable SELinux
+check_selinux() {
+  print_message "Checking SELinux..."
+  sestatus | grep "SELinux status" | grep enabled 2>/dev/null >/dev/null
+  if [ $? -eq 0 ]; then
+      setenforce 0
+      sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config 2>/dev/null >/dev/null
+      print_success "SELinux disabled."
+  else
+      print_success1 "SELinux is already disabled."
+  fi
+}
+
+# Function to configure sysctl settings
+configure_sysctl_settings() {
+  print_message "Checking Sysctl Settings for vm.max_map_count and Port Forwarding..."
+  if grep -q "vm.max_map_count=262144" /etc/sysctl.conf && grep -q "net.ipv4.ip_forward=1" /etc/sysctl.conf; then
+      print_success1 "Sysctl settings are already present in /etc/sysctl.conf"
+  else
+      echo "Enabling Port Forwarding and Sysctl Settings..."
+      grep "vm.max_map_count=262144" /etc/sysctl.conf >/dev/null || sh -c "echo 'vm.max_map_count=262144' >> /etc/sysctl.conf" 2>/dev/null >/dev/null
+      grep "net.ipv4.ip_forward=1" /etc/sysctl.conf >/dev/null || sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" 2>/dev/null >/dev/null
+      sudo sysctl -p /etc/sysctl.conf 2>/dev/null >/dev/null
+      print_success "Sysctl settings configured."
+  fi
+}
+
 # Function to check and install Docker with a minimum required version
 install_docker() {
-  print_message "Checking Docker Installation"
+  print_message "Checking Docker..."
   if ! command -v docker &> /dev/null; then
       echo "Docker is not installed."
       echo "To install Docker, you can run the following commands:"
@@ -78,9 +140,9 @@ install_docker() {
   fi
 
   # Check the Docker version and ensure it's greater than or equal to 20.10.x
-  docker_version=$(docker -v | awk -F'[ ,]+' '{print $3}' | cut -c 1-5)
+  docker_version=$(docker -v | awk -F'[ ,]+' '{print $3}' | cut -c 1-4)
   if (( $(echo "$docker_version >= 20.10" | bc -l) )); then
-      print_success "Docker $docker_version is installed successfully."
+      print_success "Docker Version $docker_version is Installed"
   else
       print_error "Docker is installed, but the version ($docker_version) is not compatible. Please install Docker version 20.10.x or above manually and re-run the script."
       exit 1
@@ -88,49 +150,9 @@ install_docker() {
 }
 
 
-# Function to check and set umask
-check_umask() {
-  print_message "Checking Umask"
-  grep 022 /etc/profile 2>/dev/null >/dev/null
-  if [ $? -eq 0 ]; then
-      print_success "Umask is correctly set (022)."
-  else
-      echo "Umask not set. Setting umask to 0022."
-      echo "umask 0022" >> /etc/profile 2>/dev/null >/dev/null
-      print_success "Umask set to 0022."
-  fi
-}
-
-# Function to check and disable SELinux
-check_selinux() {
-  print_message "Checking SELinux"
-  sestatus | grep "SELinux status" | grep enabled 2>/dev/null >/dev/null
-  if [ $? -eq 0 ]; then
-      setenforce 0
-      sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config 2>/dev/null >/dev/null
-      print_success "SELinux disabled."
-  else
-      print_success "SELinux is already disabled."
-  fi
-}
-
-# Function to configure sysctl settings
-configure_sysctl_settings() {
-  print_message "Configuring Sysctl Settings"
-  if grep -q "vm.max_map_count=262144" /etc/sysctl.conf && grep -q "net.ipv4.ip_forward=1" /etc/sysctl.conf; then
-      print_success "Sysctl settings are already present in /etc/sysctl.conf."
-  else
-      echo "Enabling Port Forwarding and Sysctl Settings..."
-      grep "vm.max_map_count=262144" /etc/sysctl.conf >/dev/null || sh -c "echo 'vm.max_map_count=262144' >> /etc/sysctl.conf" 2>/dev/null >/dev/null
-      grep "net.ipv4.ip_forward=1" /etc/sysctl.conf >/dev/null || sh -c "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf" 2>/dev/null >/dev/null
-      sudo sysctl -p /etc/sysctl.conf 2>/dev/null >/dev/null
-      print_success "Sysctl settings configured."
-  fi
-}
-
 # Function to configure Docker daemon settings
 configure_docker_daemon_settings() {
-  print_message "Configuring Docker Daemon Settings"
+  print_message "Configuring Docker Daemon Settings..."
   if [ -f /etc/docker/daemon.json ]; then
       mv /etc/docker/daemon.json /etc/docker/daemon.json_bk &>/dev/null
   fi
@@ -293,7 +315,6 @@ function configure_ssl_for_pulse {
 
 }
 
-
 # Main script logic
 case "$1" in
   check_os_prerequisites)
@@ -304,6 +325,9 @@ case "$1" in
     ;;
   install_pulse)
     install_pulse
+    ;;
+  full_install_pulse)
+    full_install_pulse
     ;;
   configure_ssl_for_pulse)
     configure_ssl_for_pulse
