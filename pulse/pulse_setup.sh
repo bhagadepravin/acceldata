@@ -178,6 +178,8 @@ install_pulse() {
   echo -e "\e[1;34m1. Make sure you have set up the AcceloHome Data directory path (e.g., /data01/acceldata).\e[0m"
   echo -e "\e[1;34m2. Download and copy the 'accelo.linux' file to the AcceloHome Data directory path as '/data01/acceldata/accelo'.\e[0m"
   echo -e "\e[1;34m3. Copy the Pulse license file into '/data01/acceldata/work/license'. Please create the 'work' directory before copying the file.\e[0m"
+  echo -e "\e[1;34m3. If Kerberos is enabled in Cluster, Please get hdfs keytab, krb5.conf file on Pulse server\e[0m"
+  echo -e "\e[1;34m3. Please get Database credentials handy for Hive and Oozie database\e[0m"
   echo -e "\e[1;34m4. Make sure to load Pulse tar images into Docker using the provided command:\e[0m"
   echo -e "\e[1;32m   'ls -1 *.tgz | xargs --no-run-if-empty -L 1 docker load -i'\e[0m"
   echo ""
