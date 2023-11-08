@@ -100,17 +100,21 @@ fi
 specs() {
   # OS information
   os_version=$(awk -F'=' '/VERSION_ID/ {gsub(/"/, "", $2); print $2}' /etc/os-release)
+  echo -e "${GREY}*********************************************************************${NC}"
   echo -e "${ICyan}OS: $os $os_version${NC}"
 
   # Number of CPU cores
   cpu_cores=$(nproc)
+  echo -e "${GREY}*********************************************************************${NC}"
   echo -e "${ICyan}Number of CPU cores: $cpu_cores${NC}"
 
   # Memory information
+  echo -e "${GREY}*********************************************************************${NC}"
   echo -e "${ICyan}Memory Information:${NC}"
   free -h
 
   # Storage information (excluding Docker and tmpfs filesystems)
+  echo -e "${GREY}*********************************************************************${NC}"
   echo -e "${ICyan}Storage Information:${NC}"
   df -hP | grep -vE 'docker|tmpfs'
 
