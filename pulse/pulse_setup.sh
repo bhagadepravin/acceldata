@@ -197,12 +197,9 @@ install_docker() {
 # Function to configure Docker daemon settings
 configure_docker_daemon_settings() {
   print_message "Configuring Docker Daemon Settings..."
-  if [ -f /etc/docker/daemon.json ]; then
-      mv /etc/docker/daemon.json /etc/docker/daemon.json_bk &>/dev/null
-  fi
-  touch /etc/docker/daemon.json &>/dev/null
 
-  echo "{
+  # Define the required configuration
+  required_config="{
     \"live-restore\": true,
     \"log-driver\": \"json-file\",
     \"log-opts\": {
@@ -211,11 +208,30 @@ configure_docker_daemon_settings() {
       \"max-size\": \"10m\",
       \"max-file\": \"3\"
     }
-  }" > /etc/docker/daemon.json
+  }"
 
-  systemctl daemon-reload
-  systemctl enable docker >/dev/null
-  systemctl restart docker && print_success "Docker daemon configured."
+  # Check if /etc/docker/daemon.json exists
+  if [ -f /etc/docker/daemon.json ]; then
+      # Check if the required configuration already exists in daemon.json
+      if ! grep -qF "$required_config" /etc/docker/daemon.json; then
+          # Append the required configuration
+          mv /etc/docker/daemon.json /etc/docker/daemon.json_bk &>/dev/null
+          echo "$required_config" > /etc/docker/daemon.json
+          print_success "Docker daemon settings updated."
+          # Reload Docker daemon
+          systemctl daemon-reload
+          # Enable and restart Docker
+          systemctl enable docker >/dev/null
+          systemctl restart docker && print_success "Docker daemon configured."
+      else
+          # The required configuration is already present
+          print_success1 "Docker daemon is already configured."
+      fi
+  else
+      # Create /etc/docker/daemon.json if it doesn't exist
+      echo "$required_config" > /etc/docker/daemon.json
+      print_success "Docker daemon settings updated."
+  fi
 }
 
 install_pulse() {
