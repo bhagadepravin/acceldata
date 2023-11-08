@@ -56,6 +56,7 @@ check_docker_prerequisites () {
 }
 
 # Function to check and install Docker
+# Function to check and install Docker with a minimum required version
 install_docker() {
   print_message "Checking Docker Installation"
   if ! command -v docker &> /dev/null; then
@@ -70,15 +71,22 @@ install_docker() {
           sudo yum install -y yum-utils
           sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
           sudo yum -y install docker-ce docker-ce-cli containerd.io
-          docker version && print_success "Docker installed successfully."
       else
           print_error "Please install Docker manually and re-run the script."
           exit 1
       fi
+  fi
+
+  # Check the Docker version and ensure it's greater than or equal to 20.10.x
+  docker_version=$(docker -v | awk -F'[ ,]+' '{print $3}' | cut -c 1-5)
+  if (( $(echo "$docker_version >= 20.10" | bc -l) )); then
+      print_success "Docker $docker_version is installed successfully."
   else
-      print_success "Docker is installed."
+      print_error "Docker is installed, but the version ($docker_version) is not compatible. Please install Docker version 20.10.x or above manually and re-run the script."
+      exit 1
   fi
 }
+
 
 # Function to check and set umask
 check_umask() {
