@@ -7,7 +7,7 @@ BLUE=$'\033[0;94m'
 RED=$'\e[0;31m'
 GREY=$'\033[90m'
 NC=$'\e[0m'
-TICK="✔"  # Tick symbol for indicating successful steps
+TICK="✅"
 CROSS="❌" # Cross symbol for indicating failed steps
 
 print_success1() {
