@@ -6,6 +6,7 @@ GREEN=$'\e[0;32m'
 BLUE=$'\033[0;94m'
 RED=$'\e[0;31m'
 GREY=$'\033[90m'
+CYAN="\033[0;36m"
 NC=$'\e[0m'
 TICK="✅"
 CROSS="❌" # Cross symbol for indicating failed steps
@@ -203,6 +204,23 @@ install_pulse() {
 }
 
 function configure_ssl_for_pulse {
+# Ask if this is a Pulse Core Server
+echo -e "${CYAN}Is this a Pulse Core Server? (yes/no):${NC}\c"
+read is_pulse_core
+case "$is_pulse_core" in
+[Yy][Ee][Ss] | [Yy])
+  is_pulse_core="yes"
+  ;;
+[Nn][Oo] | [Nn])
+  is_pulse_core="no"
+  ;;
+*)
+  echo "Invalid input. Please enter 'yes' or 'no'."
+  exit 1
+  ;;
+esac
+
+  if [[ "$is_pulse_core" == "yes" || "$is_pulse_core" == "y" ]]; then
   # Load the ad.sh profile
   source /etc/profile.d/ad.sh
   # Check if the AcceloHome variable is set
@@ -305,6 +323,8 @@ function configure_ssl_for_pulse {
     sed -i "/ad-fsanalyticsv2-connector:/,/ulimits:/ s|volumes:|volumes:\n    - $AcceloHome/config/security/jssecacerts:/usr/local/openjdk-8/lib/security/jssecacerts|" "$AcceloHome/config/docker/addons/ad-fsanalyticsv2-connector.yml"
 
     echo -e "${GREEN}Successfully added the cacerts file to the volumes section of ad-fsanalyticsv2-connector.yml${NC}"
+  fi
+
   fi
 
 }
