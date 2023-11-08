@@ -10,12 +10,6 @@ NC=$'\e[0m'
 TICK="✔"  # Tick symbol for indicating successful steps
 CROSS="❌" # Cross symbol for indicating failed steps
 
-logStep() {
-    printf "${BLUE}âš�~D� $1${NC}\n" 1>&2
-}
-
-# Function to print success messages with green color
-
 print_success1() {
   echo -e "${BLUE}${TICK} Success: $1${NC}"
 }
