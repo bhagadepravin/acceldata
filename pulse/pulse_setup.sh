@@ -1,5 +1,5 @@
 #!/bin/bash
-# Un-offical script
+# Un-official script, Acceldata Inc.
 # Define text colors for output
 YELLOW=$'\033[0;33m'
 GREEN=$'\e[0;32m'
