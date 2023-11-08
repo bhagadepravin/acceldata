@@ -6,7 +6,8 @@ GREEN=$'\e[0;32m'
 BLUE=$'\033[0;94m'
 RED=$'\e[0;31m'
 GREY=$'\033[90m'
-CYAN="\033[0;36m"
+ICyan=$'\033[0;96m'
+CYAN=$'\033[0;36m'
 NC=$'\e[0m'
 TICK="✅"
 CROSS="❌" # Cross symbol for indicating failed steps
@@ -35,6 +36,13 @@ print_message() {
 # Display usage information
 show_usage() {
   cat <<EOM
+    ${ICyan}
+   __    ___  ___  ____  __    ____    __   ____   __
+  /__\  / __)/ __)( ___)(  )  (  _ \  /__\ (_  _) /__\
+ /(__)\( (__( (__  )__)  )(__  )(_) )/(__)\  )(  /(__)\
+(__)(__)\___)\___)(____)(____)(____/(__)(__)(__)(__)(__)
+    ${NC}
+  ${CYAN}/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ ${NC}
 ${YELLOW}Usage: $(basename $0) [check_os_prerequisites, check_docker_prerequisites, install_pulse, configure_ssl_for_pulse]${NC}
 Parameters:
   - ${BLUE}check_os_prerequisites${NC}: Verify Umask, SELinux, and sysctl settings.
@@ -56,6 +64,7 @@ EOM
 [ -z $1 ] && { show_usage; }
 
 check_os_prerequisites () {
+  specs | sed -e "s/\(.*\)/${YELLOW}\1${NC}/"
   check_umask
   check_selinux
   configure_sysctl_settings
@@ -70,6 +79,42 @@ full_install_pulse () {
   check_os_prerequisites
   check_docker_prerequisites
   install_pulse
+}
+
+# Detect the operating system
+os=""
+
+if grep -qi "ubuntu" /etc/os-release; then
+  os="Ubuntu"
+elif grep -qiE "rhel|centos" /etc/os-release; then
+  os="CentOS"
+fi
+
+# Check if the detected OS is supported, and exit if it's not
+if [ -z "$os" ]; then
+  echo -e "${RED}${CROSS} OS not supported${NC}"
+  exit 94
+fi
+
+# Function to display system information
+specs() {
+  # OS information
+  os_version=$(awk -F'=' '/VERSION_ID/ {gsub(/"/, "", $2); print $2}' /etc/os-release)
+  echo -e "${ICyan}OS: $os $os_version${NC}"
+
+  # Number of CPU cores
+  cpu_cores=$(nproc)
+  echo -e "${ICyan}Number of CPU cores: $cpu_cores${NC}"
+
+  # Memory information
+  echo -e "${ICyan}Memory Information:${NC}"
+  free -h
+
+  # Storage information (excluding Docker and tmpfs filesystems)
+  echo -e "${ICyan}Storage Information:${NC}"
+  df -hP | grep -vE 'docker|tmpfs'
+
+  # Additional system details can be added here
 }
 
 
