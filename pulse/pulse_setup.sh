@@ -247,7 +247,7 @@ install_pulse() {
   echo -e "${YELLOW}   'ls -1 *.tgz | xargs --no-run-if-empty -L 1 docker load -i'\e[0m"
   echo ""
 
-  read -p "Do you want to proceed with these steps? ${YELLOW}(yes/no)${NC}: " choice
+ read -p "Do you want to proceed with these steps? ${YELLOW}(yes/no)${NC}: " choice
   if [ "$choice" == "yes" ]; then
       read -p "Enter the AcceloHome Data dir path: " AcceloHome
       if [ -d "$AcceloHome" ]; then
@@ -257,14 +257,19 @@ install_pulse() {
           sleep 2
           source /etc/profile.d/ad.sh
           ./accelo init
+          if [ $? -eq 0 ]; then
+          echo "${Cyan} accelo init completed successfully ${NC}"
+          fi
+           accelo info
           cd
           which accelo && print_success "Run -> accelo config cluster "
+          echo -e "${Cyan}https://docs.acceldata.io/pulse/documentation/single-node-installation-guide#configure-the-acceldata-core-components${NC}"
       else
           print_error "AcceloHome directory doesn't exist. Please create it and re-run the script."
           exit 1
       fi
   else
-      echo "Pulse installation canceled."
+      echo -e "{$RED}Pulse installation canceled.${NC}"
   fi
 }
 
