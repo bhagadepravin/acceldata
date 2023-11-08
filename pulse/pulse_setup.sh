@@ -219,7 +219,7 @@ configure_docker_daemon_settings() {
 }
 
 install_pulse() {
-  print_message "Installing Pulse"
+  print_message "Installing Pulse..."
   echo -e "${YELLOW}Please follow these steps to install Pulse:\e[0m"
   echo ""
   echo -e "\e[1;34m1. Make sure you have set up the AcceloHome Data directory path (e.g., /data01/acceldata).\e[0m"
