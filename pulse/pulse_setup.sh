@@ -1,17 +1,17 @@
 #!/bin/bash
 # Un-official script, Acceldata Inc.
 
-# Define text colors for output
 YELLOW=$'\033[0;33m'
 GREEN=$'\e[0;32m'
 BLUE=$'\033[0;94m'
+DARK_BLUE=$'\033[0;34m'
 RED=$'\e[0;31m'
 GREY=$'\033[90m'
 ICyan=$'\033[0;96m'
 CYAN=$'\033[0;36m'
 NC=$'\e[0m'
 TICK="✅"
-CROSS="❌"
+CROSS="❌" # Cross symbol for indicating failed steps
 
 print_success1() {
   echo -e "${BLUE}${TICK} Success: $1${NC}"
@@ -37,15 +37,15 @@ print_message() {
 # Display usage information
 show_usage() {
   cat <<EOM
-    ${ICyan}
+    ${DARK_BLUE}
  █████╗  ██████╗ ██████╗███████╗██╗     ██████╗  █████╗ ████████╗ █████╗         ██████╗ ██╗   ██╗██╗     ███████╗███████╗
 ██╔══██╗██╔════╝██╔════╝██╔════╝██║     ██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗        ██╔══██╗██║   ██║██║     ██╔════╝██╔════╝
-███████║██║     ██║     █████╗  ██║     ██║  ██║███████║   ██║   ███████║        ██████╔╝██║   ██║██║     ███████╗█████╗  
-██╔══██║██║     ██║     ██╔══╝  ██║     ██║  ██║██╔══██║   ██║   ██╔══██║        ██╔═══╝ ██║   ██║██║     ╚════██║██╔══╝  
+███████║██║     ██║     █████╗  ██║     ██║  ██║███████║   ██║   ███████║        ██████╔╝██║   ██║██║     ███████╗█████╗
+██╔══██║██║     ██║     ██╔══╝  ██║     ██║  ██║██╔══██║   ██║   ██╔══██║        ██╔═══╝ ██║   ██║██║     ╚════██║██╔══╝
 ██║  ██║╚██████╗╚██████╗███████╗███████╗██████╔╝██║  ██║   ██║   ██║  ██║        ██║     ╚██████╔╝███████╗███████║███████╗
 ╚═╝  ╚═╝ ╚═════╝ ╚═════╝╚══════╝╚══════╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝        ╚═╝      ╚═════╝ ╚══════╝╚══════╝╚══════╝
     ${NC}
-  ${CYAN}/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\ ${NC}
+  ${CYAN}/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ ${NC}
 ${YELLOW}Usage: $(basename $0) [check_os_prerequisites, check_docker_prerequisites, install_pulse, configure_ssl_for_pulse]${NC}
 Parameters:
   - ${BLUE}check_os_prerequisites${NC}: Verify Umask, SELinux, and sysctl settings.
@@ -238,42 +238,127 @@ configure_docker_daemon_settings() {
 }
 
 install_pulse() {
-  print_message "Installing Pulse..."
-  echo -e "${YELLOW}Please follow these steps to install Pulse:\e[0m"
-  echo ""
-  echo -e "\e[1;34m1. Make sure you have set up the AcceloHome Data directory path (e.g., /data01/acceldata).\e[0m"
-  echo -e "\e[1;34m2. Download and copy the 'accelo.linux' file to the AcceloHome Data directory path as '/data01/acceldata/accelo'.\e[0m"
-  echo -e "\e[1;34m3. Copy the Pulse license file into '/data01/acceldata/work/license'. Please create the 'work' directory before copying the file.\e[0m"
-  echo -e "\e[1;34m3. If Kerberos is enabled in Cluster, Please get hdfs keytab, krb5.conf file on Pulse server\e[0m"
-  echo -e "\e[1;34m3. Please get Database credentials handy for Hive and Oozie database\e[0m"
-  echo -e "\e[1;34m4. Make sure to load Pulse tar images into Docker using the provided command:\e[0m"
-  echo -e "${YELLOW}   'ls -1 *.tgz | xargs --no-run-if-empty -L 1 docker load -i'\e[0m"
-  echo ""
+    print_message "Installing Pulse..."
+    echo -e "${YELLOW}Please follow these steps to install Pulse:\e[0m"
+    echo ""
+    echo -e "\e[1;34m1. Make sure you have set up the AcceloHome Data directory path (e.g., /data01/acceldata).\e[0m"
+    echo -e "\e[1;34m2. Download and copy the 'accelo.linux' file to the AcceloHome Data directory path as '/data01/acceldata/accelo'.\e[0m"
+    echo -e "\e[1;34m3. Copy the Pulse license file into '/data01/acceldata/work/license'. Please create the 'work' directory before copying the file.\e[0m"
+    echo -e "\e[1;34m3. If Kerberos is enabled in Cluster, Please get hdfs keytab, krb5.conf file on Pulse server\e[0m"
+    echo -e "\e[1;34m3. Please get Database credentials handy for Hive and Oozie database\e[0m"
+    echo -e "\e[1;34m4. Make sure to load Pulse tar images into Docker using the provided command:\e[0m"
+    echo -e "${YELLOW}   'ls -1 *.tgz | xargs --no-run-if-empty -L 1 docker load -i'\e[0m"
+    echo ""
 
- read -p "Do you want to proceed with these steps? ${YELLOW}(yes/no)${NC}: " choice
-  if [ "$choice" == "yes" ]; then
-      read -p "Enter the AcceloHome Data dir path: " AcceloHome
-      if [ -d "$AcceloHome" ]; then
-          chmod +x $AcceloHome/accelo
-          cd $AcceloHome
-          ./accelo init
-          sleep 2
-          source /etc/profile.d/ad.sh
-          ./accelo init
-          if [ $? -eq 0 ]; then
-          echo "${Cyan} accelo init completed successfully ${NC}"
-          fi
-           accelo info
-          cd
-          which accelo && print_success "Run -> accelo config cluster "
-          echo -e "${Cyan}https://docs.acceldata.io/pulse/documentation/single-node-installation-guide#configure-the-acceldata-core-components${NC}"
-      else
-          print_error "AcceloHome directory doesn't exist. Please create it and re-run the script."
-          exit 1
-      fi
-  else
-      echo -e "{$RED}Pulse installation canceled.${NC}"
-  fi
+    read -p "Do you want to proceed with these steps? ${YELLOW}(yes/no)${NC}: " choice
+
+    if [ "$choice" == "yes" ]; then
+        read -p "Enter the AcceloHome Data dir path: " AcceloHome
+
+        if [ ! -d "$AcceloHome" ]; then
+            read -p "${CYAN}Looks like the folder does not exist. Do you want to proceed and create this folder? [y/n]: ${NC}" ANS
+
+            if [[ "$ANS" == "y" || "$ANS" == "yes" ]]; then
+                mkdir -p "$AcceloHome"
+            elif [[ "$ANS" == "n" || "$ANS" == "no" ]]; then
+                echo "${CYAN}User chose not to create the folder. Exiting script.${NC}" && exit 86
+            else
+                echo "${RED}Invalid answer. Exiting script.${NC}" && exit 87
+            fi
+        fi
+
+        if [ -z "$(ls -A "${AcceloHome}" | grep -v -E 'work|accelo|accelo.linux')" ]; then
+            echo "${YELLOW}Directory is empty.${NC}"
+        else
+            echo "${YELLOW}Directory is not empty.${NC}" && exit 88
+        fi
+
+        if [ ! -f "${AcceloHome}/work/license" ]; then
+            # Check if the license file exists, if not, ask the user to provide it
+            read -e -p "Provide Pulse license file [path/to/license], if not exist, create it and provide the complete path of the file: " lipath
+
+            if [ ! -f "$lipath" ]; then
+                echo "${YELLOW}License file is not present at the specified path.${NC}" && exit 89
+            fi
+
+            mkdir -p "${AcceloHome}/work"
+            cp "$lipath" "${AcceloHome}/work/license"
+        fi
+
+        if [ -d "$AcceloHome" ]; then
+            if [ -z "$(ls -A "${AcceloHome}/accelo")" ]; then
+                echo "${YELLOW}Accelo binary file does not exist.${NC}"
+
+                read -p "Do you have the 'accelo.linux' binary file? ${YELLOW}(yes/no)${NC}: " haveAcceloBinary
+
+                if [ "$haveAcceloBinary" == "yes" ]; then
+                    read -e -p "Provide the complete path to the 'accelo.linux' binary file or the directory containing it: " acceloBinaryPath
+
+                    if [ -f "$acceloBinaryPath" ]; then
+                        cp "$acceloBinaryPath" "${AcceloHome}/accelo"
+                        chmod +x "${AcceloHome}/accelo"
+                        echo "${CYAN}Accelo binary file copied successfully.${NC}"
+                    else
+                        echo "${RED}Invalid file path. Exiting script.${NC}" && exit 100
+                    fi
+                else
+                    echo "${CYAN}Copy 'accelo.linux' binary file to '${AcceloHome}/accelo' or provide the complete path.${NC}"
+                    exit 88
+                fi
+            fi
+
+            echo "${YELLOW}Accelo binary file exists.${NC}"
+
+            read -p "Have you loaded Pulse Docker images? ${YELLOW}(yes/no)${NC}: " loadedPulseImages
+
+            if [ "$loadedPulseImages" == "yes" ]; then
+                chmod +x "$AcceloHome/accelo"
+                cd "$AcceloHome"
+                ./accelo init
+                sleep 2
+                source "/etc/profile.d/ad.sh"
+                ./accelo init
+
+                if [ $? -eq 0 ]; then
+                    echo "${CYAN}Accelo init completed successfully${NC}"
+                fi
+
+                accelo info
+                cd
+                which accelo && echo "${GREEN}Run -> accelo config cluster${NC}"
+                echo -e "${CYAN}For more information, visit: https://docs.acceldata.io/pulse/documentation/single-node-installation-guide#configure-the-acceldata-core-components${NC}"
+            else
+                # Continue with the rest of the installation steps
+                read -e -p "Do you already have the pulse tarball file ${CYAN}(yes/y/no/n): ${NC}" pulsetar
+
+                if [[ "$pulsetar" == "yes" || "$pulsetar" == "y" ]]; then
+                    read -e -p "Location of the pulse tarball file ${CYAN}[path/to/folder]: ${NC}" pulpath
+                    read -e -p "${RED}Version of Pulse given: ${NC}" ver
+
+                    if [ ! -f "$pulpath" ]; then
+                        echo "${RED}Folder does not exist. Exiting.${NC}" && exit 100
+                    fi
+
+                    mkdir -p "/tmp/pulse-$ver"
+                    echo "${CYAN}Extracting Pulse tarball${NC}"
+                    tar -xf "$pulpath" -C "/tmp/pulse-$ver"
+                    echo "${GREEN}Extraction complete${NC}"
+                    cp "/tmp/pulse-$ver/accelo.linux" "${AcceloHome}/accelo"
+                    echo "${CYAN}Extracting images for Pulse${NC}"
+
+                    for FILE in "/tmp/pulse-$ver/ad-"*.tgz; do
+                        docker load <"$FILE"
+                    done 2>/dev/null
+                else
+                    echo "${RED}AcceloHome directory doesn't exist. Please create it and re-run the script.${NC}" && exit 1
+                fi
+            fi
+        else
+            echo "${RED}AcceloHome directory doesn't exist. Please create it and re-run the script.${NC}" && exit 1
+        fi
+    else
+        echo -e "${RED}User chose not to proceed. Exiting script.${NC}"
+    fi
 }
 
 function configure_ssl_for_pulse {
