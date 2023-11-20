@@ -26,6 +26,18 @@ print_error() {
   echo -e "${RED}${CROSS} Error: $1${NC}"
 }
 
+logStep() {
+    printf "${BLUE}${TICK} $1${NC}\n" 1>&2
+}
+
+logSuccess() {
+    printf "${GREEN}${TICK} $1${NC}\n" 1>&2
+}
+
+logFailure() {
+    printf "${RED}${CROSS} $1${NC}\n" 1>&2
+}
+
 # Function to print a message with a separator
 print_message() {
   separator="${GREY}*********************************************************************${NC}"
@@ -53,12 +65,18 @@ Parameters:
   - ${BLUE}install_pulse${NC}: Install Acceldata Pulse following specific steps.
   - ${BLUE}full_install_pulse${NC}: Include OS and Docker Pre-req setup and along with Pulse initial setup.
   - ${BLUE}configure_ssl_for_pulse${NC}: If SSL is enabled on Hadoop Cluster, Pass cacerts file to Pulse config.
+  - ${BLUE}enable_gauntlet${NC}: This component is used to delete elastic indices and run purge/compact operations on the Mongo DB collections.
+  - ${BLUE}set_daily_cron_gauntlet${NC}: Change CRON_TAB_DURATION for ad-gauntlet to next 5 min or default value.  
+  - ${BLUE}configure_pulse_multinode_mongo_uri${NC}: Pulse Multi-Node Setup to update MONGO_URI in ad.sh file.
 Examples:
   ./$(basename $0) ${GREEN}check_os_prerequisites${NC}
   ./$(basename $0) ${GREEN}check_docker_prerequisites${NC}
   ./$(basename $0) ${GREEN}install_pulse${NC}
   ./$(basename $0) ${GREEN}full_install_pulse${NC}
   ./$(basename $0) ${GREEN}configure_ssl_for_pulse${NC}
+  ./$(basename $0) ${GREEN}enable_gauntlet${NC}
+  ./$(basename $0) ${GREEN}set_daily_cron_gauntlet${NC}  
+  ./$(basename $0) ${GREEN}configure_pulse_multinode_mongo_uri${NC}  
 EOM
   exit 0
 }
@@ -487,6 +505,166 @@ esac
 
 }
 
+
+# Function to enable gauntlet
+enable_gauntlet() {
+  # Source the ad.sh profile
+  source /etc/profile.d/ad.sh
+
+  # Check if AcceloHome variable is set
+  if [ -z "$AcceloHome" ]; then
+    logFailure "Error: AcceloHome variable is not set."
+    return 1
+  fi
+
+  # Check if accelo.yml exists
+  accelo_yml="$AcceloHome/config/accelo.yml"
+  if [ ! -f "$accelo_yml" ]; then
+    logFailure "Error: $accelo_yml not found."
+    return 1
+  fi
+
+  # Check if enable_gauntlet is set to false in accelo.yml
+  enable_gauntlet=$(grep "enable_gauntlet:" "$accelo_yml" | awk '{print $2}')
+  if [ "$enable_gauntlet" == "true" ]; then
+    logSuccess "Gauntlet is already enabled."
+    return 0
+  fi
+
+  read -p "Gauntlet is currently disabled. Do you want to enable it? (y/n): " enable_response
+  if [ "$enable_response" == "y" ]; then
+    sed -i 's/enable_gauntlet: false/enable_gauntlet: true/' "$accelo_yml"
+    logSuccess "Gauntlet is now enabled."
+  else
+    logStep "Gauntlet remains disabled."
+  fi
+
+  # Check if ad-core.yml exists
+  ad_core_yml="$AcceloHome/config/docker/ad-core.yml"
+  if [ ! -f "$ad_core_yml" ]; then
+    logStep "ad-core.yml not found. Generating it..."
+    echo "accelo admin makeconfig ad-core"
+    accelo admin makeconfig ad-core
+  fi
+
+  # Check and update DRY_RUN_ENABLE in ad-core.yml
+  dry_run_enable=$(awk '/ad-gauntlet:/,/extra_hosts:/' "$ad_core_yml" | grep "DRY_RUN_ENABLE" | cut -d' ' -f3)
+  if [ "$dry_run_enable" == "false" ]; then
+    logStep "Setting DRY_RUN_ENABLE to true in ad-core.yml..."
+    sed -i 's/DRY_RUN_ENABLE=false/DRY_RUN_ENABLE=true/' "$ad_core_yml"
+  fi
+
+  # Execute the commands
+  logStep "Executing the following commands:"
+  logStep "accelo admin database push-config"
+  echo "y" | accelo admin database push-config
+  logStep "accelo restart ad-gauntlet"
+  echo "y" | accelo restart ad-gauntlet
+}
+
+# Function to calculate and set cron expression
+set_daily_cron_gauntlet() {
+  # Set AcceloHome variable
+  source /etc/profile.d/ad.sh
+
+  # Check if ad-core.yml exists
+  ad_core_yml="$AcceloHome/config/docker/ad-core.yml"
+  if [ ! -f "$ad_core_yml" ]; then
+    logFailure "ad-core.yml not found. Generating it..."
+    accelo admin makeconfig ad-core
+  fi
+
+  # Check if default CRON_TAB_DURATION is already configured
+  default_cron_configured=$(grep "CRON_TAB_DURATION=0 0 */2 * *" "$ad_core_yml")
+
+  if [ -n "$default_cron_configured" ]; then
+    logSuccess "Default CRON_TAB_DURATION is already configured in ad-core.yml."
+    return
+  fi
+
+  # Calculate the next 5 minutes
+  next_5_minutes=$(date -d '+5 minutes' '+%M %H')
+
+  # Extract minutes and hours
+  next_5_minutes_array=($next_5_minutes)
+  next_minutes=${next_5_minutes_array[0]}
+  next_hours=${next_5_minutes_array[1]}
+
+  # Set the cron expression
+  CRON_TAB_DURATION_5="$next_minutes $next_hours * * *"
+
+  # Display the calculated cron expression
+  logStep "CRON_TAB_DURATION_5 set to: $CRON_TAB_DURATION_5"
+
+  # Prompt user to change CRON_TAB_DURATION to next 5 minutes
+  read -p "Do you want to set CRON_TAB_DURATION to the next 5 minutes? (y/n): " change_cron_response
+
+  if [ "$change_cron_response" == "y" ]; then
+    # Get the current value from the file
+    current_cron_value=$(grep "CRON_TAB_DURATION=" "$ad_core_yml" | cut -d'=' -f2)
+
+    # Take a backup of ad-core.yml
+    backup_file="$AcceloHome/config/docker/ad-core.yml.bak"
+    cp "$ad_core_yml" "$backup_file"
+    logSuccess "Backup of ad-core.yml created: $backup_file"
+
+    # Update CRON_TAB_DURATION in ad-core.yml
+    sed -i "s/CRON_TAB_DURATION=$current_cron_value/CRON_TAB_DURATION=$CRON_TAB_DURATION_5/" "$ad_core_yml"
+    logSuccess "CRON_TAB_DURATION updated to next 5 minutes in ad-core.yml."
+  else
+    # Prompt user to switch back to the default value
+    read -p "Do you want to switch back to the default CRON_TAB_DURATION (0 0 */2 * *)? (y/n): " switch_default_response
+
+    if [ "$switch_default_response" == "y" ]; then
+      # Get the current value from the file
+      current_cron_value=$(grep "CRON_TAB_DURATION=" "$ad_core_yml" | cut -d'=' -f2)
+
+      # Take a backup of ad-core.yml
+      backup_file="$AcceloHome/config/docker/ad-core.yml.bak"
+      cp "$ad_core_yml" "$backup_file"
+      logSuccess "Backup of ad-core.yml created: $backup_file"
+
+      # Update CRON_TAB_DURATION to the default value in ad-core.yml
+      sed -i "s/CRON_TAB_DURATION=$current_cron_value/CRON_TAB_DURATION=0 0 */2 * */" "$ad_core_yml"
+      logSuccess "CRON_TAB_DURATION switched back to the default value in ad-core.yml."
+    else
+      logStep "CRON_TAB_DURATION_5 remains set to the calculated value."
+    fi
+  fi
+}
+
+function configure_pulse_multinode_mongo_uri {
+
+    echo -e "${YELLOW}Generate the encrypted string for the MongoDB URI :${NC}"
+    read -e -p "Please provide the Pulse Core server Hostname or IP address: " PULSECORE
+
+    STRING="mongodb://accel:ACCELUSER_01082018@$PULSECORE:27017"
+
+    # Run the command and capture the encrypted string
+    encrypted_string=$(echo "$STRING" | accelo admin encrypt 2>/dev/null | grep -oP 'ENCRYPTED:\s+\K.*')
+
+    # Check if the variables exist and remove them
+    profile_file="/etc/profile.d/ad.sh"
+    sed -i '/^export MONGO_URI=/d' "$profile_file"
+    sed -i '/^export MONGO_ENCRYPTED=/d' "$profile_file"
+    sed -i '/^export PULSE_SA_NODE=/d' "$profile_file"
+
+    # Append the variables to the profile file
+    echo "export MONGO_URI=\"$encrypted_string\"" >> "$profile_file"
+    echo "export MONGO_ENCRYPTED=true" >> "$profile_file"
+    echo "export PULSE_SA_NODE=true" >> "$profile_file"
+
+    source /etc/profile.d/ad.sh
+
+    active_cluster_name=$(accelo info 2>&1 | grep 'Active Cluster Name' | awk '{print $4}')
+
+    if [ "$active_cluster_name" == "NotFound" ]; then
+        logFailure "WARNING: Active Cluster Name is set to NotFound. Configuration may not be correct. Please check."
+    else
+        logSuccess "Active Cluster Name is: $active_cluster_name. Pulse Multi-node Setup is configured successfully."
+    fi
+}
+
 # Main script logic
 case "$1" in
   check_os_prerequisites)
@@ -501,9 +679,18 @@ case "$1" in
   full_install_pulse)
     full_install_pulse
     ;;
+  enable_gauntlet)
+    enable_gauntlet
+    ;;
+  set_daily_cron_gauntlet)
+    set_daily_cron_gauntlet
+    ;;       
   configure_ssl_for_pulse)
     configure_ssl_for_pulse
     ;;
+  configure_pulse_multinode_mongo_uri)
+    configure_pulse_multinode_mongo_uri
+    ;;    
   *)
     show_usage
     ;;
