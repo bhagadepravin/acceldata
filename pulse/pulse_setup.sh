@@ -517,6 +517,15 @@ enable_gauntlet() {
     return 1
   fi
 
+version=$(accelo info | grep "Accelo CLI Version" | awk -F ":" '{print $2}' | sed 's/^[ \t]*//')
+
+if [[ "$version" =~ ^3\.[2-9]\.[0-9]+ || "$version" =~ ^[4-9]\.[0-9]+\.[0-9]+ ]]; then
+    echo "Accelo CLI Version is $version, which is 3.2.x or higher."
+else
+    echo "Accelo CLI Version is $version, which is lower than 3.2.x. Exiting script."
+    exit 1
+fi
+
   # Check if accelo.yml exists
   accelo_yml="$AcceloHome/config/accelo.yml"
   if [ ! -f "$accelo_yml" ]; then
