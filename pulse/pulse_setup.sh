@@ -397,7 +397,7 @@ esac
   fi
 
   # Copy the cacerts file to $AcceloHome/config/security/
-  cp "$cacerts_path" "$AcceloHome/config/security/"
+  cp "$cacerts_path" "$AcceloHome/config/security/cacerts"
   cp "$cacerts_path" "$AcceloHome/config/security/jssecacerts"
 
   # Update permissions on all files in $AcceloHome/config/security/
