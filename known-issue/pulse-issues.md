@@ -733,6 +733,8 @@ Example: It would like below, You can share the above console outputs
 
 Ref: https://www.mongodb.com/docs/manual/tutorial/query-documents/
 
+## MongoDB shell
+
 ### Select All Documents in a Collection
 
 To select all documents in the collection, pass an empty document as the query filter parameter to the find method. The query filter parameter determines the select criteria:
@@ -747,4 +749,11 @@ db.yarn_yarnapps.find().sort({_id: 1}).limit(1)
 db.yarn_yarnapps.find( { _id: 'application_1700799072737_0008' } )
 
 db.yarn_yarnapps.find( { _id: { $in: [ "application_1700799072737_0008", "application_1701084228193_0003" ] } })
+
+db.impala_query_details.count()
+db.impala_query_details.getIndexes()
+db.impala_query_details.distinct("resource_pool")
+db.impala_query_details.createIndex({resource_pool:1})
+db.impala_query_details.createIndex({start_time:1,end_time:1})
+db.impala_query_details.createIndex({start_time:-1,end_time:-1})
 ```
