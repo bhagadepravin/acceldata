@@ -730,3 +730,21 @@ Example: It would like below, You can share the above console outputs
 > db.yarn_tez_queries.find().sort({_id: -1}).limit(1)
 { "_id" : "hive_20230714121120_3504965e-002b-4f53-aeb3-4035811b57c6", "appId" : "application_1688472573118_0245", "callerId" : "hive_20230714121120_3504965e-002b-4f53-aeb3-4035811b57c6", "dagId" : "dag_1688472573118_0245_1", "queue" : "default", "time" : NumberLong("1689316961653"), "counters" : { "org_apache_tez_common_counters_FileSystemCounter" : { "HDFS_BYTES_WRITTEN" : 11307, "HDFS_BYTES_READ" : 883244425 }, "org_apache_tez_common_counters_TaskCounter" : { "PHYSICAL_MEMORY_BYTES" : NumberLong("46133149696"), "CPU_MILLISECONDS" : 69870 } }, "timeTaken" : 31463, "endTime" : NumberLong("1689316922302"), "hiveAddress" : "10.90.6.94", "join" : [ { "rightTable" : null, "rightCol" : "D_DATE_SK", "leftTable" : null, "resolved" : true, "leftCol" : "SS_SOLD_DATE_SK" }, { "rightTable" : null, "rightCol" : "I_ITEM_SK", "leftTable" : null, "resolved" : true, "leftCol" : "SS_ITEM_SK" }, { "rightTable" : null, "rightCol" : "CD_DEMO_SK", "leftTable" : null, "resolved" : true, "leftCol" : "SS_CDEMO_SK" }, { "rightTable" : null, "rightCol" : "P_PROMO_SK", "leftTable" : null, "resolved" : true, "leftCol" : "SS_PROMO_SK" } ], "llap" : false, "queryUid" : "5ED0EDDADF7785B1FDEE1448D50BC80F", "startTime" : NumberLong("1689316880090"), "status" : "SUCCEEDED", "tablesUsed" : [ "ITEM", "CUSTOMER_DEMOGRAPHICS", "DATE_DIM", "STORE_SALES", "PROMOTION" ], "uid" : "EE930585A8F4D40E84D486880BF1A30C", "user" : "hive" }
 ```
+
+Ref: https://www.mongodb.com/docs/manual/tutorial/query-documents/
+
+### Select All Documents in a Collection
+
+To select all documents in the collection, pass an empty document as the query filter parameter to the find method. The query filter parameter determines the select criteria:
+
+Examples:
+```mongo
+db.yarn_yarnapps.find( {} )
+db.yarn_yarnapps.find( {} ).limit(1)
+db.yarn_yarnapps.find().sort({_id: 1}).limit(1)
+
+
+db.yarn_yarnapps.find( { _id: 'application_1700799072737_0008' } )
+
+db.yarn_yarnapps.find( { _id: { $in: [ "application_1700799072737_0008", "application_1701084228193_0003" ] } })
+```
