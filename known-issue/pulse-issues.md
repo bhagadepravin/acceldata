@@ -757,3 +757,52 @@ db.impala_query_details.createIndex({resource_pool:1})
 db.impala_query_details.createIndex({start_time:1,end_time:1})
 db.impala_query_details.createIndex({start_time:-1,end_time:-1})
 ```
+
+
+# ElasticSearch Commands Cheat Sheet
+
+Check out the [Elasticsearch Commands Cheat Sheet](https://www.bmc.com/blogs/elasticsearch-commands/).
+
+### list all indexes
+```bash
+curl -X GET 'http://localhost:19013/_cat/indices?v'
+```
+
+
+### list all docs in index
+```
+curl -X GET 'http://localhost:19013/sample/_search'
+
+curl -X GET 'http://localhost:19013/odp_titan-hdfs-audit-2023.11.28/_search'
+```
+
+### query using URL parameters
+```
+Here we use Lucene query format to write q=school:Harvard.
+
+curl -X GET http://localhost:19013/samples/_search?q=school:Harvard
+
+curl -X GET http://localhost:19013/samples/_search?q=allowed:false
+```
+### In JSON format 
+```
+yum install jq -y 
+
+curl -X GET 'http://localhost:19013/odp_titan-logs-syslog-info-2023.11.28/_search' | jq
+
+
+curl -X GET http://localhost:19013/odp_titan-logs-syslog-info-2023.11.28/_search?q=offset:36492307
+
+curl -X GET http://localhost:19013/odp_titan-logs-syslog-info-2023.11.28/_search?q=offset:36492307  | jq
+
+
+curl -X GET --header 'Content-Type: application/json' http://localhost:19013/odp_titan-logs-syslog-info-2023.11.28/_search -d '{
+"query" : {
+"match" : { "offset": "36492307" }
+}
+}'
+```
+### Show cluster health
+```
+curl -H 'Content-Type: application/json' -X GET http://localhost:19013/_cluster/health?pretty
+```
