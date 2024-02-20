@@ -851,3 +851,38 @@ Check in mongodb
 docker exec -it ad-db_default mongo mongodb://accel:password@localhost:27017/admin --eval "db.getSiblingDB('acceldata').monitor_groups.find({}).projection({}).sort({_id: -1}).limit(100)"
 ```
 
+
+
+### Incomplete Details in Spark Application Page
+
+The Spark application page lacks crucial information, specifically related to configuration and wastage. The Spark configuration details are obtained from the spark.eventLog.dir property within the cluster, with the default setting being spark.eventLog.dir=hdfs:///spark2-history/.
+
+To ensure data availability for Pulse, check the HDFS location (/spark2-history/) and verify that the application file contains the necessary data. Running the command `$ hdfs dfs -ls /spark2-history/` should provide insights into the data presence.
+
+Additionally, gather container logs by executing a sample job:
+
+```bash
+/usr/odp/current/spark2-client/bin/spark-sql --master yarn --num-executors 3 --executor-memory 512m --executor-cores 1 --driver-memory 512m --conf spark.sql.shuffle.partitions=5 --conf spark.sql.autoBroadcastJoinThreshold=-1 --conf spark.sql.execution.arrow.enabled=true --conf spark.sql.parquet.writeLegacyFormat=false <<EOF
+SELECT 'Hello, World!' as greeting
+EOF
+```
+
+Collect logs from various Docker containers:
+
+```bash
+docker logs ad-streaming_default > /tmp/ad-streaming_default_feb.log
+docker logs ad-connectors_default > /tmp/ad-connectors_default_feb.log
+docker logs ad-sparkstats_default > /tmp/ad-sparkstats_default_feb.log
+
+tar -cvzf spark-logs-pulse.tar.gz /tmp/ad-streaming_default_feb.log /tmp/ad-connectors_default_feb.log /tmp/ad-sparkstats_default_feb.log
+```
+
+Attach the file `spark-logs-pulse.tar.gz` and review the logs for any exceptions. Ensure that ad-sparkstats_default logs successful completion of the application. If not, verify the SparkStats URL in the configuration under `$AcceloHome/config`.
+
+Check MongoDB for relevant information:
+
+```bash
+docker exec -it ad-db_default mongo mongodb://accel:password@localhost:27017/admin --eval "db.getSiblingDB('acceldata').monitor_groups.find({}).projection({}).sort({_id: -1}).limit(100)"
+```
+
+Review the MongoDB entries for insights into the application's status.
