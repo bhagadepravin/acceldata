@@ -840,3 +840,12 @@ docker exec -it ad-db_default mongo mongodb://accel:password@localhost:27017/adm
 ```
 
 Review the MongoDB configuration.
+
+### Increase Shard limit
+```
+open;","error.stack_trace":"org.elasticsearch.common.ValidationException: Validation Failed: 1: this action would add [2] shards, but this cluster currently has [1000]/[1000] maximum normal shards open
+
+the ad-elastic was not working fine due to its shards limit being reached. We increased the shards limit to 3000 using the below command on pulse server that is hosting pulse ad-elastic service:
+
+curl -k -XPUT http://localhost:19013/_cluster/settings -H 'Content-type: application/json' --data-binary $'{"persistent":{"cluster.max_shards_per_node":3000}}'
+```
