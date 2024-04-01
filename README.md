@@ -2,7 +2,7 @@
 
 ##### LVM resize
 ```
-yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
+yum clean all ; yum update all; yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
 
 #RHEL 8
 
