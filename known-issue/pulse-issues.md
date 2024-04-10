@@ -685,7 +685,7 @@ Save it:
 `$ accelo restart ad-logstash`
 
 
-## Check Tez Query Dashboard Data missing.
+## 13. Check Tez Query Dashboard Data missing.
 
 - Check ad-connector logs
 - Check in Backend if we see data.
@@ -733,7 +733,7 @@ Example: It would like below, You can share the above console outputs
 
 Ref: https://www.mongodb.com/docs/manual/tutorial/query-documents/
 
-## MongoDB shell
+## 14. MongoDB shell
 
 ### Select All Documents in a Collection
 
@@ -759,7 +759,7 @@ db.impala_query_details.createIndex({start_time:-1,end_time:-1})
 ```
 
 
-# ElasticSearch Commands Cheat Sheet
+## 15. ElasticSearch Commands Cheat Sheet
 
 Check out the [Elasticsearch Commands Cheat Sheet](https://www.bmc.com/blogs/elasticsearch-commands/).
 
@@ -807,7 +807,7 @@ curl -X GET --header 'Content-Type: application/json' http://localhost:19013/odp
 curl -H 'Content-Type: application/json' -X GET http://localhost:19013/_cluster/health?pretty
 ```
 
-### Incomplete Details in Spark Application Page
+## 16. Incomplete Details in Spark Application Page
 
 The Spark application page lacks crucial information, specifically related to configuration and wastage. The Spark configuration details are obtained from the spark.eventLog.dir property within the cluster, with the default setting being spark.eventLog.dir=hdfs:///spark2-history/.
 
@@ -841,11 +841,30 @@ docker exec -it ad-db_default mongo mongodb://accel:password@localhost:27017/adm
 
 Review the MongoDB configuration.
 
-### Increase Shard limit
+## 17. Increase Shard limit
 ```
 open;","error.stack_trace":"org.elasticsearch.common.ValidationException: Validation Failed: 1: this action would add [2] shards, but this cluster currently has [1000]/[1000] maximum normal shards open
 
 the ad-elastic was not working fine due to its shards limit being reached. We increased the shards limit to 3000 using the below command on pulse server that is hosting pulse ad-elastic service:
 
 curl -k -XPUT http://localhost:19013/_cluster/settings -H 'Content-type: application/json' --data-binary $'{"persistent":{"cluster.max_shards_per_node":3000}}'
+```
+
+## 18. NATS cli
+https://github.com/nats-io/natscli
+
+##### Installation from the shell
+The following script will install the latest version of the nats cli on Linux and OS X:
+
+```bash
+curl -sf https://binaries.nats.dev/nats-io/natscli/nats@latest | sh
+```
+
+```bash
+nats context add nats --server localhost:19009 --description "NATS ODP Server" --select
+nats context ls
+nats stream ls
+
+nats str info hive_queries_events_lotr
+nats str edit hive_queries_events_lotr --max-msgs=100000
 ```
