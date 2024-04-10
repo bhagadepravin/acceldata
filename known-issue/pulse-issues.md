@@ -20,6 +20,13 @@
 10. [Error: kinit: Resource temporarily unavailable while getting initial credentials](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#10-error-kinit-resource-temporarily-unavailable-while-getting-initial-credentials)
 11. [ERROR c.a.p.fsanalytics.FsImageService - updating fsimage failed java.io.IOException: listener timeout after waiting for [30000] ms](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#11-error-capfsanalyticsfsimageservice---updating-fsimage-failed-javaioioexception-listener-timeout-after-waiting-for-30000-ms)
 12. [ERROR c.a.p.f.elasticsearch.EsWriter - Failed to execute bulk java.net.SocketTimeoutException: null](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#12-error-capfelasticsearcheswriter---failed-to-execute-bulk-javanetsockettimeoutexception-null)
+13. [Check Tez Query Dashboard Data missing](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#13-check-tez-query-dashboard-data-missing)
+14. [MongoDB shell](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#14-mongodb-shell)
+15. [ElasticSearch Commands Cheat Sheet](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#15-elasticsearch-commands-cheat-sheet)
+16. [Incomplete Details in Spark Application Page](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#16-incomplete-details-in-spark-application-page)
+17. [Increase Shard limit](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#17-increase-shard-limit)
+18. [NATS cli](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#18-nats-cli)
+
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
