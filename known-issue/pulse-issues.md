@@ -26,7 +26,8 @@
 16. [Incomplete Details in Spark Application Page](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#16-incomplete-details-in-spark-application-page)
 17. [Increase Shard limit](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#17-increase-shard-limit)
 18. [NATS cli](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#18-nats-cli)
-
+19. [Increase NATS storage limit (Default 500GB)]()
+20. [NATS local storage cleanup]()
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
@@ -874,4 +875,32 @@ nats stream ls
 
 nats str info hive_queries_events_lotr
 nats str edit hive_queries_events_lotr --max-msgs=100000
+```
+
+## 19. Increase NATS storage limit (Default 500GB)
+
+Login into Pulse server:
+
+Update value for max_file in `$AcceloHome/config/db/nats-server.conf`
+
+- Increase size from 500G to 700G
+
+`vi $AcceloHome/config/db/nats-server.conf`
+- From : 500G to 700G
+
+- Once you edit this file, be sure to restart ad-events
+
+`accelo restart ad-events`
+`docker logs -f ad-events_default`
+
+## 20. NATS local storage cleanup
+
+- Check the size of NATS dir.
+
+```bash
+du -sch $AcceloHome/data/nats
+du -sch $AcceloHome/data/nats/*/*/*
+
+#Delete the dir which is consuming more data and restart ad-events
+accelo restart ad-events
 ```
