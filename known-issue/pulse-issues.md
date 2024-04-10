@@ -26,8 +26,8 @@
 16. [Incomplete Details in Spark Application Page](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#16-incomplete-details-in-spark-application-page)
 17. [Increase Shard limit](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#17-increase-shard-limit)
 18. [NATS cli](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#18-nats-cli)
-19. [Increase NATS storage limit (Default 500GB)]()
-20. [NATS local storage cleanup]()
+19. [Increase NATS storage limit (Default 500GB)](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#19-increase-nats-storage-limit-default-500gb)
+20. [NATS local storage cleanup](https://github.com/bhagadepravin/acceldata/blob/main/known-issue/pulse-issues.md#20-nats-local-storage-cleanup)
 
 ## 1. Pulse File Explorer / ad-fsanalitics Container: HDFS fsimage Access Error Solution.
 
