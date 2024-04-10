@@ -891,6 +891,7 @@ Update value for max_file in `$AcceloHome/config/db/nats-server.conf`
 - Once you edit this file, be sure to restart ad-events
 
 `accelo restart ad-events`
+
 `docker logs -f ad-events_default`
 
 ## 20. NATS local storage cleanup
