@@ -18,8 +18,13 @@ sudo pvresize /dev/sda5
 sudo lvextend -l+100%FREE /dev/mapper/vgubuntu-root
 sudo resize2fs /dev/mapper/vgubuntu-root
 sudo lsblk
+```
 
-
+##### Remove unwanted docker images:
+```
+source /etc/profile.d/ad.sh
+current_version=$(awk '/ImageTag: [0-9.]*/ { print $2 }' "$AcceloHome/config/accelo.yml")
+docker images --format "{{.Repository}}:{{.Tag}}" | grep -v ":$current_version" | xargs -r docker rmi
 ```
 
 ##### K9s on Centos 7
