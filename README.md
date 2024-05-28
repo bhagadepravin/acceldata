@@ -21,10 +21,11 @@ sudo lsblk
 ```
 
 ##### Remove unwanted docker images:
-```
+```bash
 source /etc/profile.d/ad.sh
 current_version=$(awk '/ImageTag: [0-9.]*/ { print $2 }' "$AcceloHome/config/accelo.yml")
-docker images --format "{{.Repository}}:{{.Tag}}" | grep -v ":$current_version" | xargs -r docker rmi
+docker images --format "{{.Repository}}:{{.Tag}}" | grep -E -v ":$current_version|<none>" | xargs -r docker rmi
+docker images --filter "dangling=true" -q | xargs -r docker rmi
 ```
 
 ##### K9s on Centos 7
