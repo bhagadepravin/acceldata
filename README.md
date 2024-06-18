@@ -2,6 +2,10 @@
 
 ##### LVM resize
 ```
+## DC VM centos 7
+yum -y install cloud-utils-growpart && pvcreate /dev/vdb && vgextend centos /dev/vdb && pvresize /dev/vdb && lvextend -l +100%FREE /dev/centos/root && xfs_growfs / && lsblk
+
+## ITI centos 7
 yum clean all ; yum update all; yum -y install cloud-utils-growpart && growpart /dev/sda 2; pvresize /dev/sda2; lvextend -l+100%FREE /dev/centos/root; xfs_growfs /dev/centos/root;lsblk
 
 #RHEL 8
