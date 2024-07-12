@@ -905,3 +905,9 @@ du -sch $AcceloHome/data/nats/*/*/*
 #Delete the dir which is consuming more data and restart ad-events
 accelo restart ad-events
 ```
+
+
+## wildcard
+```
+$ curl -X PUT "http://localhost:19013/_cluster/settings?pretty" -H 'Content-Type: application/json' -d'{"persistent": {"action.destructive_requires_name":false}}'
+```
