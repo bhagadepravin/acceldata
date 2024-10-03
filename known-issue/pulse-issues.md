@@ -125,6 +125,8 @@ docker logs -f ad-fsanalyticsv2-connector_default
 docker logs -f ad-connectors_default
 
 # Check fsimage
+curl -u pulse:data@ops -X GET http://localhost:19013/_cat/indices
+
 curl -X GET http://localhost:19013/_cat/indices?v |grep fsimage
 
 # Delete fsimage and load it again
