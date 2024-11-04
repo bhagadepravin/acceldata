@@ -914,8 +914,6 @@ accelo restart ad-events
 $ curl -X PUT "http://localhost:19013/_cluster/settings?pretty" -H 'Content-Type: application/json' -d'{"persistent": {"action.destructive_requires_name":false}}'
 ```
 
-
-```markdown
 # Managing Applications with `finalStatus` as `UNDEFINED` in MongoDB
 
 This document provides guidance on finding and deleting all application documents in the `yarn_yarnapps` collection where `finalStatus` is set to `UNDEFINED`.
@@ -973,4 +971,3 @@ If the command returns an empty result set, the deletion was successful.
 - **Delete Documents**: `db.yarn_yarnapps.deleteMany({ finalStatus: 'UNDEFINED' })`
 
 This process allows for efficient identification and cleanup of documents with an undefined final status in the `yarn_yarnapps` collection.
-```
