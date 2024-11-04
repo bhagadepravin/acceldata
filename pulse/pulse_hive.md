@@ -5,23 +5,36 @@ Nodes Page:
 Nodes Page Services:
 <img width="317" alt="image" src="https://github.com/user-attachments/assets/09c0de82-94b7-415d-8171-da31a929aec4">
 
-Tez Dashboard:
+# Tez Dashboard:
 
-- Vcore Usage
-- Memory Usage
-- Query Execution Count
-- Average Query Time
+Using Pulse, you can monitor the tables and queries executed in Tez.
+Click Tez > Dashboard in the left pane to access the Tez dashboard. The dashboard consists of summary panels, a Sankey Diagram, and charts that display information about queries and other related metrics.
+
+Note: The default time range is Last 24 hrs. To view statistics from a custom date range, click the icon and select a time frame and timezone of your choice.
+
+Summary Panel
+The summary tiles display several aggregated values. You can click the number on each field to view detailed information about that metric.
+<img width="806" alt="image" src="https://github.com/user-attachments/assets/e6d65785-4dcd-45cd-81c6-2f453d06210e">
+
+## Tez Charts
+
+- Vcore Usage :- The number of physical virtual cores used by a queue in the cluster.
+- Memory Usage :- The amount of memory used by a queue in the cluster.
+- Query Execution Count :- The number of queries executed within a timeframe.
+- Average Query Time :- The average time taken to execute queries. This metric also displays the Total Execution Time.
 <img width="1505" alt="image" src="https://github.com/user-attachments/assets/a82a3de4-5eef-46ff-857b-706f859a9c91">
 
-- Top 20 Users (By Query)
-- Top 20 Tables (By Query)
-- Total Connections hive_metastore
-- Total Connections hive_server2
+- Top 20 Users (By Query) :- The top 20 users that executed the highest number of queries.
+- Top 20 Tables (By Query) :- The top 20 tables that executed the highest number of queries.
+- Total Connections hive_metastore :- The total number of established connections to the Hive Metastore over a specified time period. You can change the status of connections for the chart by clicking the status drop-down and selecting one of these options: Established, Listen, Close_wait, etc.
+- Total Connections hive_server2 :- The total number of established connections to Hive Server2 over a specified time period. You can change the status of connections for the chart by clicking the status drop-down and selecting one of these options: Established, Listen, Close_wait, etc.
 <img width="1510" alt="image" src="https://github.com/user-attachments/assets/477b100a-f6de-422e-9f85-d24352214d19">
 
-- Top 10 Connections hive_metastore
-- Top 10 Connections hive_server2
+- Top 10 Connections hive_metastore :- This bar chart ranks the top 10 connections to the Hive Metastore based on the number of established connections from different hosts. You can change the status of connections for the chart by clicking the status drop-down and selecting one of these options: Established, Listen, Close_wait, etc.
+- Top 10 Connections hive_server2 :- This bar chart ranks the top 10 connections to Hive Server2 based on the number of established connections from different hosts. You can change the status of connections for the chart by clicking the status drop-down and selecting one of the these options: Established, Listen, Close_wait, etc.
 <img width="1309" alt="image" src="https://github.com/user-attachments/assets/9a49c8b2-8299-40b6-8fe4-a78f742bd323">
+
+Note: To view memory capacity allocated to or used by resources on a queue, click the queue in the Queues tab.
 
 # Dashplots:
 - HIVE-SERVICE-NEW Dashboard.
