@@ -913,3 +913,64 @@ accelo restart ad-events
 ```
 $ curl -X PUT "http://localhost:19013/_cluster/settings?pretty" -H 'Content-Type: application/json' -d'{"persistent": {"action.destructive_requires_name":false}}'
 ```
+
+
+```markdown
+# Managing Applications with `finalStatus` as `UNDEFINED` in MongoDB
+
+This document provides guidance on finding and deleting all application documents in the `yarn_yarnapps` collection where `finalStatus` is set to `UNDEFINED`.
+
+## 1. Finding Application IDs with `finalStatus` as `UNDEFINED`
+
+To retrieve the application IDs for all documents where `finalStatus` is set to `UNDEFINED`, use the following MongoDB query:
+
+```javascript
+db.yarn_yarnapps.find({ finalStatus: 'UNDEFINED' }, { _id: 1 })
+```
+
+### Explanation
+- **Query Filter**: `{ finalStatus: 'UNDEFINED' }` specifies that only documents with a `finalStatus` of `UNDEFINED` should be included in the results.
+- **Projection**: `{ _id: 1 }` restricts the output to display only the `_id` field (the application ID) of each matching document.
+
+### Example Output
+This query will return a list of application IDs with `finalStatus` as `UNDEFINED`, similar to:
+
+```json
+[
+  { "_id": "application_1730489651745_0015" },
+  { "_id": "application_1730489651745_0016" },
+  ...
+]
+```
+
+## 2. Deleting All Documents with `finalStatus` as `UNDEFINED`
+
+To delete all documents where `finalStatus` is set to `UNDEFINED`, run the following MongoDB command:
+
+```javascript
+db.yarn_yarnapps.deleteMany({ finalStatus: 'UNDEFINED' })
+```
+
+### Explanation
+- **`deleteMany` Method**: This command will delete all documents that match the provided filter.
+- **Filter**: `{ finalStatus: 'UNDEFINED' }` ensures that only documents with `finalStatus` set to `UNDEFINED` are deleted.
+
+> **Warning**: This operation is **irreversible** and will permanently delete all matching records. Ensure you have a backup of your data if needed, especially in a production environment.
+
+## Verification
+
+After deletion, you can confirm that all documents with `finalStatus` as `UNDEFINED` have been removed by running:
+
+```javascript
+db.yarn_yarnapps.find({ finalStatus: 'UNDEFINED' })
+```
+
+If the command returns an empty result set, the deletion was successful.
+
+## Summary
+
+- **Find Application IDs**: `db.yarn_yarnapps.find({ finalStatus: 'UNDEFINED' }, { _id: 1 })`
+- **Delete Documents**: `db.yarn_yarnapps.deleteMany({ finalStatus: 'UNDEFINED' })`
+
+This process allows for efficient identification and cleanup of documents with an undefined final status in the `yarn_yarnapps` collection.
+```
