@@ -115,7 +115,7 @@ Additional metrics:
 
 ### Nodes Page and Services
 
-The **Nodes Page** displays details about each node in the cluster, including their statuses and performance indicators.
+The **Nodes Page** displays details about each node in the cluster, including service statuses.
 
 ![Nodes Page Example](https://github.com/user-attachments/assets/1629308c-69c7-4bed-a9d9-1e53c441ebbb)
 ![Nodes Page Services](https://github.com/user-attachments/assets/09c0de82-94b7-415d-8171-da31a929aec4)
