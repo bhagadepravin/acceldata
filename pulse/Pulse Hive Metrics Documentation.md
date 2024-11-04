@@ -65,6 +65,11 @@ Other metrics:
 - **Total Connections (hive_metastore)**: Established connections to the Hive Metastore, with status filtering options (e.g., Established, Listen, Close_wait).
 - **Total Connections (hive_server2)**: Established connections to Hive Server2, with similar status filtering.
 
+<img width="1510" alt="image" src="https://github.com/user-attachments/assets/477b100a-f6de-422e-9f85-d24352214d19">
+
+- **Top 10 Connections hive_metastore** :- This bar chart ranks the top 10 connections to the Hive Metastore based on the number of established connections from different hosts. You can change the status of connections for the chart by clicking the status drop-down and selecting one of these options: Established, Listen, Close_wait, etc.
+- **Top 10 Connections hive_server2** :- This bar chart ranks the top 10 connections to Hive Server2 based on the number of established connections from different hosts. You can change the status of connections for the chart by clicking the status drop-down and selecting one of the these options: Established, Listen, Close_wait, etc.
+
 ![Tez Connections Example](https://github.com/user-attachments/assets/9a49c8b2-8299-40b6-8fe4-a78f742bd323)
 
 To view memory capacity for queues, select a queue under the **Queues** tab.
