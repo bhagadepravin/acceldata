@@ -79,32 +79,37 @@ By integrating Pulse's Hive metrics into their monitoring practices, organizatio
 For more detailed information, refer to the [Tez Dashboard documentation](https://docs.acceldata.io/pulse/documentation/tez-dashboard). 
 
 # Dashplots:
-- HIVE-SERVICE-NEW Dashboard.
 
-- HIVE-SERVICE-SUMMARY
- - LIVE COUNT OF HIVE SERVERS
- - LIVE COUNT OF HIVE METASTORES
+## HIVE-SERVICE-NEW Dashboard
 
-- ACTIVE-HIVE-SERVER-PROCESS-STATE
-- ACTIVE-HIVE-METASTORE-PROCESS-STATE
-- HIVE-SERVER-CPU-UTLISATION
-- HIVE-METASTORE-CPU-UTILISATION
+The HIVE-SERVICE-NEW dashboard provides a consolidated view of the current state and performance of Hive services. It includes real-time metrics and visualizations that assist administrators in monitoring the health and efficiency of Hive components
+
+## Key Metrics and Visualizations
+
+- HIVE-SERVICE-SUMMARY :- This section offers an overview of the Hive services, summarizing critical information such as the number of active servers, metastore instances, and their operational statuses.
+ - LIVE COUNT OF HIVE SERVERS :- Displays the current number of active Hive server instances. Monitoring this count helps ensure that the appropriate number of servers are running to handle the workload.
+ - LIVE COUNT OF HIVE METASTORES :- Shows the number of active Hive metastore instances. Maintaining the correct number of metastore services is crucial for metadata management and query planning.
+
+- ACTIVE-HIVE-SERVER-PROCESS-STATE :- Indicates the operational state of each Hive server process, such as running, stopped, or in error. This metric aids in identifying and addressing issues with specific server processes.
+- ACTIVE-HIVE-METASTORE-PROCESS-STATE :- Reflects the current state of Hive metastore processes, providing insights into their operational health and availability.
+- HIVE-SERVER-CPU-UTLISATION :- Measures the CPU usage of Hive server instances. Monitoring CPU utilization helps in detecting performance bottlenecks and ensuring efficient resource usage.
+- HIVE-METASTORE-CPU-UTILISATION :- Tracks the CPU consumption of Hive metastore services, assisting in performance tuning and capacity planning.
 <img width="753" alt="image" src="https://github.com/user-attachments/assets/d8b48f85-ea92-4bb0-9272-ff3fe0cdaaca">
 
-- HIVE SERVERS JVM USAGE
-- HIVE METASTORE JVM USAGE
+- HIVE SERVERS JVM USAGE :- Displays Java Virtual Machine (JVM) metrics for Hive servers, including heap memory usage. These metrics are vital for diagnosing memory-related issues and optimizing JVM performance.
+- HIVE METASTORE JVM USAGE :- Provides JVM metrics for Hive metastore services, offering insights into memory utilization and JVM health.
 
-- ACTIVE-OPERATIONS
-- HIVE GET REQUEST API
+- ACTIVE-OPERATIONS :- Lists the currently active operations on Hive servers, such as running queries and data processing tasks. This information is useful for tracking ongoing activities and managing workloads.
+- HIVE GET REQUEST API :- Monitors the number and performance of GET requests to the Hive API, helping to identify potential issues with API responsiveness or usage patterns.
 <img width="1473" alt="image" src="https://github.com/user-attachments/assets/dbd63ccc-7a9d-44da-8180-20ab62dcd8ac">
 
-- HIVE-SERVER-APP-STOP
-- HIVE-METASTORE-APP-STOP
-- HS2-QUERY-COUNT-TREND
+- HIVE-SERVER-APP-STOP :- Logs instances where Hive server applications have stopped, either intentionally or due to errors. This metric is essential for maintaining service availability and troubleshooting unexpected downtimes.
+- HIVE-METASTORE-APP-STOP :- Records occurrences of Hive metastore application stoppages, aiding in diagnosing and resolving service interruptions.
+- HS2-QUERY-COUNT-TREND :- Presents a trend analysis of the number of queries processed by HiveServer2 over time. This visualization helps in understanding query load patterns and planning for capacity needs.
 
-- HIVE-SERVER-OPEN-CONNECTIONS
-- HIVE-METASTORE-OPEN-CONNECTIONS
-- HIVE-QUERY-STATUS-TREND
+- HIVE-SERVER-OPEN-CONNECTIONS :- Shows the number of open connections to Hive servers, providing insights into user activity and potential connection management issues.
+- HIVE-METASTORE-OPEN-CONNECTIONS :- Displays the count of open connections to Hive metastore services, assisting in monitoring client interactions and connection pooling effectiveness.
+- HIVE-QUERY-STATUS-TREND :- Illustrates the status distribution of Hive queries over time, categorizing them into succeeded, failed, or running. This trend analysis aids in identifying systemic issues affecting query performance and reliabilit
 
 <img width="1289" alt="image" src="https://github.com/user-attachments/assets/d2c2846f-e330-4fed-8d8f-b293dcda73e2">
 
