@@ -16,7 +16,7 @@ The dashboard presents a comprehensive overview of Hive activities, including qu
 # Tez Dashboard:
 
 Using Pulse, you can monitor the tables and queries executed in Tez.
-Click Tez > Dashboard in the left pane to access the Tez dashboard. The dashboard consists of summary panels, a Sankey Diagram, and charts that display information about queries and other related metrics.
+Click Tez > Dashboard in the left pane to access the Tez dashboard. The dashboard consists of summary panels, charts that display information about queries and other related metrics.
 
 Note: The default time range is Last 24 hrs. To view statistics from a custom date range, click the icon and select a time frame and timezone of your choice.
 
