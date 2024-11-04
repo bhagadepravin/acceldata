@@ -43,7 +43,7 @@ These metrics enable users to:
 - Evaluate resource allocation efficiency through average CPU and memory usage.
 - Identify and troubleshoot failed or killed queries to enhance system reliability.
 
-<img width="806" alt="image" src="https://github.com/user-attachments/assets/e6d65785-4dcd-45cd-81c6-2f453d06210e">
+#<img width="806" alt="image" src="https://github.com/user-attachments/assets/e6d65785-4dcd-45cd-81c6-2f453d06210e">
 
 ## Additional Tez Charts
 
